@@ -38,9 +38,14 @@
 	<h2>Goal</h2>
 		<p>Visit popular destinations along Route 66 Hwy in Albuquerque, NM.</p>
 	<h2>Use of Site</h2>
-		<p>To use the website to find popular landmarks or signs on the Route. Jane will mostly use her smartphone for access to various websites exploring the area.</p>
+		<p>To use the website to find popular landmarks or signs on the Route.</p>
 	<h2>Tech</h2>
-		<p>Social Network: Has a blog geared towards nurses and travels. Peruses Instagram and Twitter frequently. Posts rarely on Twitter, and occasionally on Instagram.</p>
+		<p>Social Network: Has a blog geared towards nurses and travels. Peruses Instagram and Twitter frequently. Posts rarely on Twitter, and occasionally on Instagram. Jane brought along her laptop (Windows 10) and iPad Air 2. She mostly uses her Galaxy J3 for navigation when traveling and sightseeing.</p>
+			<ul>
+				<li>Galaxy J3 Phone - 5.00-inch touchscreen display with a resolution of 720x1280 pixels. Samsung Galaxy J3 (6) is powered by a 1.5GHz quad-core processor. It comes with 1.5GB of RAM. The Samsung Galaxy J3 (6) runs Android 5.1 and is powered by a 2,600mAh non-removable battery.</li>
+				<li>Laptop - Dell Inspiron 11 3000 is an 11.6-inch laptop with Intel Core i3-4030U processor and 4GB RAM. It has 500 GB hard drive and supported by Windows 10 operating system. 13- to 15-inch standard ratio laptop screen	1400 × 1050.</li>
+				<li>iPad - iPad Air 2 with an iOS 10 operating system. 1.5GHz tri-core 64-bit ARMv8-A "Typhoon". 2GB LPDDR3 RAM with 32 GB of storage. 9.4 by 6.6 by 0.24 inches.</li>
+			</ul>
 	<h2>Frustrations</h2>
 		<p>Lack of time to plan the Route. Jane wants a pre-made guide that could help reduce Jane’s frustration and planning time.</p>
 	<h2>User Story</h2>
