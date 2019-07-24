@@ -26,7 +26,8 @@
 
 			<p><strong>Profession: </strong>Architect and Photographer</p>
 
-			<p><strong>	Technology:</strong> Ted plan to use his camera, laptop and Mobile.</p>
+			<p><strong>	Technology:</strong> Ted plan to use his camera:Nikon D90 DX, laptop:Surface Laptop 2 - 256GB / Intel Core i7
+				and mobile:Apple iPhone XR-6.10 inch touchscreen display .</p>
 
 			<p><strong>About Me</strong></p>
 			<p>Ted is new resident to Albuquerque city.<br>
