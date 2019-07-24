@@ -16,17 +16,18 @@
 
 		<div>
 			<h2>Persona</h2>
-			<img width="300" src="personacapstone.jpg" alt="route66 photographer">
+			<img width="500" src="photographer.jpg" alt="ted snow photo">
 		</div>
 		<div>
 
 			<p><strong>Name:</strong> Ted Snow  </p>
 
-			<p><strong>Age: </strong>35</p> 
+			<p><strong>Age: </strong>35</p>
 
 			<p><strong>Profession: </strong>Architect and Photographer</p>
 
-			<p><strong>	Technology:</strong> Ted plan to use his camera, laptop and Mobile.</p>
+			<p><strong>	Technology:</strong> Ted plan to use his camera:Nikon D90 DX., laptop:Surface Laptop 2 - 256GB / Intel Core i7 / 8GB
+				and mobile:Apple iPhone XS Max-6.50-inch touchscreen display .</p>
 
 			<p><strong>About Me</strong></p>
 			<p>Ted is new resident to Albuquerque city.<br>
@@ -45,7 +46,6 @@
 			</p>
 
 			<p><strong>User Story:</strong> As a user, I want to explore historic and all other signs of Route66 around the city.</p>
-
 		</div>
 
 	</body>
