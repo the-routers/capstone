@@ -21,7 +21,7 @@
 		<p><b>Name:</b> Fred Visitor</p>
 		<p><b>Age:</b> 65</p>
 		<p><b>Profession:</b> Fred is a recently retired teacher who now has time to travel to visit family and explore historic landmarks around the U.S.</p>
-		<p><b>Technology:</b> Fred has a basic comfort level with technology, but does not want to spend much time on his phone or computer. He uses an older smartphone, a Windows laptop that is several years old, and uses email, Facebook and texting to communicate with friends and family.</p>
+		<p><b>Technology:</b> Fred has a basic comfort level with technology, but does not want to spend much time on his phone or computer. He uses an older Moto x4 Android smartphone with a 5.2" screen, a laptop running Windows 10 that is several years old, and uses email, Facebook and texting to communicate with friends and family.</p>
 		<p><b>Attitudes and Behaviors:</b> Fred would rather not deal with technology, but knows that while he is planning his travels he will be using websites frequently to research destination details and purchase plane tickets and reserve hotels.</p>
 		<p><b>Needs:</b> Fred will be traveling to visit family in New Mexico, would like to visit local sites with them, and needs access to easy to navigate, simple and uncluttered websites that will get him the travel information he needs quickly. He will get frustrated and leave a site if he can't quickly find what he is looking for. He also will be traveling primarily with his smartphone, and will need to use sites that are mobile-friendly.</p>
 		<p><b>Goals:</b> Fred will need to use his phone to access information about the places he is visiting with family in New Mexico.</p>
