@@ -7,7 +7,7 @@
 	<body>
 		<H1>Entity Relationship Diagram</H1>
 
-		<img src="erd.jpg" alt="relationship diagram" height="594" width="1368">
+		<img src="erd.jpg" alt="relationship diagram" height="526" width="1634">
 
 	</body>
 </html>
