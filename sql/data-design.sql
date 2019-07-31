@@ -1,4 +1,4 @@
-ALTER DATABASE rhariyani CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+ALTER DATABASE signson66 CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
 DROP TABLE IF EXISTS userPhoto;
 DROP TABLE IF EXISTS user;
