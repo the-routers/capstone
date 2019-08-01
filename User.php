@@ -37,6 +37,7 @@ class User {
 
 
 
+
 	/**
 	 * This is the ASSESSOR method for the userId
 	 * @return @Uuid value of  id (or null if new User)
@@ -60,6 +61,10 @@ class User {
 		//convert and store the user id
 		$this->userId = $uuid;
 	}
+
+
+
+
 
 
 
@@ -93,6 +98,10 @@ class User {
 		$this->UserName = $newUserName;
 
 	}
+
+
+
+
 
 
 	/**
@@ -132,6 +141,8 @@ class User {
 
 
 
+
+
 	/**
 	 * This is the ASSESSOR method for the userEmail
 	 * @return string value for user email
@@ -139,7 +150,6 @@ class User {
 	public function getUserEmail() : string {
 		return $this->userEmail;
 	}
-
 
 	/**
 	 * This is the MUTATOR method for the userEmail
@@ -199,6 +209,35 @@ class User {
 		}
 		$this->userActivationToken = $newUserActivationToken;
 	}
+
+
+
+
+	/**
+	 * Inserts this user profile into MySQL
+	 *
+	 * @param \PDO $pdo is the PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert (\PDO $pdo) : void {
+
+		//This creates a query template.
+		$query = "INSERT INTO User(userId, userName, userEmail, userPassword, userActivationToken) VALUES (:userId, :userName, :userEmail, :userPassword, :userActivationToken)";
+		$statement = $pdo->prepare($query);
+
+		//This binds the member variables to the place holder in the template
+		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail,"userPassword" => $this->userPassword, "userActivationToken" => $this->userActivationToken];
+		$statement->execute($parameters);
+	}
+
+
+
+
+
+
+
+
 
 }
 
