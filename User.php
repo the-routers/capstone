@@ -188,6 +188,7 @@ class User {
 	}
 
 
+
 	/**This is the MUTATOR METHOD for the user activation token
 	 * @param string $newUserActivationToken
 	 * @throws \InvalidArgumentException if the token is not a string or insecure
@@ -232,6 +233,9 @@ class User {
 	}
 
 
+
+
+
 	/**
 	 * Deletes this User from mySQL
 	 *
@@ -247,6 +251,7 @@ class User {
 		$parameters = ["userId" => $this->userId->getBytes()];
 		$statement->execute($parameters);
 	}
+
 
 
 
@@ -267,8 +272,11 @@ class User {
 	}
 
 
+
+
+
 	/**
-	 * gets the USer by user id
+	 * gets the User by user id
 	 *
 	 * @param \PDO $pdo $pdo PDO connection object
 	 * @param  $userId user id to search for (the data type should be mixed/not specified)
@@ -308,7 +316,51 @@ class User {
 
 
 
+
+	
 	/**
+	 * gets the User by user name
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $userName username to search for
+	 * @return \SPLFixedArray of all profiles found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getUserByUserName(\PDO $pdo, string $userName) : \SPLFixedArray {
+		//This sanitizes the at handle before searching
+		$userName = trim($userName);
+		$userName = filter_var($userName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($userName) === true) {
+			throw(new \PDOException("not a valid username"));
+		}
+		//This creates the query template
+		$query = "SELECT  userId, userName, userEmail, userPassword, userActivationToken FROM User WHERE userName = :userName";
+		$statement = $pdo->prepare($query);
+
+		//This binds the username to the place holder in the template
+		$parameters = ["userName" => $userName];
+		$statement->execute($parameters);
+		$users = new \SPLFixedArray($statement->rowCount());  //:::::::::::::::::::::::::::::::::::::IS "USERS" CORRECT:::::::::::::::::::::::
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while (($row = $statement->fetch()) !== false) {
+			try {
+				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"], $row["userActivationToken"]);
+				$users[$users->key()] = $user;
+				$users->next();
+			} catch(\Exception $exception) {
+
+				//If the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($users);
+	}
+
+
+
+
+		/**
 	 * gets the User by email
 	 *
 	 * @param \PDO $pdo PDO connection object
