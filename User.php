@@ -78,6 +78,21 @@ class User {
 	 * @throws \RangeException if $newUserName is > 32 characters
 	 * @throws \TypeError if $newUserName is not a string
 	 **/
+	public function setUserName($NewUserName) : void {
+		//the following verifies the userName is secure
+		$newUserName = trim($newUserName);
+		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newUserName) === true) {
+			throw(new \InvalidArgumentException("username is empty or insecure"));
+		}
+		//the following verifies the userName will fit in the database
+		if(strlen($newUserName) > 50) {
+			throw(new \RangeException("username length is too large; must be less that 50 characters"));
+		}
+		//the following stores the username
+		$this->UserName = $newUserName;
+
+	}
 
 
 	/**
