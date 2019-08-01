@@ -39,7 +39,7 @@ class User {
 
 	/**
 	 * This is the ASSESSOR method for the userId
-	 * @return @Uuid value of profile id (or null if new User)
+	 * @return @Uuid value of  id (or null if new User)
 	 */
 	public function getUserId() : Uuid {
 		return $this->userId;
@@ -169,13 +169,35 @@ class User {
 
 
 
-
 	/**
 	 * This is the ASSESSOR method for the userActivationToken;
 	 * @return string value of the activation token
 	 **/
 	public function getUserActivationToken() : string {
 		return $this->userActivationToken;
+	}
+
+
+	/**This is the MUTATOR METHOD for the user activation token
+	 * @param string $newUserActivationToken
+	 * @throws \InvalidArgumentException if the token is not a string or insecure
+	 * @throws \RangeException if the token is not exactly 32 characters
+	 * @throws \TypeError if the activation token is not a string
+	 **/
+	public function setUserActivationToken(string $newUserActivationToken): void {
+		if($newUserActivationToken === null) {
+			$this->userActivationToken = null;
+			return;
+		}
+		$newUserActivationToken = strtolower(trim($newUserActivationToken));
+		if(ctype_xdigit($newUserActivationToken) === false) {
+			throw(new\RangeException("user activation is not valid"));
+		}
+		//This enforces the user activation token is only 32 characters
+		if(strlen($newUserActivationToken) !== 32) {
+			throw(new\RangeException("user activation token has to be 32 characters"));
+		}
+		$this->userActivationToken = $newUserActivationToken;
 	}
 
 }
