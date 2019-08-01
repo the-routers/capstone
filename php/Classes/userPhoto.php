@@ -247,7 +247,64 @@ private $userPhotoUrl;
 		}
 
 
-/**
+	/**
+	 * inserts this userPhoto into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo) : void {
+
+		// create query template
+		$query = "INSERT INTO signson66.userPhoto(userPhotoId, UserPhotoSignId, userPhotoUserId, userPhotoCaption, userPhotoIsFeature, userPhotoUrl) 
+   VALUES(:UserPhotoId, :userPhotoSignId, :userPhotoUserId, :userPhotoCaption, :userPhotoIsFeature, :userPhotoUrl)";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$parameters = ["userPhotoId" => $this->userPhotoId->getBytes(), "userPhotoSignId" => $this->userPhotoSignId,
+			"userPhotoUserId" => $this->userPhotoUserId,"userPhotoCaption"=> $this->userPhotoCaption,
+			"userPhotoIsFeature" => $this->userPhotoIsFeature, "userPhotoUrl" => $this->userPhotoUrl];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * deletes this userPhoto from mySQL
+	 *S
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo) : void {
+
+		// create query template
+		$query = "DELETE FROM signson66.userPhoto WHERE userPhotoID = :userPhotoID";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holder in the template
+		$parameters = ["userPhotoID" => $this->userPhotoId->getBytes()];
+		$statement->execute($parameters);
+	}
+	/**
+	 * updates this userphoto in mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function update(\PDO $pdo) : void {
+
+		// create query template
+		$query = "UPDATE signson66.userPhoto SET userPhotoCaption = :userPhotoCaption, userPhotoIsFeature = :userPhotoIsFeature,
+     userPhotoUrl = :userPhotoUrl WHERE userPhotoId = :userPhotoId";
+		$statement = $pdo->prepare($query);
+		$parameters = ["userPhotoCaption" => $this->userPhotoCaption,"userPhotoIsFeature"=> $this->userPhotoIsFeature,
+			"userPhotoUrl" => $this->userPhotoUrl];
+		$statement->execute($parameters);
+	}
+
+	
+	/**
 	 * formats the state variables for JSON serialization
 	 *
 	 * @return array resulting state variables to serialize
