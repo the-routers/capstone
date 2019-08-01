@@ -142,9 +142,38 @@ class User {
 
 
 	/**
+	 * This is the MUTATOR method for the userEmail
+	 * @param string $newUserEmail is the new email for the user
+	 * @throws \InvalidArgumentException if the new email is not a string or insecure
+	 * @throws \RangeException if the $newUserEmail is greater than 128 characters
+	 * @throws \TypeError if $newUserEmail is not a string
+	 **/
+	public function setUserEmail(string $newUserEmail) : void {
+		//This enforces that the user email is properly formatted and secure
+		$newUserEmail = trim($newUserEmail);
+		$newUserEmail = filter_var($newUserEmail, FILTER_VALIDATE_EMAIL);
+		if(empty($newUserEmaild) == true) {
+			throw(new \InvalidArgumentException("user email empty or insecure"));
+		}
+
+		//This verifies the user email will fit in the database
+		if(strlen($newUserEmail) > 128) {
+			throw(new \RangeException("user email is too large"));
+		}
+		//This stores the user email in the database
+		$this->userEmail = $newUserEmail;
+
+	}
+
+
+
+
+
+
+	/**
 	 * This is the ASSESSOR method for the userActivationToken;
 	 * @return string value of the activation token
-	 */
+	 **/
 	public function getUserActivationToken() : string {
 		return $this->userActivationToken;
 	}
