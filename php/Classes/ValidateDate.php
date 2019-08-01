@@ -1,5 +1,5 @@
 <?php
-namespace Rhariyani\ObjectOrientedPhase1;
+namespace Rhariyani\capstone;
 /**
  * Trait to Validate a mySQL Date
  *
