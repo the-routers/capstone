@@ -9,7 +9,7 @@ require_once(dirname(__DIR__) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
-class  userPhoto{
+class  userPhoto implements \JsonSerializable {
 	use ValidateUuid;
 
 	/**
@@ -41,7 +41,7 @@ private $userPhotoCaption;
 	/**
 	 * this attribute of userPhoto table that will be boolean value
 	 * for each photos if it is featured or not;
-	 * @var Uuid $userPhotoIsFeature
+	 * @var  boolean $userPhotoIsFeature
 	 **/
 private $userPhotoIsFeature;
 /**
@@ -55,19 +55,19 @@ private $userPhotoUrl;
 /**
 * constructor for this userPhoto
 *
-* @param string|Uuid $newuserPhotoId id of this UserPhoto
-* @param string|Uuid $newuserPhotoUserId id of the user table
- * @param string|Uuid $newuserPhotoSignId id of the sign table
- * @param string $newuserPhotoCaption string containing actual  data for photo
- * @param boolean $newuserPhotoIsFeature (1) contain data is featured or not.
- * @param string $newuuserPhotoUrl string containing actual  link  for photo
+* @param string|Uuid $newUserPhotoId id of this UserPhoto
+* @param string|Uuid $newUserPhotoUserId id of the user table
+ * @param string|Uuid $newUserPhotoSignId id of the sign table
+ * @param string $newUserPhotoCaption string containing actual  data for photo
+ * @param boolean $newUserPhotoIsFeature (1) contain data is featured or not.
+ * @param string $newUserPhotoUrl string containing actual  link  for photo
  * @throws \InvalidArgumentException if data types are not valid
 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 * @throws \TypeError if data types violate type hints
 * @throws \Exception if some other exception occurs
 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 **/
-	public function __construct($newUserPhotoId, $newUserPhotoUserId, $newUserPhotoSignId, $newUserPhotoCaption, $newUserPhotoIsFeature, $newUserPhotoUrl= null) {
+	public function __construct($newUserPhotoId, $newUserPhotoUserId, $newUserPhotoSignId, $newUserPhotoCaption, $newUserPhotoIsFeature, $newUserPhotoUrl = null) {
 		try {
 			$this->setUserPhotoId($newUserPhotoId);
 			$this->setUserPhotoUserId($newUserPhotoUserId);
@@ -81,6 +81,183 @@ private $userPhotoUrl;
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
+	}
+	/**
+	 * accessor method for userPhoto id
+	 *
+	 * @return Uuid value of userPhoto id
+	 **/
+	public function getUserPhotoId() : Uuid {
+		return($this->userPhotoId);
+	}
+
+	/**
+	 * mutator method for userPhoto id
+	 *
+	 * @param Uuid|string $newUserPhotoID new value of userPhotoId
+	 * @throws \RangeException if $newUserPhoto is not positive
+	 * @throws \TypeError if $newUserPhoto is not a uuid or string
+	 **/
+	public function setUserPhotoId( $newUserPhotoID) : void {
+		try {
+			$uuid = self::validateUuid($newUserPhotoID);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+
+		// convert and store the userPhoto id
+		$this->userPhotoId = $uuid;
+	}
+
+	/**
+	 * accessor method for user  id this is foreign key
+	 *
+	 * @return Uuid value of userPhoto id
+	 **/
+	public function getUserPhotoUserId() : Uuid{
+		return($this->userPhotoUserId);
+	}
+
+	/**
+	 * mutator method for tweet profile id
+	 *
+	 * @param string | Uuid $newUserPhotoUserId new value of user  id
+	 * @throws \RangeException if $newUserPhotoUserId is not positive
+	 * @throws \TypeError if $newUserPhotoUserId is not an integer
+	 **/
+	public function setUserPhotoUserId( $newUserPhotoUserId) : void {
+		try {
+			$uuid = self::validateUuid($newUserPhotoUserId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+
+		// convert and store the userPhoto id
+		$this->userPhotoUserId = $uuid;
+	}
+
+	/**
+	 * accessor method for sign id this is foreign key
+	 *
+	 * @return Uuid value of userPhotoSign id
+	 **/
+	public function getUserPhotoSignId() : Uuid{
+		return($this->userPhotoSignId);
+	}
+
+	/**
+	 * mutator method for tweet profile id
+	 *
+	 * @param string | Uuid $newUserPhotoSignId new value of user  id
+	 * @throws \RangeException if $newUserPhotoSignId is not positive
+	 * @throws \TypeError if $newUserPhotoSignId is not an integer
+	 **/
+	public function setUserPhotoSignId( $newUserPhotoSignId) : void {
+		try {
+			$uuid = self::validateUuid($newUserPhotoSignId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+
+		// convert and store the userPhoto id
+		$this->userPhotoSignId = $uuid;
+	}
+
+	/**
+	 * accessor method for userPhotoCaption content
+	 *
+	 * @return string value of  content
+	 **/
+	public function getUserPhotoCaption() : string {
+		return($this->userPhotoCaption);
+	}
+
+	/**
+	 * mutator method for userPhotoCaption content
+	 *
+	 * @param string $newUserPhotoCaption new value of userPhotoCaption content
+	 * @throws \InvalidArgumentException if $newUserPhotoCaption is not a string or insecure
+	 * @throws \RangeException if $newTweetContent is > 140 characters
+	 * @throws \TypeError if $newTweetContent is not a string
+	 **/
+	public function setUserPhotoCaption(string $newUserPhotoCaption) : void {
+		// verify the tweet content is secure
+		$newUserPhotoCaption = trim($newUserPhotoCaption);
+		$newUserPhotoCaption = filter_var($newUserPhotoCaption, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newUserPhotoCaption) === true) {
+			throw(new \InvalidArgumentException("Caption content is empty or insecure"));
+		}
+
+		// verify the tweet content will fit in the database
+		if(strlen($newUserPhotoCaption) > 140) {
+			throw(new \RangeException("Caption is too large"));
+		}
+
+		// store the tweet content
+		$this->userPhotoCaption = $newUserPhotoCaption;
+	}
+
+	/**
+	 * accessor method for userPhotoIsFeature content
+	 *
+	 * @return boolean value of  content
+	 **/
+	public function getUserPhotoIsFeature() : bool {
+		return($this->userPhotoIsFeature);
+}
+	public function setUserPhotoIsFeature(bool $newUserPhotoIsFeature): void {
+		/** verify the value will fit in the database**/
+		if(is_bool($newUserPhotoIsFeature) == 0) {
+			throw(new \RangeException("Image is not featured"));
+		}
+		// store the image  content
+		$this->userPhotoIsFeature = $newUserPhotoIsFeature;
+	}
+
+		/**
+		 * accessor method for userPhotoUrl content
+		 *
+		 * @return string  value of  content
+		 **/
+
+		public function getUserPhotoUrl(): string {
+			return ($this->userPhotoUrl);
+		}
+
+		/**
+		 * mutator method for at handle
+		 *
+		 * @param string $newUserPhotoUrl new value of photo URL
+		 * @throws \InvalidArgumentException if $newUserPhotoUrl is not a string or insecure
+		 * @throws \RangeException if $newUserPhotoUrl is > 255 characters
+		 * @throws \TypeError if $newAtHandle is not a string
+		 **/
+		public function setUserPhotoUrl(string $newUserPhotoUrl): void {
+			$newUserPhotoUrl = trim($newUserPhotoUrl);
+			$newUserPhotoUrl = filter_var($newUserPhotoUrl, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			// verify the  URL will fit in the database
+			if(strlen($newUserPhotoUrl) > 255) {
+				throw(new \RangeException("Image content too large"));
+			}
+			// store the image  content
+			$this->userPhotoUrl = $newUserPhotoUrl;
+		}
+
+
+/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		$fields["userPhotoId"] = $this->userPhotoId->toString();
+		unset($fields["UserPhotoCaption"]);
+		unset($fields["UserPhotoUrl"]);
+		return ($fields);
 	}
 
 }
