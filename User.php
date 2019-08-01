@@ -232,6 +232,22 @@ class User {
 	}
 
 
+	/**
+	 * Deletes this User from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo): void {
+		//createa query template
+		$query = "DELETE FROM User WHERE userId = :userId";
+		$statement = $pdo->prepare($query);
+		//This binds the member variables to the place holders in the template
+		$parameters = ["userId" => $this->userId->getBytes()];
+		$statement->execute($parameters);
+	}
+
 
 
 
