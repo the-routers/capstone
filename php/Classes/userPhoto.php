@@ -257,7 +257,7 @@ private $userPhotoUrl;
 	public function insert(\PDO $pdo) : void {
 
 		// create query template
-		$query = "INSERT INTO signson66.userPhoto(userPhotoId, UserPhotoSignId, userPhotoUserId, userPhotoCaption, userPhotoIsFeature, userPhotoUrl) 
+		$query = "INSERT INTO userPhoto(userPhotoId, UserPhotoSignId, userPhotoUserId, userPhotoCaption, userPhotoIsFeature, userPhotoUrl) 
    VALUES(:UserPhotoId, :userPhotoSignId, :userPhotoUserId, :userPhotoCaption, :userPhotoIsFeature, :userPhotoUrl)";
 		$statement = $pdo->prepare($query);
 
@@ -278,7 +278,7 @@ private $userPhotoUrl;
 	public function delete(\PDO $pdo) : void {
 
 		// create query template
-		$query = "DELETE FROM signson66.userPhoto WHERE userPhotoID = :userPhotoID";
+		$query = "DELETE FROM userPhoto WHERE userPhotoID = :userPhotoID";
 		$statement = $pdo->prepare($query);
 
 		// bind the member variables to the place holder in the template
@@ -295,7 +295,7 @@ private $userPhotoUrl;
 	public function update(\PDO $pdo) : void {
 
 		// create query template
-		$query = "UPDATE signson66.userPhoto SET userPhotoCaption = :userPhotoCaption, userPhotoIsFeature = :userPhotoIsFeature,
+		$query = "UPDATE userPhoto SET userPhotoCaption = :userPhotoCaption, userPhotoIsFeature = :userPhotoIsFeature,
      userPhotoUrl = :userPhotoUrl WHERE userPhotoId = :userPhotoId";
 		$statement = $pdo->prepare($query);
 		$parameters = ["userPhotoCaption" => $this->userPhotoCaption,"userPhotoIsFeature"=> $this->userPhotoIsFeature,
@@ -303,7 +303,124 @@ private $userPhotoUrl;
 		$statement->execute($parameters);
 	}
 
-	
+
+
+	/**
+	 * gets the photo by UserPhotoId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $userPhotoId author id to search for
+	 * @return userPhoto|null Tweet found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getuserPhotoByUserPhotoId(\PDO $pdo, $userPhotoId) : ?userPhoto {
+		// sanitize the tweetId before searching
+		try {
+			$userPhotoId = self::validateUuid($userPhotoId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		// create query template
+		$query = " SELECT userPhotoId, userPhotoSignId, userPhotoUserId, userPhotoCaption, 
+		 userPhotoIsFeature, userPhotoUrl FROM userPhoto where userPhotoId = :userPhotoId";
+		$statement = $pdo->prepare($query);
+
+		// bind the userPhoto id to the place holder in the template
+		$parameters = ["$userPhotoId" => $userPhotoId->getBytes()];
+		$statement->execute($parameters);
+
+		// grab the photo from mySQL
+		try {
+			$userPhotoId = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$userPhotoId = new userPhoto($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"],
+					$row["userPhotoCaption"], $row["UserPhotoIsFeature"], $row["userPhotoUrl"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($userPhotoId);
+	}
+	/**
+	 **
+	 * gets all photo
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of photo found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getAlluserPhoto(\PDO $pdo) : \SPLFixedArray {
+		// create query template
+		$query = "SELECT userPhotoId, userPhotoSignId, userPhotoUserId, userPhotoCaption,
+       userPhotoIsFeature, userPhotoUrl FROM userPhoto";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of tweets
+		$userPhotos = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$userPhoto= new userPhoto ($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"], $row["userPhotoCaption"], $row["userPhotoIsFeature"], $row["userPhotoUrl"]);
+				$userPhotos[$userPhotos->key()] = $userPhoto;
+				$userPhotos->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($userPhotos);
+	}
+
+
+	/**
+	 * gets the photo by userPhotoIsFeature
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $userPhotoIsFeature to search for
+	 * @return userPhoto|null  found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getuserPhotoByuserPhotoIsFeature(\PDO $pdo, $userPhotoIsFeature) : ?userPhoto {
+		// sanitize the $userPhotoIsFeature before searching
+		try {
+			$userPhotoIsFeature = self::validateUuid($userPhotoIsFeature);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		// create query template
+		$query = " SELECT userPhotoId, userPhotoSignId, userPhotoUserId, userPhotoCaption, 
+		 userPhotoIsFeature, userPhotoUrl FROM userPhoto where userPhotoIsFeature = :userPhotoIsFeature";
+		$statement = $pdo->prepare($query);
+
+		// bind the userPhoto feature to the place holder in the template
+		$parameters = ["$userPhotoIsFeature" => $userPhotoIsFeature->getBytes()];
+		$statement->execute($parameters);
+
+		// grab the photo from mySQL
+		try {
+			$userPhotoIsFeature = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row === 1) {
+				$userPhotoIsFeature = new userPhoto($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"],
+					$row["userPhotoCaption"], $row["UserPhotoIsFeature"], $row["userPhotoUrl"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($userPhotoIsFeature);
+	}
+
 	/**
 	 * formats the state variables for JSON serialization
 	 *
