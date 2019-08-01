@@ -250,6 +250,23 @@ class User {
 
 
 
+	/**
+	 * updates this User from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 **/
+	public function update(\PDO $pdo): void {
+		//This creates query template
+		$query = "UPDATE User SET userId = :userId, userName = :userName, userEmail = :userEmail, userPassword = :userPassword, userActivationToken = userActivationToken WHERE userId = :userId";
+		$statement = $pdo->prepare($query);
+
+		//This binds the member variables to the place holders in the template
+		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userPassword" => $this->userPassword, "userActivationToker" => $this->userActivationToken];
+		$statement->execute($parameters);
+	}
+
+
 
 
 
