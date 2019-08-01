@@ -78,8 +78,8 @@ class User {
 	 * @throws \RangeException if $newUserName is > 32 characters
 	 * @throws \TypeError if $newUserName is not a string
 	 **/
-	public function setUserName($NewUserName) : void {
-		//the following verifies the userName is secure
+	public function setUserName($newUserName) : void {
+		//The following ensure that the UserName is properly formatted and secure
 		$newUserName = trim($newUserName);
 		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newUserName) === true) {
@@ -103,6 +103,33 @@ class User {
 	public function getUserPassword(): string {
 		return $this->userPassword;
 	}
+
+	/**This is the MUTATOR method for the userPassword
+	 * @param string $userPassword is the new password for the user
+	 * @throws \InvalidArgumentException if $userPassword is not a string or is insecure
+	 * @throws \RangeException is $userPassword is more than 50 characters
+	 * @throws \TypeError if $userPassword is not a string
+	 **/
+	public function setUserPassword(string $newUserPassword) : void {
+		//This enforces that the password is properly formatted and secure
+		$newUserPassword = trim($newUserPassword);
+		if(empty($newUserPassword) === true) {
+			throw(new \InvalidArgumentException("user password is empty or insecure"));
+		}
+		//This enforces that the password is really an Argon password
+		$userPasswordInfo = password_get_info($newUserPassword);
+		if($newUserPassword["algoName"] !== "argon2i") {
+			throw(new \InvalidArgumentException("user password is not a valid password"));
+		}
+		//This enforces that the hash is exactly 97 characters. :::::____CHECK THIS VALUE_____:::::::::::::::::::::::::::::::::::::::::
+		if(strlen($newUserPassword) !== 97) {
+			throw(new \RangeException("user password must be 97 characters"));
+		}
+		//This stores the password
+		$this->userPassword = $newUserPassword; //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+	}
+
 
 
 	/**
