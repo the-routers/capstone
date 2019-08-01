@@ -267,7 +267,44 @@ class User {
 	}
 
 
+	/**
+	 * gets the USer by user id
+	 *
+	 * @param \PDO $pdo $pdo PDO connection object
+	 * @param  $userId user id to search for (the data type should be mixed/not specified)
+	 * @return User|null User or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getUserByUserId(\PDO $pdo, $userId): ?User {
+		//This sanitizes the user id before searching
+		try {
+			$userId = self::validateUuid($userId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		//This creates query template
+		$query = "SELECT userId, userName, userEmail, userPassword, userActivationToken FROM User WHERE userId = :userId";
+		$statement = $pdo->prepare($query);
 
+		//This binds the user id to the place holder in the template
+		$parameters = ["userId" => $userId->getBytes()];
+		$statement->execute($parameters);
+
+		//This grabs the User from mySQL
+		try {
+			$user = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"],$row["userActivationToken"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($User);
+	}
 
 
 
