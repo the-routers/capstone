@@ -308,6 +308,47 @@ class User {
 
 
 
+	/**
+	 * gets the User by email
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $userEmail email to search for
+	 * @return USer|null USer or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getUserByUserEmail(\PDO $pdo, string $userEmail): ?User {
+		//This sanitize the email before searching
+		$userEmail = trim($userEmail);
+		$userEmail = filter_var($userEmail, FILTER_VALIDATE_EMAIL);
+		if(empty($userEmail) === true) {
+			throw(new \PDOException("not a valid email"));
+		}
+		//This creates a query template
+		$query = "SELECT userId, userName, userEmail, userPassword, userActivationToken FROM User WHERE userEmail = :userEmail";
+		$statement = $pdo->prepare($query);
+
+		//This binds the user email to the place holder in the template
+		$parameters = ["userEmail" => $userEmail];
+		$statement->execute($parameters);
+
+		//This grabs the User from mySQL
+		try {
+			$user = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"], $row["userActivationToken"]);
+			}
+		} catch(\Exception $exception) {
+			//If the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($user);
+	}
+
+
+
 
 }
 
