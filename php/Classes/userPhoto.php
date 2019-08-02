@@ -120,7 +120,7 @@ private $userPhotoUrl;
 	}
 
 	/**
-	 * mutator method for tweet profile id
+	 * mutator method for user photo id
 	 *
 	 * @param string | Uuid $newUserPhotoUserId new value of user  id
 	 * @throws \RangeException if $newUserPhotoUserId is not positive
@@ -148,7 +148,7 @@ private $userPhotoUrl;
 	}
 
 	/**
-	 * mutator method for tweet profile id
+	 * mutator method for user photo sign id
 	 *
 	 * @param string | Uuid $newUserPhotoSignId new value of user  id
 	 * @throws \RangeException if $newUserPhotoSignId is not positive
@@ -180,23 +180,23 @@ private $userPhotoUrl;
 	 *
 	 * @param string $newUserPhotoCaption new value of userPhotoCaption content
 	 * @throws \InvalidArgumentException if $newUserPhotoCaption is not a string or insecure
-	 * @throws \RangeException if $newTweetContent is > 140 characters
-	 * @throws \TypeError if $newTweetContent is not a string
+	 * @throws \RangeException if $newUserPhotoCaption is > 140 characters
+	 * @throws \TypeError if $newUserPhotoCaption is not a string
 	 **/
 	public function setUserPhotoCaption(string $newUserPhotoCaption) : void {
-		// verify the tweet content is secure
+		// verify the content is secure
 		$newUserPhotoCaption = trim($newUserPhotoCaption);
 		$newUserPhotoCaption = filter_var($newUserPhotoCaption, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newUserPhotoCaption) === true) {
 			throw(new \InvalidArgumentException("Caption content is empty or insecure"));
 		}
 
-		// verify the tweet content will fit in the database
+		// verify the content will fit in the database
 		if(strlen($newUserPhotoCaption) > 140) {
 			throw(new \RangeException("Caption is too large"));
 		}
 
-		// store the tweet content
+		// store the content
 		$this->userPhotoCaption = $newUserPhotoCaption;
 	}
 
@@ -310,11 +310,11 @@ private $userPhotoUrl;
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param Uuid|string $userPhotoId author id to search for
-	 * @return userPhoto|null Tweet found or null if not found
+	 * @return userPhoto|null photo found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
-	public static function getuserPhotoByUserPhotoId(\PDO $pdo, $userPhotoId) : ?userPhoto {
+	public static function getUserPhotoByUserPhotoId(\PDO $pdo, $userPhotoId) : ?userPhoto {
 		// sanitize the tweetId before searching
 		try {
 			$userPhotoId = self::validateUuid($userPhotoId);
@@ -355,14 +355,13 @@ private $userPhotoUrl;
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getAlluserPhoto(\PDO $pdo) : \SPLFixedArray {
+	public static function getAllUserPhoto(\PDO $pdo) : \SPLFixedArray {
 		// create query template
 		$query = "SELECT userPhotoId, userPhotoSignId, userPhotoUserId, userPhotoCaption,
        userPhotoIsFeature, userPhotoUrl FROM userPhoto";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
-		// build an array of tweets
 		$userPhotos = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
