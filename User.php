@@ -37,6 +37,40 @@ class User {
 
 
 
+	/**
+	 * Constructor for this User
+	 *
+	 * @param string|Uuid $newUserId of this User or null if a new User
+	 * @param string $newUserName string containing new user name
+	 * @param string $newUserEmail string containing email
+	 * @param string $newUserPassword string containing password
+	 * @param string $newUserActivationToken activation token to safe guard against malicious accounts
+
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+	 * @throws \TypeError if a data type violates a data hint
+	 * @throws \Exception if some other exception occurs
+	 *
+	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
+	 **/
+	public function __construct($newUserId, ?string $newUserName, string $newUserEmail, ?string $newUserPassword, ?string $newUserActivationToken) { //Added ? to string at newUserPassword
+		try {
+			$this->setUserId($newUserId);
+			$this->setUserName($newUserName);
+			$this->setUserEmail($newUserEmail);
+			$this->setUserPassword($newUserPassword);
+			$this->setUserActivationToken($newUserActivationToken);
+		} catch(\InvalidArgumentException | \RangeException |\TypeError | \Exception $exception) {
+
+			//Determines what exception type was thrown
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+	}
+
+
+
+
 
 	/**
 	 * This is the ASSESSOR method for the userId
