@@ -317,7 +317,6 @@ class User {
 
 
 
-	
 	/**
 	 * gets the User by user name
 	 *
@@ -400,6 +399,46 @@ class User {
 	}
 
 
+
+
+	/**
+	 * Gets the profile by user activation token
+	 *
+	 * @param string $userActivationToken
+	 * @param \PDO object $pdo
+	 * @return User|null User or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getUserByUserActivationToken(\PDO $pdo, string $userActivationToken) : ?User {
+		//Enforces activation token is in the right format and that it is a string representation of a hexadecimal
+		$userActivationToken = trim($userActivationToken);
+		if(ctype_xdigit($userActivationToken) === false) {
+			throw(new \InvalidArgumentException("user activation token is empty or in the wrong format"));
+		}
+
+		//Creates the query template
+		$query = "SELECT  userId, userName, userEmail, userPassword, userActivationToken FROM user WHERE userActivationToken = :userActivationToken";
+		$statement = $pdo->prepare($query);
+		//Binds the user activation token to the placeholder in the template
+		$parameters = ["userActivationToken" => $userActivationToken];
+		$statement->execute($parameters);
+
+		//Grabs the User from mySQL
+		try {
+			$user = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"], $row["userActivationToken"]);
+			}
+		} catch(\Exception $exception) {
+
+			//If the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($user);
+	}
 
 
 }
