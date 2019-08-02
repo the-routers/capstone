@@ -10,9 +10,9 @@ Ground Rules - 1st Draft (July 23, 2019)
  
 3. Communication -  No capstone communication from Friday 6pm until Monday morning, unless an informal check-in needed or we’re at a deadline and haven’t completed a Sprint (Asana and text).
 
-4. Slack inquiries outside of class time M-R at the latest, 9PM. When inquiring about team member’s work, use the hamburger method.
+4. Slack inquiries outside of class time M-R at the latest, 9PM, throught the #web-the-routers slack channel. When inquiring about team member’s work, use the hamburger method.
 
-5. Divide Sprint tasks initially in Asana, evenly. Check in (as above) with group to communicate verbally block, completing tasks, as deadline nears.
+5. Divide Sprint tasks initially in Asana, evenly. Check in (as above) with group to communicate verbally daily during open work time block, regarding completing tasks.
 
 6. Celebrate each Sprint completion with coffee or lunch.
 
