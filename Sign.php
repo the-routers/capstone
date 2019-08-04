@@ -18,6 +18,7 @@ use Ramsey\Uuid\Uuid;
 
 class Sign implements \JsonSerializable {
 	use ValidateUuid;
+
 	/**
 	 * id for this Sign; this is the primary key; this is unique
 	 * @var Uuid $signId
@@ -32,13 +33,13 @@ class Sign implements \JsonSerializable {
 
 	/**
 	 * location for this Sign in latitude;
-	 * @var string $signLat
+	 * @var float $signLat
 	 **/
 	private $signLat;
 
 	/**
 	 * location for this Sign in longitude;
-	 * @var string $signLong
+	 * @var float $signLong
 	 **/
 	private $signLong;
 
@@ -54,6 +55,36 @@ class Sign implements \JsonSerializable {
 	 **/
 	private $signType;
 
+
+	/**
+	 * constructor for this Sign
+	 *
+	 * @param string|Uuid $newSignId id of this Sign
+	 * @param string $newSignDescription description of this Sign
+	 * @param float $newSignLat float containing the latitude of this Sign
+	 * @param float $newSignLong float containing the longitude of this Sign
+	 * @param string $newSignName string containing name for this Sign
+	 * @param string $newSignType string containing type for this Sign
+	 * @throws \InvalidArgumentException if data types are not valid
+	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+	 * @throws \TypeError if data types violate type hints
+	 * @throws \Exception if some other exception occurs
+	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
+	 **/
+	public function __construct($newSignId, ?string $newSignDescription, ?float $newSignLat, ?float $newSignLong, ?string $newSignName, ?string $newSignType) {
+		try {
+			$this->setSignId($newSignId);
+			$this->setSignDescription($newSignDescription);
+			$this->setSignLat($newSignLat);
+			$this->setSignLong($newSignLong);
+			$this->setSignName($newSignName);
+			$this->setSignType($newSignType);
+		} //determine what exception type was thrown
+		catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+		}
+	}
 
 
 
