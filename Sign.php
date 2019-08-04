@@ -272,6 +272,61 @@ class Sign implements \JsonSerializable {
 		$this->signType = $newSignType;
 	}
 
+	/**
+	 * inserts this Sign into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo) : void {
+
+		// create query template
+		$query = "INSERT INTO sign(signId, signDescription, signLat, signLong, signName, signType) VALUES (:signId, :signDescription, :signLat, :signLong, :signName, :signType)";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$parameters = ["signId" => $this->signId->getBytes(), "signDescription" => $this->signDescription, "signLat" => $this->signLat, "signLong" => $this->signLong, "signName" => $this->signName, "signType" => $this->signType];
+		$statement->execute($parameters);
+	}
+
+
+	/**
+	 * deletes this Sign from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo) : void {
+
+		// create query template
+		$query = "DELETE FROM sign WHERE signId = :signId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holder in the template
+		$parameters = ["signId" => $this->signId->getBytes()];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * updates this Sign in mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function update(\PDO $pdo) : void {
+
+		// create query template
+		$query = "UPDATE sign SET signDescription = :signDescription, signLat = :signLat, signLong = :signLong, signName = :signName, signType = :signType WHERE signId = :signId";
+		$statement = $pdo->prepare($query);
+
+
+		$parameters = ["signId" => $this->signId->getBytes(),"signDescription" => $this->signDescription, "signLat" => $this->signLat, "signLong" => $this->signLong, "signName" => $this->signName, "signType" => $this->signType];
+		$statement->execute($parameters);
+	}
+
 
 	/**
 	 * formats the state variables for JSON serialization
