@@ -164,7 +164,7 @@ class Sign implements \JsonSerializable {
 	 **/
 	public function setSignLat(?float $newSignLat): void {
 		// verify the sign latitude will fit in the database
-		if(is_float($newSignLat) != true)
+		if(is_float($newSignLat) != true) {
 			throw(new \InvalidArgumentException("latitude not valid"));
 		}
 
@@ -195,7 +195,7 @@ class Sign implements \JsonSerializable {
 	 **/
 	public function setSignLong(?float $newSignLong): void {
 		// verify the sign longitude will fit in the database
-		if(is_float($newSignLong) != true)
+		if(is_float($newSignLong) != true) {
 			throw(new \InvalidArgumentException("longitude not valid"));
 		}
 
@@ -208,6 +208,69 @@ class Sign implements \JsonSerializable {
 		$this->signLong = $newSignLong;
 	}
 
+	/**
+	 * accessor method for sign name
+	 *
+	 * @return string value of sign name
+	 **/
+	public function getSignName(): string {
+		return ($this->signName);
+	}
+
+	/**
+	 * mutator method for sign name
+	 *
+	 * @param string $newSignName new value of sign name
+	 * @throws \InvalidArgumentException if $newSignName is not a string or insecure
+	 * @throws \RangeException if $newSignName is > 75 characters
+	 * @throws \TypeError if $newSignName is not a string
+	 **/
+	public function setSignName(?string $newSignName): void {
+		// verify the sign name is secure
+		$newSignName = trim($newSignName);
+		$newSignName = filter_var($newSignName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newSignName) === true) {
+			throw(new \InvalidArgumentException("sign name is empty or insecure"));
+		}
+		// verify the sign name will fit in the database
+		if(strlen($newSignName) > 75) {
+			throw(new \RangeException("sign name is too large"));
+		}
+		// store the sign name
+		$this->signName = $newSignName;
+	}
+
+	/**
+	 * accessor method for sign type
+	 *
+	 * @return string value of sign type
+	 **/
+	public function getSignType(): string {
+		return ($this->signType);
+	}
+
+	/**
+	 * mutator method for sign type
+	 *
+	 * @param string $newSignType new value of sign type
+	 * @throws \InvalidArgumentException if $newSignType is not a string or insecure
+	 * @throws \RangeException if $newSignType is > 15 characters
+	 * @throws \TypeError if $newSignType is not a string
+	 **/
+	public function setSignType(?string $newSignType): void {
+		// verify the sign type is secure
+		$newSignType = trim($newSignType);
+		$newSignType = filter_var($newSignType, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newSignType) === true) {
+			throw(new \InvalidArgumentException("sign type is empty or insecure"));
+		}
+		// verify the sign type will fit in the database
+		if(strlen($newSignType) > 15) {
+			throw(new \RangeException("sign type is too large"));
+		}
+		// store the sign name
+		$this->signType = $newSignType;
+	}
 
 
 	/**
