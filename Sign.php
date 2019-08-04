@@ -397,6 +397,86 @@ class Sign implements \JsonSerializable {
 		return($sign);
 	}
 
+	/**
+	 * gets the Sign by signType
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $signType sign type to search for
+	 * @return Sign|null Sign found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getSignBySignType(\PDO $pdo, $signType) : ?Sign {
+		// sanitize the sign type before searching
+		$signType = trim($signType);
+		$signType = filter_var($signType, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($signType) === true) {
+			throw(new \PDOException("sign type is invalid"));
+		}
+
+		// create query template
+		$query = "SELECT signId, signDescription, signLat, signLong, signName, signType FROM sign WHERE signType = :signType";
+		$statement = $pdo->prepare($query);
+
+		// bind the sign type to the place holder in the template
+		$parameters = ["signType" => $signType];
+		$statement->execute($parameters);
+
+		// grab the sign from mySQL
+		try {
+			$sign = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$sign = new Sign($row["signId"], $row["signDescription"], $row["signLat"], $row["signLong"], $row["signName"], $row["signType"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($sign);
+	}
+
+	/**
+	 * gets the Sign by signId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param Uuid|string $signId sign id to search for
+	 * @return Sign|null Sign found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getSignBySignId(\PDO $pdo, $signId) : ?Sign {
+		// sanitize the signId before searching
+		try {
+			$signId = self::validateUuid($signId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+
+		// create query template
+		$query = "SELECT signId, signDescription, signLat, signLong, signName, signType FROM sign WHERE signId = :signId";
+		$statement = $pdo->prepare($query);
+
+		// bind the sign name to the place holder in the template
+		$parameters = ["signId" => $signId];
+		$statement->execute($parameters);
+
+		// grab the sign from mySQL
+		try {
+			$sign = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$sign = new Sign($row["signId"], $row["signDescription"], $row["signLat"], $row["signLong"], $row["signName"], $row["signType"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($sign);
+	}
+
 
 	/**
 	 * formats the state variables for JSON serialization
@@ -413,4 +493,3 @@ class Sign implements \JsonSerializable {
 }
 
 ?>
-}
