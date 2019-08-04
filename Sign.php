@@ -327,6 +327,76 @@ class Sign implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
+	/**
+	 * gets all Signs
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of Signs found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getAllSigns(\PDO $pdo) : \SPLFixedArray {
+		// create query template
+		$query = "SELECT signId, signDescription, signLat, signLong, signName, signType FROM sign";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of signs
+		$signs = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$sign = new Sign($row["signId"], $row["signDescription"], $row["signLat"], $row["signLong"], $row["signName"], $row["signType"]);
+				$signs[$signs->key()] = $sign;
+				$signs->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($signs);
+	}
+
+	/**
+	 * gets the Sign by signName
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $signName sign name to search for
+	 * @return Sign|null Sign found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getSignBySignName(\PDO $pdo, $signName) : ?Sign {
+		// sanitize the sign name before searching
+		$signName = trim($signName);
+		$signName = filter_var($signName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($signName) === true) {
+			throw(new \PDOException("sign name is invalid"));
+		}
+
+		// create query template
+		$query = "SELECT signId, signDescription, signLat, signLong, signName, signType FROM sign WHERE signName = :signName";
+		$statement = $pdo->prepare($query);
+
+		// bind the sign name to the place holder in the template
+		$parameters = ["signName" => $signName];
+		$statement->execute($parameters);
+
+		// grab the sign from mySQL
+		try {
+			$sign = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$sign = new Sign($row["signId"], $row["signDescription"], $row["signLat"], $row["signLong"], $row["signName"], $row["signType"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($sign);
+	}
+
 
 	/**
 	 * formats the state variables for JSON serialization
