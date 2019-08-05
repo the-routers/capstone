@@ -249,7 +249,7 @@ class User {
 
 
 	/**
-	 * Inserts this user profile into MySQL
+	 * Inserts this user info into MySQL
 	 *
 	 * @param \PDO $pdo is the PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
@@ -271,7 +271,7 @@ class User {
 
 
 	/**
-	 * Deletes this User from mySQL
+	 * Deletes this user from mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
@@ -290,7 +290,7 @@ class User {
 
 
 	/**
-	 * updates this User from mySQL
+	 * updates this user from mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
@@ -310,7 +310,7 @@ class User {
 
 
 	/**
-	 * gets the User by user id
+	 * gets the user by userId
 	 *
 	 * @param \PDO $pdo $pdo PDO connection object
 	 * @param  $userId user id to search for (the data type should be mixed/not specified)
@@ -352,7 +352,7 @@ class User {
 
 
 	/**
-	 * gets the User by user name
+	 * gets the user by userName
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param string $userName username to search for
@@ -394,7 +394,7 @@ class User {
 
 
 		/**
-	 * gets the User by email
+	 * gets the user by userEmail
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param string $userEmail email to search for
@@ -472,6 +472,52 @@ class User {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return ($user);
+	}
+
+	/**
+	 * gets all Users
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of Users found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getAllUsers(\PDO $pdo) : \SPLFixedArray {
+		//Creates query template
+		$query = "SELECT userId, userName, userEmail FROM user";
+
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+		//Builds an array of users
+		$users = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$user = new User($row["userId"], $row["userName"], $row["userEmail"]);
+				$users[$users->key()] = $user;
+				$users->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($users);
+	}
+
+
+	/**
+	 * formats the state variables for JSON serialization
+	 *
+	 * @return array resulting state variables to serialize
+	 **/
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		$fields["userId"] = $this->userId->toString();           //in the tweet profile example
+		$fields["userName"] = $this->userName->toString();
+		$fields["userEmail"] = $this->userEmail->toString();
+		unset($fields["userPassword"]);
+		unset($fields["userActivationToken"]);
+		return ($fields);
 	}
 
 
