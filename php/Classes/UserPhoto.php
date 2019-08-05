@@ -429,9 +429,6 @@ class  UserPhoto implements \JsonSerializable {
 		$fields["userPhotoId"] = $this->userPhotoId->toString();
 		$fields["userPhotoSignId"] = $this->userPhotoSignId->toString();
 		$fields["userPhotoUserId"] = $this->userPhotoUserId->toString();
-		unset($fields["UserPhotoId"]);
-		unset($fields["UserPhotoSignId"]);
-		unset($fields["UserPhotoUserId"]);
 		return ($fields);
 	}
 
