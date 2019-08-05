@@ -5,25 +5,25 @@
 
 class User {
 
-	/**This is the ID for the user. This is the PRIMARY KEY.
+	/**This is the Id for the User. This is the PRIMARY KEY.
 	 * @var = Uuid $userId
 	 **/
 	private $userId;
 
 
-	/**This is the username for the user.
+	/**This is the userName for the User.
 	 * @var = string $userName
 	 **/
 	private $userName;
 
 
-	/**This is the email address for the user.
+	/**This is the email address for the User.
 	 *@var = string $userName
 	 **/
 	private $userEmail;
 
 
-	/**This is the password for the user's email address.
+	/**This is the password for the User's login.
 	 * @var string $userPassword
 	 **/
 	private $userPassword;
@@ -36,13 +36,12 @@ class User {
 
 
 
-
 	/**
 	 * Constructor for this User
 	 *
 	 * @param string|Uuid $newUserId of this User or null if a new User
-	 * @param string $newUserName string containing new user name
-	 * @param string $newUserEmail string containing email
+	 * @param string $newUserName string containing new userName
+	 * @param string $newUserEmail string containing user's email
 	 * @param string $newUserPassword string containing password
 	 * @param string $newUserActivationToken activation token to safe guard against malicious accounts
 
@@ -70,20 +69,18 @@ class User {
 
 
 
-
-
 	/**
 	 * This is the ASSESSOR method for the userId
-	 * @return @Uuid value of  id (or null if new User)
+	 * @return @Uuid value of id (or null if new User)
 	 */
 	public function getUserId() : Uuid {
 		return $this->userId;
 	}
 
 	/**This is the MUTATOR method for the userId
-	 * @param Uuid| string $newUserId value of new user id
+	 * @param Uuid| string $newUserId value of new userId
 	 * @throws \RangeException if $newUserId is not positive
-	 * @throws \TypeError if the user Id is not a string
+	 * @throws \TypeError if the userId is not a string
 	 **/
 	public function setUserId($newUserId) : void {
 		try {
@@ -92,27 +89,23 @@ class User {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-		//convert and store the user id
+		//convert and store the userId
 		$this->userId = $uuid;
 	}
 
 
 
-
-
-
-
 	/**
-	 * This is the ASSESSOR method for the username
-	 * @return string value of user name
+	 * This is the ASSESSOR method for the userName
+	 * @return string value of userName
 	 **/
 	public function getUserName() {
 		return $this->userName;
 	}
 
 	/**
-	 * This is the MUTATOR method for the username
-	 * @param string $newUserName is the new value of the username
+	 * This is the MUTATOR method for the userName
+	 * @param string $newUserName is the new value of the userName
 	 * @throws \InvalidArgumentException if $newUserName is not a string or insecure
 	 * @throws \RangeException if $newUserName is > 32 characters
 	 * @throws \TypeError if $newUserName is not a string
@@ -124,31 +117,28 @@ class User {
 		if(empty($newUserName) === true) {
 			throw(new \InvalidArgumentException("username is empty or insecure"));
 		}
-		//the following verifies the userName will fit in the database
+		//Verifies the userName will fit in the database
 		if(strlen($newUserName) > 50) {
 			throw(new \RangeException("username length is too large; must be less that 50 characters"));
 		}
-		//the following stores the username
+		//Stores the username
 		$this->UserName = $newUserName;
 
 	}
 
 
 
-
-
-
 	/**
 	 * This is the ASSESSOR method for the userPassword
 	 *	@param string $userPassword
-	 * @return string for user password
+	 * @return string for userPassword
 	 */
 	public function getUserPassword(): string {
 		return $this->userPassword;
 	}
 
 	/**This is the MUTATOR method for the userPassword
-	 * @param string $userPassword is the new password for the user
+	 * @param string $userPassword is the new password for the User
 	 * @throws \InvalidArgumentException if $userPassword is not a string or is insecure
 	 * @throws \RangeException is $userPassword is more than 50 characters
 	 * @throws \TypeError if $userPassword is not a string
@@ -175,11 +165,10 @@ class User {
 
 
 
-
-
 	/**
 	 * This is the ASSESSOR method for the userEmail
-	 * @return string value for user email
+	 *
+	 * @return string value for userEmail
 	 */
 	public function getUserEmail() : string {
 		return $this->userEmail;
@@ -187,7 +176,7 @@ class User {
 
 	/**
 	 * This is the MUTATOR method for the userEmail
-	 * @param string $newUserEmail is the new email for the user
+	 * @param string $newUserEmail is the new email for the User
 	 * @throws \InvalidArgumentException if the new email is not a string or insecure
 	 * @throws \RangeException if the $newUserEmail is greater than 128 characters
 	 * @throws \TypeError if $newUserEmail is not a string
@@ -199,17 +188,13 @@ class User {
 		if(empty($newUserEmaild) == true) {
 			throw(new \InvalidArgumentException("user email empty or insecure"));
 		}
-
-		//This verifies the user email will fit in the database
+		//This verifies the userEmail will fit in the database
 		if(strlen($newUserEmail) > 128) {
 			throw(new \RangeException("user email is too large"));
 		}
-		//This stores the user email in the database
+		//This stores the userEmail in the database
 		$this->userEmail = $newUserEmail;
-
 	}
-
-
 
 
 
@@ -221,9 +206,7 @@ class User {
 		return $this->userActivationToken;
 	}
 
-
-
-	/**This is the MUTATOR METHOD for the user activation token
+	/**This is the MUTATOR METHOD for the userActivationToken
 	 * @param string $newUserActivationToken
 	 * @throws \InvalidArgumentException if the token is not a string or insecure
 	 * @throws \RangeException if the token is not exactly 32 characters
@@ -247,17 +230,15 @@ class User {
 
 
 
-
 	/**
-	 * Inserts this user info into MySQL
+	 * Inserts this User info into MySQL
 	 *
 	 * @param \PDO $pdo is the PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function insert (\PDO $pdo) : void {
-
-		//This creates a query template.
+		//This creates a query template
 		$query = "INSERT INTO User(userId, userName, userEmail, userPassword, userActivationToken) VALUES (:userId, :userName, :userEmail, :userPassword, :userActivationToken)";
 		$statement = $pdo->prepare($query);
 
@@ -266,19 +247,15 @@ class User {
 		$statement->execute($parameters);
 	}
 
-
-
-
-
 	/**
-	 * Deletes this user from mySQL
+	 * Deletes this User from mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function delete(\PDO $pdo): void {
-		//createa query template
+		//Creates query template
 		$query = "DELETE FROM User WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 		//This binds the member variables to the place holders in the template
@@ -286,11 +263,8 @@ class User {
 		$statement->execute($parameters);
 	}
 
-
-
-
 	/**
-	 * updates this user from mySQL
+	 * Updates this User from mySQL
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
@@ -307,19 +281,17 @@ class User {
 
 
 
-
-
 	/**
-	 * gets the user by userId
+	 * Gets the User by userId
 	 *
 	 * @param \PDO $pdo $pdo PDO connection object
-	 * @param  $userId user id to search for (the data type should be mixed/not specified)
+	 * @param  $userId is the userId to search for (the data type should be mixed/not specified)
 	 * @return User|null User or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
 	public static function getUserByUserId(\PDO $pdo, $userId): ?User {
-		//This sanitizes the user id before searching
+		//This sanitizes the userId before searching
 		try {
 			$userId = self::validateUuid($userId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
@@ -329,7 +301,7 @@ class User {
 		$query = "SELECT userId, userName, userEmail, userPassword, userActivationToken FROM User WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
-		//This binds the user id to the place holder in the template
+		//This binds the userId to the place holder in the template
 		$parameters = ["userId" => $userId->getBytes()];
 		$statement->execute($parameters);
 
@@ -348,15 +320,12 @@ class User {
 		return ($User);
 	}
 
-
-
-
 	/**
-	 * gets the user by userName
+	 * gets the User by userName
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param string $userName username to search for
-	 * @return \SPLFixedArray of all users found
+	 * @param string $userName userName to search for
+	 * @return \SPLFixedArray of all Users found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
@@ -371,7 +340,7 @@ class User {
 		$query = "SELECT  userId, userName, userEmail, userPassword, userActivationToken FROM User WHERE userName = :userName";
 		$statement = $pdo->prepare($query);
 
-		//This binds the username to the place holder in the template
+		//This binds the userName to the place holder in the template
 		$parameters = ["userName" => $userName];
 		$statement->execute($parameters);
 		$users = new \SPLFixedArray($statement->rowCount());  //:::::::::::::::::::::::::::::::::::::IS "USERS" CORRECT:::::::::::::::::::::::
@@ -390,14 +359,11 @@ class User {
 		return ($users);
 	}
 
-
-
-
 		/**
-	 * gets the user by userEmail
+	 * Gets the user by userEmail
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param string $userEmail email to search for
+	 * @param string $userEmail is the email to search for
 	 * @return USer|null USer or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
@@ -432,11 +398,8 @@ class User {
 		return ($user);
 	}
 
-
-
-
 	/**
-	 * Gets the user by user activation token
+	 * Gets the user by userActivationToken
 	 *
 	 * @param string $userActivationToken
 	 * @param \PDO object $pdo
@@ -505,7 +468,7 @@ class User {
 	}
 
 	/**
-	 * gets all userEmails
+	 * gets all userEmails ::::::::::::::::::::::::::::::::::::::::::::::::::::Is this needed or will this return in getAllUsers????
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @return \SplFixedArray SplFixedArray of userEmails found or null if not found
