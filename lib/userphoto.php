@@ -1,7 +1,7 @@
 <?php
 
 namespace Rhariyani\capstone;
-require_once("../php/Classes/userPhoto.php");
+require_once("../php/Classes/UserPhoto.php");
 
 
 $Rishita = new userPhoto("b6a001d5e2644ae08b0138f545cc93ab",
