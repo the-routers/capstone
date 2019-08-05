@@ -2,10 +2,10 @@
 /**
  * This is about userPhoto table.Here is declaration of all state variables
  */
-namespace Rhariyani\capstone;
+namespace TheRouters\Capstone;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
+require_once(dirname(__DIR__,1) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -172,32 +172,25 @@ class  UserPhoto implements \JsonSerializable {
 	public function getUserPhotoCaption(): string {
 		return ($this->userPhotoCaption);
 	}
-	//check here
 
-
-	
 	/**
 	 * mutator method for userPhotoCaption content
 	 *
 	 * @param string $newUserPhotoCaption new value of userPhotoCaption content
-	 * @throws \InvalidArgumentException if $newUserPhotoCaption is not a string or insecure
 	 * @throws \RangeException if $newUserPhotoCaption is > 255 characters
-	 * @throws \TypeError if $newUserPhotoCaption is not a string
 	 **/
-	public function setUserPhotoCaption(string $newUserPhotoCaption): void {
-		// verify the content is secure
-		$newUserPhotoCaption = trim($newUserPhotoCaption);
-		$newUserPhotoCaption = filter_var($newUserPhotoCaption, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newUserPhotoCaption) === true) {
-			throw(new \InvalidArgumentException("Caption content is empty or insecure"));
+	public function setUserPhotoCaption(?string $newUserPhotoCaption): void {
+		//verifies data is null or not
+		if($newUserPhotoCaption !== null) {
+			//verify the content is secure
+			$newUserPhotoCaption = trim($newUserPhotoCaption);
+			$newUserPhotoCaption = filter_var($newUserPhotoCaption, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+			//verify the content will fit in the database
+				if(strlen($newUserPhotoCaption) > 255) {
+				throw(new \RangeException("Caption should be less than 255 characters"));
+				}
 		}
-
-		// verify the content will fit in the database
-		if(strlen($newUserPhotoCaption) > 255) {
-			throw(new \RangeException("Caption is too large"));
-		}
-
-		// store the content
+		//store the content
 		$this->userPhotoCaption = $newUserPhotoCaption;
 	}
 
@@ -209,10 +202,16 @@ class  UserPhoto implements \JsonSerializable {
 	public function getUserPhotoIsFeature(): bool {
 		return ($this->userPhotoIsFeature);
 	}
-//check here
+
+	/**
+	 * mutator for $newUserPhotoIsFeature.
+	 * @param bool $newUserPhotoIsFeature
+	 * @throws /InvalidArgumentException if image is feature or not
+	 */
+
 	public function setUserPhotoIsFeature(bool $newUserPhotoIsFeature): void {
-		/** verify the value will fit in the database  need doc block and change error msg**/
-		if(is_bool($newUserPhotoIsFeature) === false) {
+		// verify the value will fit in the database.
+		if($newUserPhotoIsFeature === 0) {
 			throw(new \InvalidArgumentException("Image is not featured"));
 		}
 		// store the image  content
@@ -228,12 +227,10 @@ class  UserPhoto implements \JsonSerializable {
 	public function getUserPhotoUrl(): string {
 		return ($this->userPhotoUrl);
 	}
-//check here
 	/**
 	 * mutator method
 	 *
 	 * @param string $newUserPhotoUrl new value of photo URL
-	 * @throws \InvalidArgumentException if $newUserPhotoUrl is not a string or insecure
 	 * @throws \RangeException if $newUserPhotoUrl is > 255 characters
 	 **/
 	public function setUserPhotoUrl(string $newUserPhotoUrl): void {
@@ -241,7 +238,7 @@ class  UserPhoto implements \JsonSerializable {
 		$newUserPhotoUrl = filter_var($newUserPhotoUrl, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		// verify the  URL will fit in the database
 		if(strlen($newUserPhotoUrl) > 255) {
-			throw(new \RangeException("Image Url is too large"));
+			throw(new \RangeException("Image Url is too long"));
 		}
 		// store the image  content
 		$this->userPhotoUrl = $newUserPhotoUrl;
@@ -296,12 +293,12 @@ class  UserPhoto implements \JsonSerializable {
 	 **/
 	public function update(\PDO $pdo): void {
 
-		// create query template update foreign key and make statement not to change it unnecessarily. Change done
+		// create query template update foreign key and make statement not to change it unnecessarily.Change done
 		$query = "UPDATE userPhoto SET userPhotoSignId = :userPhotoSignId, userPhotoUserId = :userPhotoUserId, userPhotoCaption = :userPhotoCaption, userPhotoIsFeature = :userPhotoIsFeature,
-     userPhotoUrl = :userPhotoUrl WHERE userPhotoId = :userPhotoId";
-		//do i need to add signid and userid here
+       userPhotoUrl = :userPhotoUrl WHERE userPhotoId = :userPhotoId";
 		$statement = $pdo->prepare($query);
-		$parameters = ["userPhotoCaption" => $this->userPhotoCaption, "userPhotoIsFeature" => $this->userPhotoIsFeature,
+		$parameters = ["userPhotoId" => $this->userPhotoId ->getBytes(),"userPhotoSignId" => $this->userPhotoSignId->getBytes(),"userPhotoUserId" => $this->userPhotoUserId->getBytes(),
+			"userPhotoCaption" => $this->userPhotoCaption, "userPhotoIsFeature" => $this->userPhotoIsFeature,
 			"userPhotoUrl" => $this->userPhotoUrl];
 		$statement->execute($parameters);
 	}
@@ -410,8 +407,8 @@ class  UserPhoto implements \JsonSerializable {
 			$userPhotoIsFeature = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
-			// need to correct this
-			if($row === 1) {
+
+			if($row === true) {
 				$userPhotoIsFeature = new userPhoto($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"],
 					$row["userPhotoCaption"], $row["UserPhotoIsFeature"], $row["userPhotoUrl"]);
 			}

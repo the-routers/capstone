@@ -1,12 +1,12 @@
 <?php
-namespace Rhariyani\capstone;
+namespace TheRouters\Capstone;
 /**
  * Trait to Validate a mySQL Date
  *
  * This trait will inject a private method to validate a mySQL style date (e.g., 2016-01-15 15:32:48.643216). It will
  * convert a string representation to a DateTime object or throw an exception.
  *
- * @author Rishita Hariyani<rhariyani@cnm.edu>
+ * @author Dylan McDonald <dmcdonald21@cnm.edu>
  * @version 4.0.1
  **/
 trait ValidateDate {
@@ -30,6 +30,7 @@ trait ValidateDate {
 		// treat the date as a mySQL date string: Y-m-d
 		$newDate = trim($newDate);
 		if((preg_match("/^(\d{4})-(\d{2})-(\d{2})$/", $newDate, $matches)) !== 1) {
+			//2019-01-25
 			throw(new \InvalidArgumentException("date is not a valid date"));
 		}
 		// verify the date is really a valid calendar date
@@ -69,7 +70,7 @@ trait ValidateDate {
 			list($second, $microseconds) = explode(".", $second);
 			$date->setTime($hour, $minute, $second, $microseconds);
 			return($date);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError  $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}

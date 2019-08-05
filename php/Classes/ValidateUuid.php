@@ -1,6 +1,6 @@
 <?php
-namespace Rhariyani\capstone;
-require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
+namespace TheRouters\Capstone;
+require_once(dirname(__DIR__,1) . "/vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
 /**
  * Trait to validate a uuid
@@ -11,8 +11,8 @@ use Ramsey\Uuid\Uuid;
  * 2. binary string (16 bytes)
  * 3. Ramsey\Uuid\Uuid object
  *
- * @userPhoto Rishita Hariyani <rhariyani@cnm.edu>
- * @package Edu\Cnm
+ * @author Dylan McDonald <dmcdonald21@cnm.edu>
+ * @package Edu\Cnm\Misquote
  **/
 trait ValidateUuid {
 	/**
@@ -20,8 +20,8 @@ trait ValidateUuid {
 	 *
 	 * @param string|Uuid $newUuid uuid to validate
 	 * @return Uuid object with validated uuid
-	 * @throws \InvalidArgumentException if $newUuid is not a valid uuid
-	 * @throws \RangeException if $newUuid is not a valid uuid v4
+	 * @throws \InvalidArgumentException if $newMisquoteId is not a valid uuid
+	 * @throws \RangeException if $newMisquoteId is not a valid uuid v4
 	 **/
 	private static function validateUuid($newUuid) : Uuid {
 		// verify a string uuid
@@ -31,7 +31,7 @@ trait ValidateUuid {
 				$newUuid = bin2hex($newUuid);
 				$newUuid = substr($newUuid, 0, 8) . "-" . substr($newUuid, 8, 4) . "-" . substr($newUuid,12, 4) . "-" . substr($newUuid, 16, 4) . "-" . substr($newUuid, 20, 12);
 			}
-			// 36 characters is a human readable uuid
+			// 32 characters is a human readable uuid
 			if(strlen($newUuid) === 36) {
 				if(Uuid::isValid($newUuid) === false) {
 					throw(new \InvalidArgumentException("invalid uuid"));
