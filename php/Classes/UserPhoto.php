@@ -427,8 +427,11 @@ class  UserPhoto implements \JsonSerializable {
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
 		$fields["userPhotoId"] = $this->userPhotoId->toString();
-		unset($fields["UserPhotoCaption"]);
-		unset($fields["UserPhotoUrl"]);
+		$fields["userPhotoSignId"] = $this->userPhotoSignId->toString();
+		$fields["userPhotoUserId"] = $this->userPhotoUserId->toString();
+		unset($fields["UserPhotoId"]);
+		unset($fields["UserPhotoSignId"]);
+		unset($fields["UserPhotoUserId"]);
 		return ($fields);
 	}
 
