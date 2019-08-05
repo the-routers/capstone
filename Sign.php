@@ -1,6 +1,6 @@
 <?php
 
-namespace ;
+namespace TheRouters\Capstone;
 
 require_once("autoload.php");
 require_once(dirname(__DIR__) . "/vendor/autoload.php");
@@ -71,7 +71,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newSignId, ?string $newSignDescription, ?float $newSignLat, ?float $newSignLong, ?string $newSignName, ?string $newSignType) {
+	public function __construct($newSignId, string $newSignDescription, float $newSignLat, float $newSignLong, string $newSignName, ?string $newSignType) {
 		try {
 			$this->setSignId($newSignId);
 			$this->setSignDescription($newSignDescription);
@@ -131,7 +131,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \RangeException if $newSignDescription is > 255 characters
 	 * @throws \TypeError if $newSignDescription is not a string
 	 **/
-	public function setSignDescription(?string $newSignDescription): void {
+	public function setSignDescription(string $newSignDescription): void {
 		// verify the sign description is secure
 		$newSignDescription = trim($newSignDescription);
 		$newSignDescription = filter_var($newSignDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -160,19 +160,17 @@ class Sign implements \JsonSerializable {
 	 *
 	 * @param float $newSignLat new value of sign latitude
 	 * @throws \InvalidArgumentException if the sign latitude is not a decimal value
-	 * @throws \InvalidArgumentException  if the sign latitude is not a float or insecure
+	 * @throws \RangeException  if the sign latitude is not within range of -90 to 90
 	 **/
-	public function setSignLat(?float $newSignLat): void {
+	public function setSignLat(float $newSignLat): void {
 		// verify the sign latitude will fit in the database
 		if(is_float($newSignLat) != true) {
 			throw(new \InvalidArgumentException("latitude not valid"));
 		}
 
-		// verify the sign latitude is secure
-		$newSignLat = trim($newSignLat);
-		$newSignLat = filter_var($newSignLat, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newSignLat) === true) {
-			throw(new \InvalidArgumentException("sign latitude is empty or insecure"));
+		// verify the latitude is in range
+		if(($newSignLat)!= range(-90, 90)) {
+			throw(new \RangeException("latitude is not within range of -90 to 90"));
 		}
 		$this->SignLat = $newSignLat;
 	}
@@ -193,18 +191,17 @@ class Sign implements \JsonSerializable {
 	 * @throws \InvalidArgumentException if the sign longitude is not a decimal value
 	 * @throws \InvalidArgumentException if the sign longitude is not a float or insecure
 	 **/
-	public function setSignLong(?float $newSignLong): void {
+	public function setSignLong(float $newSignLong): void {
 		// verify the sign longitude will fit in the database
 		if(is_float($newSignLong) != true) {
 			throw(new \InvalidArgumentException("longitude not valid"));
 		}
 
-		// verify the sign longitude is secure
-		$newSignLong = trim($newSignLong);
-		$newSignLong = filter_var($newSignLong, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newSignLong) === true) {
-			throw(new \InvalidArgumentException("sign longitude is empty or insecure"));
+		// verify the longitude is in range
+		if(($newSignLong)!= range(-180, 180)) {
+			throw(new \RangeException("longitude is not within range of -180 to 180"));
 		}
+	}
 		$this->signLong = $newSignLong;
 	}
 
@@ -225,7 +222,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \RangeException if $newSignName is > 75 characters
 	 * @throws \TypeError if $newSignName is not a string
 	 **/
-	public function setSignName(?string $newSignName): void {
+	public function setSignName(string $newSignName): void {
 		// verify the sign name is secure
 		$newSignName = trim($newSignName);
 		$newSignName = filter_var($newSignName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -257,7 +254,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \RangeException if $newSignType is > 15 characters
 	 * @throws \TypeError if $newSignType is not a string
 	 **/
-	public function setSignType(?string $newSignType): void {
+	public function setSignType(string $newSignType): void {
 		// verify the sign type is secure
 		$newSignType = trim($newSignType);
 		$newSignType = filter_var($newSignType, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
