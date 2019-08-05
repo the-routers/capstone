@@ -164,7 +164,7 @@ class User {
 		if($newUserPassword["algoName"] !== "argon2i") {
 			throw(new \InvalidArgumentException("user password is not a valid password"));
 		}
-		//This enforces that the hash is exactly 97 characters. :::::____CHECK THIS VALUE_____:::::::::::::::::::::::::::::::::::::::::
+		//This enforces that the password is exactly 97 characters. :::::____CHECK THIS VALUE_____:::::::::::::::::::::::::::::::::::::::::
 		if(strlen($newUserPassword) !== 97) {
 			throw(new \RangeException("user password must be 97 characters"));
 		}
@@ -356,7 +356,7 @@ class User {
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param string $userName username to search for
-	 * @return \SPLFixedArray of all profiles found
+	 * @return \SPLFixedArray of all users found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
@@ -436,7 +436,7 @@ class User {
 
 
 	/**
-	 * Gets the profile by user activation token
+	 * Gets the user by user activation token
 	 *
 	 * @param string $userActivationToken
 	 * @param \PDO object $pdo
@@ -502,6 +502,36 @@ class User {
 			}
 		}
 		return ($users);
+	}
+
+	/**
+	 * gets all userEmails
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of userEmails found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getAllUserEmalis(\PDO $pdo) : \SPLFixedArray {
+		//Creates query template
+		$query = "SELECT userId, userName FROM userEmail";
+
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+		//Builds an array of userEmails
+		$userEmails = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$userEmail = new UserEmail($row["userId"], $row["userName"]);
+				$userEmails[$userEmails->key()] = $userEmail;
+				$userEmails->next();
+			} catch(\Exception $exception) {
+				//If the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($userEmails);
 	}
 
 
