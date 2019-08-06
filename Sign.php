@@ -172,7 +172,7 @@ class Sign implements \JsonSerializable {
 		if(($newSignLat)!= range(-90, 90)) {
 			throw(new \RangeException("latitude is not within range of -90 to 90"));
 		}
-		$this->SignLat = $newSignLat;
+		$this->signLat = $newSignLat;
 	}
 
 /**
@@ -201,7 +201,6 @@ class Sign implements \JsonSerializable {
 		if(($newSignLong)!= range(-180, 180)) {
 			throw(new \RangeException("longitude is not within range of -180 to 180"));
 		}
-	}
 		$this->signLong = $newSignLong;
 	}
 
