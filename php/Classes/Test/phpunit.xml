@@ -1,0 +1,14 @@
+<phpunit>
+	<testsuites>
+		<testsuite name="Signs on 66">
+			<file>UserTest.php</file>
+			<!-- <file>SignTest.php</file>
+			<file>UserPhotoTest.php</file> -->
+		</testsuite>
+	</testsuites>
+	<filter>
+		<whitelist processUncoveredFilesFromWhitelist="true">
+			<directory suffix=".php">..</directory>
+		</whitelist>
+	</filter>
+</phpunit>
