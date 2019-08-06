@@ -3,11 +3,13 @@
 namespace TheRouters\Capstone;
 
 require_once("autoload.php");
-require_once (dirname(__DIR__) . "/vendor/autoload.php");
+require_once(dirname(__DIR__) . "/vendor/autoload.php");
 
 use ramsey\Uuid\Uuid;
 
-class User {
+class User implements \JsonSerializable {
+	use ValidateUuid;
+
 
 	/**This is the Id for the User. This is the PRIMARY KEY.
 	 * @var = Uuid $userId
@@ -22,7 +24,7 @@ class User {
 
 
 	/**This is the email address for the User.
-	 *@var = string $userName
+	 * @var = string $userName
 	 **/
 	private $userEmail;
 
@@ -34,10 +36,9 @@ class User {
 
 
 	/**This is the token sent by email to user to verify user is valid and not malicious.
-	 * @var string $userActivationToken.
+	 * @var string $userActivationToken .
 	 **/
 	private $userActivationToken;
-
 
 
 	/**
@@ -48,7 +49,6 @@ class User {
 	 * @param string $newUserEmail string containing user's email
 	 * @param string $newUserPassword string containing password
 	 * @param string $newUserActivationToken activation token to safe guard against malicious accounts
-
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 	 * @throws \TypeError if a data type violates a data hint
@@ -72,12 +72,11 @@ class User {
 	}
 
 
-
 	/**
 	 * This is the ASSESSOR method for the userId
 	 * @return @Uuid value of id (or null if new User)
 	 */
-	public function getUserId() : Uuid {
+	public function getUserId(): Uuid {
 		return $this->userId;
 	}
 
@@ -86,9 +85,9 @@ class User {
 	 * @throws \RangeException if $newUserId is not positive
 	 * @throws \TypeError if the userId is not a string
 	 **/
-	public function setUserId($newUserId) : void {
+	public function setUserId($newUserId): void {
 		try {
-				$uuid = self::validateUuid($newUserId);
+			$uuid = self::validateUuid($newUserId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -96,7 +95,6 @@ class User {
 		//convert and store the userId
 		$this->userId = $uuid;
 	}
-
 
 
 	/**
@@ -114,7 +112,7 @@ class User {
 	 * @throws \RangeException if $newUserName is > 32 characters
 	 * @throws \TypeError if $newUserName is not a string
 	 **/
-	public function setUserName($newUserName) : void {
+	public function setUserName($newUserName): void {
 		//The following ensure that the UserName is properly formatted and secure
 		$newUserName = trim($newUserName);
 		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -131,10 +129,9 @@ class User {
 	}
 
 
-
 	/**
 	 * This is the ASSESSOR method for the userPassword
-	 *	@param string $userPassword
+	 * @param string $userPassword
 	 * @return string for userPassword
 	 */
 	public function getUserPassword(): string {
@@ -147,7 +144,7 @@ class User {
 	 * @throws \RangeException is $userPassword is more than 50 characters
 	 * @throws \TypeError if $userPassword is not a string
 	 **/
-	public function setUserPassword(string $newUserPassword) : void {
+	public function setUserPassword(string $newUserPassword): void {
 		//This enforces that the password is properly formatted and secure
 		$newUserPassword = trim($newUserPassword);
 		if(empty($newUserPassword) === true) {
@@ -168,13 +165,12 @@ class User {
 	}
 
 
-
 	/**
 	 * This is the ASSESSOR method for the userEmail
 	 *
 	 * @return string value for userEmail
 	 */
-	public function getUserEmail() : string {
+	public function getUserEmail(): string {
 		return $this->userEmail;
 	}
 
@@ -185,7 +181,7 @@ class User {
 	 * @throws \RangeException if the $newUserEmail is greater than 128 characters
 	 * @throws \TypeError if $newUserEmail is not a string
 	 **/
-	public function setUserEmail(string $newUserEmail) : void {
+	public function setUserEmail(string $newUserEmail): void {
 		//This enforces that the user email is properly formatted and secure
 		$newUserEmail = trim($newUserEmail);
 		$newUserEmail = filter_var($newUserEmail, FILTER_VALIDATE_EMAIL);
@@ -201,12 +197,11 @@ class User {
 	}
 
 
-
 	/**
 	 * This is the ASSESSOR method for the userActivationToken;
 	 * @return string value of the activation token
 	 **/
-	public function getUserActivationToken() : string {
+	public function getUserActivationToken(): string {
 		return $this->userActivationToken;
 	}
 
@@ -233,7 +228,6 @@ class User {
 	}
 
 
-
 	/**
 	 * Inserts this User info into MySQL
 	 *
@@ -241,13 +235,13 @@ class User {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
-	public function insert (\PDO $pdo) : void {
+	public function insert(\PDO $pdo): void {
 		//This creates a query template
-		$query = "INSERT INTO User(userId, userName, userEmail, userPassword, userActivationToken) VALUES (:userId, :userName, :userEmail, :userPassword, :userActivationToken)";
+		$query = "INSERT INTO user(userId, userName, userEmail, userPassword, userActivationToken) VALUES (:userId, :userName, :userEmail, :userPassword, :userActivationToken)";
 		$statement = $pdo->prepare($query);
 
 		//This binds the member variables to the place holder in the template
-		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail,"userPassword" => $this->userPassword, "userActivationToken" => $this->userActivationToken];
+		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userPassword" => $this->userPassword, "userActivationToken" => $this->userActivationToken];
 		$statement->execute($parameters);
 	}
 
@@ -260,7 +254,7 @@ class User {
 	 **/
 	public function delete(\PDO $pdo): void {
 		//Creates query template
-		$query = "DELETE FROM User WHERE userId = :userId";
+		$query = "DELETE FROM user WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 		//This binds the member variables to the place holders in the template
 		$parameters = ["userId" => $this->userId->getBytes()];
@@ -275,14 +269,13 @@ class User {
 	 **/
 	public function update(\PDO $pdo): void {
 		//This creates query template
-		$query = "UPDATE User SET userId = :userId, userName = :userName, userEmail = :userEmail, userPassword = :userPassword, userActivationToken = userActivationToken WHERE userId = :userId";
+		$query = "UPDATE user SET userId = :userId, userName = :userName, userEmail = :userEmail, userPassword = :userPassword, userActivationToken = userActivationToken WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		//This binds the member variables to the place holders in the template
 		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userPassword" => $this->userPassword, "userActivationToker" => $this->userActivationToken];
 		$statement->execute($parameters);
 	}
-
 
 
 	/**
@@ -302,7 +295,7 @@ class User {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//This creates query template
-		$query = "SELECT userId, userName, userEmail, userPassword, userActivationToken FROM User WHERE userId = :userId";
+		$query = "SELECT userId, userName, userEmail, userPassword, userActivationToken FROM user WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		//This binds the userId to the place holder in the template
@@ -315,7 +308,7 @@ class User {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"],$row["userActivationToken"]);
+				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"], $row["userActivationToken"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
@@ -333,7 +326,7 @@ class User {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getUserByUserName(\PDO $pdo, string $userName) : \SPLFixedArray {
+	public static function getUserByUserName(\PDO $pdo, string $userName): \SPLFixedArray {
 		//This sanitizes the at handle before searching
 		$userName = trim($userName);
 		$userName = filter_var($userName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -341,7 +334,7 @@ class User {
 			throw(new \PDOException("not a valid username"));
 		}
 		//This creates the query template
-		$query = "SELECT  userId, userName, userEmail, userPassword, userActivationToken FROM User WHERE userName = :userName";
+		$query = "SELECT  userId, userName, userEmail, userPassword, userActivationToken FROM user WHERE userName = :userName";
 		$statement = $pdo->prepare($query);
 
 		//This binds the userName to the place holder in the template
@@ -349,7 +342,7 @@ class User {
 		$statement->execute($parameters);
 		$users = new \SPLFixedArray($statement->rowCount());  //:::::::::::::::::::::::::::::::::::::IS "USERS" CORRECT:::::::::::::::::::::::
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while (($row = $statement->fetch()) !== false) {
+		while(($row = $statement->fetch()) !== false) {
 			try {
 				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"], $row["userActivationToken"]);
 				$users[$users->key()] = $user;
@@ -363,7 +356,7 @@ class User {
 		return ($users);
 	}
 
-		/**
+	/**
 	 * Gets the user by userEmail
 	 *
 	 * @param \PDO $pdo PDO connection object
@@ -380,7 +373,7 @@ class User {
 			throw(new \PDOException("not a valid email"));
 		}
 		//This creates a query template
-		$query = "SELECT userId, userName, userEmail, userPassword, userActivationToken FROM User WHERE userEmail = :userEmail";
+		$query = "SELECT userId, userName, userEmail, userPassword, userActivationToken FROM user WHERE userEmail = :userEmail";
 		$statement = $pdo->prepare($query);
 
 		//This binds the user email to the place holder in the template
@@ -411,7 +404,7 @@ class User {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getUserByUserActivationToken(\PDO $pdo, string $userActivationToken) : ?User {
+	public static function getUserByUserActivationToken(\PDO $pdo, string $userActivationToken): ?User {
 		//Enforces activation token is in the right format and that it is a string representation of a hexadecimal
 		$userActivationToken = trim($userActivationToken);
 		if(ctype_xdigit($userActivationToken) === false) {
@@ -449,7 +442,7 @@ class User {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getAllUsers(\PDO $pdo) : \SPLFixedArray {
+	public static function getAllUsers(\PDO $pdo): \SPLFixedArray {
 		//Creates query template
 		$query = "SELECT userId, userName, userEmail FROM user";
 
@@ -470,7 +463,7 @@ class User {
 		}
 		return ($users);
 	}
-
+/**
 	/**
 	 * gets all userEmails ::::::::::::::::::::::::::::::::::::::::::::::::::::Is this needed or will this return in getAllUsers????
 	 *
@@ -478,8 +471,8 @@ class User {
 	 * @return \SplFixedArray SplFixedArray of userEmails found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
-	 **/
-	public static function getAllUserEmalis(\PDO $pdo) : \SPLFixedArray {
+
+	public static function getAllUserEmalis(\PDO $pdo): \SPLFixedArray {
 		//Creates query template
 		$query = "SELECT userId, userName FROM userEmail";
 
@@ -500,7 +493,7 @@ class User {
 		}
 		return ($userEmails);
 	}
-
+**/
 
 	/**
 	 * formats the state variables for JSON serialization
