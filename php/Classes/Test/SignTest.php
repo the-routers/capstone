@@ -48,59 +48,48 @@ class SignTest extends SignsOn66Test {
 	 * @var string $VALID_TYPE
 	 **/
 	protected $VALID_TYPE = "This sample sign type is orphan";
+
 	/**
-	 * run the default setup operation to create salt and hash.
-	 */
-	public final function setUp() : void {
-		parent::setUp();
-		//
-		$password = "abc123";
-		$this->VALID_HASH = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
-		$this->VALID_ACTIVATION = bin2hex(random_bytes(16));
+	 * test inserting a valid Sign and verify that the actual mySQL data matches
+	 **/
+	public function testInsertValidSign() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("sign");
+		$signId = generateUuidV4();
+		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LATITUDE, $this->VALID_LONGITUDE, $this->VALID_NAME, $this->VALID_TYPE);
+		$sign->insert($this->getPDO());
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoSign = Sign::getSignBySignId($this->getPDO(), $sign->getSignId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
+		$this->assertEquals($pdoSign->getSignId(), $signId);
+		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
+		$this->assertEquals($pdoSign->getSignLatitude(), $this->VALID_LATITUDE);
+		$this->assertEquals($pdoSign->getSignLongitude(), $this->VALID_LONGITUDE);
+		$this->assertEquals($pdoSign->getSignName(), $this->VALID_NAME);
+		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 	/**
-	 * test inserting a valid Profile and verify that the actual mySQL data matches
+	 * test inserting a Sign, editing it, and then updating it
 	 **/
-	public function testInsertValidProfile() : void {
+	public function testUpdateValidSign() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("profile");
-		$profileId = generateUuidV4();
-		$profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_PROFILE_AVATAR_URL, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PHONE);
-		$profile->insert($this->getPDO());
+		$numRows = $this->getConnection()->getRowCount("sign");
+		// create a new Sign and insert to into mySQL
+		$signId = generateUuidV4();
+		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LATITUDE,$this->VALID_LONGITUDE, $this->VALID_NAME, $this->VALID_TYPE);
+		$sign->insert($this->getPDO());
+		// edit the Sign and update it in mySQL
+		$sign->setSignDescription($this->VALID_DESCRIPTION);
+		$sign->update($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
-		$this->assertEquals($pdoProfile->getProfileId(), $profileId);
-		$this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
-		$this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE );
-		$this->assertEquals($pdoProfile->getProfileAvatarUrl(), $this->VALID_PROFILE_AVATAR_URL);
-		$this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
-		$this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
-		$this->assertEquals($pdoProfile->getProfilePhone(), $this->VALID_PHONE);
-	}
-	/**
-	 * test inserting a Profile, editing it, and then updating it
-	 **/
-	public function testUpdateValidProfile() {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("profile");
-		// create a new Profile and insert to into mySQL
-		$profileId = generateUuidV4();
-		$profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE,$this->VALID_PROFILE_AVATAR_URL, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PHONE);
-		$profile->insert($this->getPDO());
-		// edit the Profile and update it in mySQL
-		$profile->setProfileAtHandle($this->VALID_ATHANDLE2);
-		$profile->update($this->getPDO());
-		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
-		$this->assertEquals($pdoProfile->getProfileId(), $profileId);
-		$this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
-		$this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE2);
-		$this->assertEquals($pdoProfile->getProfileAvatarUrl(), $this->VALID_PROFILE_AVATAR_URL);
-		$this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
-		$this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
-		$this->assertEquals($pdoProfile->getProfilePhone(), $this->VALID_PHONE);
+		$pdoSign = Sign::getSignBySignId($this->getPDO(), $sign->getSignId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
+		$this->assertEquals($pdoSign->getSignId(), $signId);
+		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
+		$this->assertEquals($pdoSign->getSignLatitude(), $this->VALID_LATITUDE);
+		$this->assertEquals($pdoSign->getSignLongitude(), $this->VALID_LONGITUDE);
+		$this->assertEquals($pdoSign->getSignName(), $this->VALID_NAME);
+		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 	/**
 	 * test creating a Profile and then deleting it
