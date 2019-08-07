@@ -296,7 +296,7 @@ class  UserPhoto implements \JsonSerializable {
 		// create query template update foreign key and make statement not to change it unnecessarily.Change done
 		$query = "UPDATE userPhoto SET userPhotoSignId = :userPhotoSignId, userPhotoUserId = :userPhotoUserId, userPhotoCaption = :userPhotoCaption, userPhotoIsFeature = :userPhotoIsFeature,
        userPhotoUrl = :userPhotoUrl WHERE userPhotoId = :userPhotoId";
-		$statement = $pdo->prepare($query);
+		$statement = $pdo->prepare( $query);
 		$parameters = ["userPhotoId" => $this->userPhotoId ->getBytes(),"userPhotoSignId" => $this->userPhotoSignId->getBytes(),"userPhotoUserId" => $this->userPhotoUserId->getBytes(),
 			"userPhotoCaption" => $this->userPhotoCaption, "userPhotoIsFeature" => $this->userPhotoIsFeature,
 			"userPhotoUrl" => $this->userPhotoUrl];
