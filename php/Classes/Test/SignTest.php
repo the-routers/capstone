@@ -158,67 +158,65 @@ class SignTest extends SignsOn66Test {
 		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 	/**
-	 * test grabbing a Profile by at handle that does not exist
+	 * test grabbing a Sign by a name that does not exist
 	 **/
-	public function testGetInvalidProfileByAtHandle() : void {
-		// grab an at handle that does not exist
-		$profile = Profile::getProfileByProfileAtHandle($this->getPDO(), "@doesnotexist");
-		$this->assertCount(0, $profile);
+	public function testGetInvalidSignByName() : void {
+		// grab a name that does not exist
+		$profile = Sign::getSignBySignName($this->getPDO(), "doesnotexist");
+		$this->assertCount(0, $sign);
 	}
 	/**
-	 * test grabbing a Profile by email
+	 * test grabbing a Sign by type
 	 **/
-	public function testGetValidProfileByEmail() : void {
+	public function testGetValidSignByType() : void {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("profile");
-		$profileId = generateUuidV4();
-		$profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_PROFILE_AVATAR_URL, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PHONE);
-		$profile->insert($this->getPDO());
+		$numRows = $this->getConnection()->getRowCount("sign");
+		$signId = generateUuidV4();
+		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LAT, $this->VALID_LONG, $this->VALID_NAME, $this->VALID_TYPE);
+		$sign->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoProfile = Profile::getProfileByProfileEmail($this->getPDO(), $profile->getProfileEmail());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
-		$this->assertEquals($pdoProfile->getProfileId(), $profileId);
-		$this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
-		$this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE);
-		$this->assertEquals($pdoProfile->getProfileAvatarUrl(), $this->VALID_PROFILE_AVATAR_URL);
-		$this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
-		$this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
-		$this->assertEquals($pdoProfile->getProfilePhone(), $this->VALID_PHONE);
+		$pdoSign = Sign::getSignBySignType($this->getPDO(), $sign->getSignType());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
+		$this->assertEquals($pdoSign->getSignId(), $signId);
+		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
+		$this->assertEquals($pdoSign->getSignLat(), $this->VALID_LAT);
+		$this->assertEquals($pdoSign->getSignLong(), $this->VALID_LONG);
+		$this->assertEquals($pdoSign->getSignName(), $this->VALID_NAME);
+		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 	/**
-	 * test grabbing a Profile by an email that does not exists
+	 * test grabbing a Sign by an type that does not exists
 	 **/
-	public function testGetInvalidProfileByEmail() : void {
-		// grab an email that does not exist
-		$profile = Profile::getProfileByProfileEmail($this->getPDO(), "does@not.exist");
-		$this->assertNull($profile);
+	public function testGetInvalidSignByType() : void {
+		// grab a sign type that does not exist
+		$sign = Sign::getSignBySignType($this->getPDO(), "typedoesnotexist");
+		$this->assertNull($sign);
 	}
 	/**
-	 * test grabbing a profile by its activation
+	 * test grabbing a Sign by its Id
 	 */
-	public function testGetValidProfileByActivationToken() : void {
+	public function testGetValidSignById() : void {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("profile");
-		$profileId = generateUuidV4();
-		$profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_PROFILE_AVATAR_URL, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PHONE);
-		$profile->insert($this->getPDO());
+		$numRows = $this->getConnection()->getRowCount("sign");
+		$signId = generateUuidV4();
+		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LAT, $this->VALID_LONG, $this->VALID_NAME, $this->VALID_TYPE);
+		$sign->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoProfile = Profile::getProfileByProfileActivationToken($this->getPDO(), $profile->getProfileActivationToken());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
-		$this->assertEquals($pdoProfile->getProfileId(), $profileId);
-		$this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
-		$this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE);
-		$this->assertEquals($pdoProfile->getProfileAvatarUrl(), $this->VALID_PROFILE_AVATAR_URL);
-		$this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
-		$this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
-		$this->assertEquals($pdoProfile->getProfilePhone(), $this->VALID_PHONE);
+		$pdoSign = Sign::getSignBySignId($this->getPDO(), $sign->getSignId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("Sign"));
+		$this->assertEquals($pdoSign->getSignId(), $signId);
+		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
+		$this->assertEquals($pdoSign->getSignLat(), $this->VALID_LAT);
+		$this->assertEquals($pdoSign->getSignLong(), $this->VALID_LONG);
+		$this->assertEquals($pdoSign->getSignName(), $this->VALID_NAME);
+		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 	/**
-	 * test grabbing a Profile by an email that does not exists
+	 * test grabbing a Sign by an id that does not exists
 	 **/
-	public function testGetInvalidProfileActivation() : void {
-		// grab an email that does not exist
-		$profile = Profile::getProfileByProfileActivationToken($this->getPDO(), "6675636b646f6e616c646472756d7066");
-		$this->assertNull($profile);
+	public function testGetInvalidSignId() : void {
+		// grab an id that does not exist
+		$sign = Sign::getSignBySignId($this->getPDO(), "6675636b646f6e616c646472756d7066");
+		$this->assertNull($sign);
 	}
 }
