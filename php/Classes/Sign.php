@@ -163,14 +163,12 @@ class Sign implements \JsonSerializable {
 	 * @throws \RangeException  if the sign latitude is not within range of -90 to 90
 	 **/
 	public function setSignLat(float $newSignLat): void {
-		// verify the sign latitude will fit in the database
-		if(is_float($newSignLat) != true) {
-			throw(new \InvalidArgumentException("latitude not valid"));
-		}
-
 		// verify the latitude is in range
-		if(($newSignLat)!= range(-90, 90)) {
-			throw(new \RangeException("latitude is not within range of -90 to 90"));
+		if(floatval($newSignLat) < -90) {
+			throw(new \RangeException("latitude is not between -90 and 90"));
+		}
+		if(floatval($newSignLat) > 90) {
+			throw(new \RangeException("latitude is not between -90 and 90"));
 		}
 		$this->signLat = $newSignLat;
 	}
@@ -192,14 +190,12 @@ class Sign implements \JsonSerializable {
 	 * @throws \InvalidArgumentException if the sign longitude is not a float or insecure
 	 **/
 	public function setSignLong(float $newSignLong): void {
-		// verify the sign longitude will fit in the database
-		if(is_float($newSignLong) != true) {
-			throw(new \InvalidArgumentException("longitude not valid"));
-		}
-
 		// verify the longitude is in range
-		if(($newSignLong)!= range(-180, 180)) {
-			throw(new \RangeException("longitude is not within range of -180 to 180"));
+		if(floatval($newSignLong) < -90) {
+			throw(new \RangeException("longitude is not between -90 and 90"));
+		}
+		if(floatval($newSignLong) > 90) {
+			throw(new \RangeException("longitude is not between -90 and 90"));
 		}
 		$this->signLong = $newSignLong;
 	}
