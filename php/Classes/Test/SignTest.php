@@ -30,14 +30,14 @@ class SignTest extends SignsOn66Test {
 	protected $VALID_DESCRIPTION2 = "I'm adding another sample sign description";
 	/**
 	 * valid sign latitude
-	 * @var float $VALID_LATITUDE
+	 * @var float $VALID_LAT
 	 **/
-	protected $VALID_LATITUDE = 35.084385;
+	protected $VALID_LAT = 35.084385;
 	/**
 	 * valid sign longitude
-	 * @var float $VALID_LONGITUDE
+	 * @var float $VALID_LONG
 	 **/
-	protected $VALID_LONGITUDE = -106.650421;
+	protected $VALID_LONG = -106.650421;
 	/**
 	* valid sign name to use
 	 * @var string $VALID_NAME
@@ -56,15 +56,15 @@ class SignTest extends SignsOn66Test {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("sign");
 		$signId = generateUuidV4();
-		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LATITUDE, $this->VALID_LONGITUDE, $this->VALID_NAME, $this->VALID_TYPE);
+		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LAT, $this->VALID_LONG, $this->VALID_NAME, $this->VALID_TYPE);
 		$sign->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoSign = Sign::getSignBySignId($this->getPDO(), $sign->getSignId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
 		$this->assertEquals($pdoSign->getSignId(), $signId);
 		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
-		$this->assertEquals($pdoSign->getSignLatitude(), $this->VALID_LATITUDE);
-		$this->assertEquals($pdoSign->getSignLongitude(), $this->VALID_LONGITUDE);
+		$this->assertEquals($pdoSign->getSignLat(), $this->VALID_LAT);
+		$this->assertEquals($pdoSign->getSignLong(), $this->VALID_LONG);
 		$this->assertEquals($pdoSign->getSignName(), $this->VALID_NAME);
 		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
@@ -76,7 +76,7 @@ class SignTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("sign");
 		// create a new Sign and insert to into mySQL
 		$signId = generateUuidV4();
-		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LATITUDE,$this->VALID_LONGITUDE, $this->VALID_NAME, $this->VALID_TYPE);
+		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LAT,$this->VALID_LONG, $this->VALID_NAME, $this->VALID_TYPE);
 		$sign->insert($this->getPDO());
 		// edit the Sign and update it in mySQL
 		$sign->setSignDescription($this->VALID_DESCRIPTION);
@@ -86,53 +86,52 @@ class SignTest extends SignsOn66Test {
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
 		$this->assertEquals($pdoSign->getSignId(), $signId);
 		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
-		$this->assertEquals($pdoSign->getSignLatitude(), $this->VALID_LATITUDE);
-		$this->assertEquals($pdoSign->getSignLongitude(), $this->VALID_LONGITUDE);
+		$this->assertEquals($pdoSign->getSignLatitude(), $this->VALID_LAT);
+		$this->assertEquals($pdoSign->getSignLongitude(), $this->VALID_LONG);
 		$this->assertEquals($pdoSign->getSignName(), $this->VALID_NAME);
 		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 	/**
-	 * test creating a Profile and then deleting it
+	 * test creating a Sign and then deleting it
 	 **/
-	public function testDeleteValidProfile() : void {
+	public function testDeleteValidSign() : void {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("profile");
-		$profileId = generateUuidV4();
-		$profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_PROFILE_AVATAR_URL, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PHONE);
-		$profile->insert($this->getPDO());
-		// delete the Profile from mySQL
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
-		$profile->delete($this->getPDO());
-		// grab the data from mySQL and enforce the Profile does not exist
-		$pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
-		$this->assertNull($pdoProfile);
-		$this->assertEquals($numRows, $this->getConnection()->getRowCount("profile"));
+		$numRows = $this->getConnection()->getRowCount("sign");
+		$signId = generateUuidV4();
+		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LAT, $this->VALID_LONG, $this->VALID_NAME, $this->VALID_TYPE);
+		$sign->insert($this->getPDO());
+		// delete the Sign from mySQL
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
+		$sign->delete($this->getPDO());
+		// grab the data from mySQL and enforce the Sign does not exist
+		$pdoSign = Sign::getSignBySignId($this->getPDO(), $sign->getSignId());
+		$this->assertNull($pdoSign);
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("sign"));
 	}
 	/**
-	 * test inserting a Profile and regrabbing it from mySQL
+	 * test inserting a Sign and regrabbing it from mySQL
 	 **/
-	public function testGetValidProfileByProfileId() : void {
+	public function testGetValidSignBySignId() : void {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("profile");
-		$profileId = generateUuidV4();
-		$profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_PROFILE_AVATAR_URL, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PHONE);
-		$profile->insert($this->getPDO());
+		$numRows = $this->getConnection()->getRowCount("sign");
+		$signId = generateUuidV4();
+		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LAT, $this->VALID_LONG, $this->VALID_NAME, $this->VALID_TYPE);
+		$sign->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
-		$this->assertEquals($pdoProfile->getProfileId(), $profileId);
-		$this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
-		$this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE);
-		$this->assertEquals($pdoProfile->getProfileAvatarUrl(), $this->VALID_PROFILE_AVATAR_URL);
-		$this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
-		$this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
-		$this->assertEquals($pdoProfile->getProfilePhone(), $this->VALID_PHONE);
+		$pdoSign = Sign::getSignBySignId($this->getPDO(), $sign->getSignId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
+		$this->assertEquals($pdoSign->getSignId(), $signId);
+		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
+		$this->assertEquals($pdoSign->getSignLat(), $this->VALID_LAT);
+		$this->assertEquals($pdoSign->getSignLong(), $this->VALID_LONG);
+		$this->assertEquals($pdoSign->getSignName(), $this->VALID_NAME);
+		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 	/**
-	 * test grabbing a Profile that does not exist
+	 * test grabbing a Sign that does not exist
 	 **/
-	public function testGetInvalidProfileByProfileId() : void {
-		// grab a profile id that exceeds the maximum allowable profile id
+	public function testGetInvalidSignBySignId() : void {
+		// grab a sign id that exceeds the maximum allowable profile id
 		$fakeProfileId = generateUuidV4();
 		$profile = Profile::getProfileByProfileId($this->getPDO(), $fakeProfileId );
 		$this->assertNull($profile);
