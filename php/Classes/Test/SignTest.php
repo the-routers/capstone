@@ -132,31 +132,30 @@ class SignTest extends SignsOn66Test {
 	 **/
 	public function testGetInvalidSignBySignId() : void {
 		// grab a sign id that exceeds the maximum allowable profile id
-		$fakeProfileId = generateUuidV4();
-		$profile = Profile::getProfileByProfileId($this->getPDO(), $fakeProfileId );
-		$this->assertNull($profile);
+		$fakeSignId = generateUuidV4();
+		$profile = Sign::getSignBySignId($this->getPDO(), $fakeSignId );
+		$this->assertNull($sign);
 	}
-	public function testGetValidProfileByAtHandle() {
+	public function testGetValidSignByName() {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("profile");
-		$profileId = generateUuidV4();
-		$profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_PROFILE_AVATAR_URL, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PHONE);
-		$profile->insert($this->getPDO());
+		$numRows = $this->getConnection()->getRowCount("sign");
+		$signId = generateUuidV4();
+		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LAT, $this->VALID_LONG, $this->VALID_NAME, $this->VALID_TYPE);
+		$sign->insert($this->getPDO());
 		//grab the data from MySQL
-		$results = Profile::getProfileByProfileAtHandle($this->getPDO(), $this->VALID_ATHANDLE);
-		$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("profile"));
-		//enforce no other objects are bleeding into profile
-		$this->assertContainsOnlyInstancesOf("Edu\\CNM\\DataDesign\\Profile", $results);
+		$results = Sign::getSignBySignName($this->getPDO(), $this->VALID_NAME);
+		$this->assertEquals($numRows +1, $this->getConnection()->getRowCount("sign"));
+		//enforce no other objects are bleeding into sign
+		$this->assertContainsOnlyInstancesOf("Routers\\Capstone\\Sign", $results);
 		//enforce the results meet expectations
 		$pdoProfile = $results[0];
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
-		$this->assertEquals($pdoProfile->getProfileId(), $profileId);
-		$this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
-		$this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE);
-		$this->assertEquals($pdoProfile->getProfileAvatarUrl(), $this->VALID_PROFILE_AVATAR_URL);
-		$this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
-		$this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
-		$this->assertEquals($pdoProfile->getProfilePhone(), $this->VALID_PHONE);
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
+		$this->assertEquals($pdoSign->getSignId(), $profileId);
+		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
+		$this->assertEquals($pdoSign->getSignLat(), $this->VALID_LAT);
+		$this->assertEquals($pdoSign->getSignLong(), $this->VALID_LONG);
+		$this->assertEquals($pdoSign->getSignName(), $this->VALID_NAME);
+		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 	/**
 	 * test grabbing a Profile by at handle that does not exist
