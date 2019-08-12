@@ -32,12 +32,12 @@ class SignTest extends SignsOn66Test {
 	 * valid sign latitude
 	 * @var float $VALID_LAT
 	 **/
-	protected $VALID_LAT = 35.084385;
+	protected $VALID_LAT = '35.084385';
 	/**
 	 * valid sign longitude
 	 * @var float $VALID_LONG
 	 **/
-	protected $VALID_LONG = -106.650421;
+	protected $VALID_LONG = '-106.650421';
 	/**
 	 * valid sign name to use
 	 * @var string $VALID_NAME
@@ -47,7 +47,7 @@ class SignTest extends SignsOn66Test {
 	 * valid sign type to use
 	 * @var string $VALID_TYPE
 	 **/
-	protected $VALID_TYPE = "This sample sign type is orphan";
+	protected $VALID_TYPE = "Orphan";
 
 	/**
 	 * test inserting a valid Sign and verify that the actual mySQL data matches
@@ -87,8 +87,8 @@ class SignTest extends SignsOn66Test {
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
 		$this->assertEquals($pdoSign->getSignId(), $signId);
 		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
-		$this->assertEquals($pdoSign->getSignLatitude(), $this->VALID_LAT);
-		$this->assertEquals($pdoSign->getSignLongitude(), $this->VALID_LONG);
+		$this->assertEquals($pdoSign->getSignLat(), $this->VALID_LAT);
+		$this->assertEquals($pdoSign->getSignLong(), $this->VALID_LONG);
 		$this->assertEquals($pdoSign->getSignName(), $this->VALID_NAME);
 		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
@@ -180,7 +180,7 @@ class SignTest extends SignsOn66Test {
 		$results = Sign::getSignBySignName($this->getPDO(), $this->VALID_NAME);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
 		//enforce no other objects are bleeding into sign
-		$this->assertContainsOnlyInstancesOf("Routers\\Capstone\\Sign", $results);
+		$this->assertContainsOnlyInstancesOf("TheRouters\\Capstone\\Sign", $results);
 		//enforce the results meet expectations
 		$pdoSign = $results[0];
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
@@ -222,7 +222,7 @@ class SignTest extends SignsOn66Test {
 	}
 
 	/**
-	 * test grabbing a Sign by an type that does not exist
+	 * test grabbing a Sign by a type that does not exist
 	 **/
 	public function testGetInvalidSignByType(): void {
 		// grab a sign type that does not exist
