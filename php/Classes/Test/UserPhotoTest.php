@@ -6,7 +6,7 @@ use TheRouters\Capstone\{
 // grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
 // grab the uuid generator
-require_once(dirname(__DIR__, 1) . "/Classes/uuid.php");
+require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
 /**
  * Full PHPUnit test for the Image class
  *
@@ -18,65 +18,54 @@ require_once(dirname(__DIR__, 1) . "/Classes/uuid.php");
  * @modeled after TweetTest.php by Dylan McDonald <dmcdonald21@cnm.edu>
  **/
 class UserPhotoTest extends SignsOn66Test {
-	/**
-	 * User that created  the post; this is for foreign key relations
+	 /* User that created  the post; this is for foreign key relations
 	 * @var  User $userPhotoUserId
 	 **/
-	protected $userPhotoUserId = null;
+	protected $userPhotoUser = null;
+
+/* valid hash to use create object of user
+	 * @var $VALID_Password
+	 */
+	protected $VALID_Password;
+/**
+ * valid activationToken to create the user object to own the test
+ * @var string $VALID_ACTIVATION
+ */
+	protected $VALID_ACTIVATION;
 	/**
 	 * Sign that was liked; this is for foreign key relations
 	 * @var Sign $userPhotoSignId
 	 **/
-	protected $userPhotoSignId = null;
+	protected $userPhotoSign = null;
 	/**
-	 *  this is for foreign key relations
-	 * @var UserPhoto
-	 **/
-	protected $userPhoto = null;
-	/**
-	 * User use to
+	 *  this is where user input caption for photo
 	 * @var $userPhotoCaption
-	 */
-	protected $userPhotoCaption;
+	 **/
+	protected $VALID_userPhotoCaption = null;
 	/**
-	 * timestamp of the Like; this starts as null and is assigned later
+	 * User use to determine photo uploaded is featured or not
 	 * @var
+	 */
+	protected $VALID_userPhotoIsFeature = '0';
+	/**
+	 * user use to photoUrl to store sign photo
+	 * @var $userPhotoUrl
 	 **/
-	protected $VALID_LIKEDATE;
-	/**
-	 * valid activationToken to create the profile object to own the test
-	 * @var string $VALID_ACTIVATION
-	 */
-	protected $VALID_ACTIVATION;
-	/**
-	 * second valid cloudinary token  to use
-	 * @var string $VALID_CLOUDINARYTOKEN
-	 **/
-	protected $VALID_CLOUDINARYTOKEN;
-	/**
-	 * valid IMAGECLOUDINARYTOKEN to create the image object to own the test
-	 * @var string $VALID_IMAGECLOUDINARYTOKEN
-	 */
-	protected $VALID_IMAGECLOUDINARYTOKEN;
-	/**
-	 * valid IMAGEURL to create the image object to own the test
-	 * @var string $VALID_IMAGEURL
-	 */
-	protected $VALID_IMAGEURL = "https://media.giphy.com/media/szxw88uS1cq4M/giphy.gif";
+	protected $VALID_userPhotoUrl = "https://media.giphy.com/media/szxw88uS1cq4M/giphy.gif";
+
 	/**
 	 * create dependent objects before running each test
 	 **/
+
 	public final function setUp(): void {
 		// run the default setUp() method first
 		parent::setUp();
 		// create a salt and hash for the mocked profile
 		$password = "abc123";
-		$this->VALID_HASH = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
+		$this->VALID_Password = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
 		$this->VALID_ACTIVATION = bin2hex(random_bytes(16));
-		$this->VALID_CLOUDINARYTOKEN = bin2hex(random_bytes(125));
-		$this->VALID_IMAGECLOUDINARYTOKEN = "https://media.giphy.com/media/3og0INyCmHlNylks9O/giphy.gif";
-		// create and insert the mocked profile
-		$this->profile = new Profile(generateUuidV4(), null, "@phpunit", $this->VALID_CLOUDINARYTOKEN, "test@phpunit.de", $this->VALID_HASH, "+12125551212");
+		// create and insert the mocked UserPhoto
+		$this->userPhoto = new UserPhoto(generateUuidV4(), null, null, $this->VALID_userPhotoCaption, '0', $this->VALID_Password);
 		$this->profile->insert($this->getPDO());
 		// create the and insert the mocked tweet
 		$this->tweet = new Tweet(generateUuidV4(), $this->profile->getProfileId(), "PHPUnit like test passing");
