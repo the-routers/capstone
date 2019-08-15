@@ -42,11 +42,9 @@ abstract class SignsOn66Test extends TestCase {
 		$dataset = new QueryDataSet($this->getConnection());
 		// add all the tables for the project here
 		// THESE TABLES *MUST* BE LISTED IN THE SAME ORDER THEY WERE CREATED!!!!
-		$dataset->addTable("profile");
-		$dataset->addTable("tweet");
-		// the second parameter is required because like is also a SQL keyword and is the only way PHPUnit can query the like table
-		$dataset->addTable("like", "SELECT likeProfileId, likeTweetId, likeDate FROM `like`");
-		$dataset->addTable("image");
+		$dataset->addTable("sign");
+		$dataset->addTable("user");
+		$dataset->addTable("userPhoto");
 		return($dataset);
 	}
 	/**
@@ -80,7 +78,7 @@ abstract class SignsOn66Test extends TestCase {
 		// if the connection hasn't been established, create it
 		if($this->connection === null) {
 			// connect to mySQL and provide the interface to PHPUnit
-			$secrets =  new \Secrets("/etc/apache2/capstone-mysql/ddctwitter.ini");
+			$secrets =  new \Secrets("/etc/apache2/capstone-mysql/signson66.ini");
 			$pdo = $secrets->getPdoObject();
 			$this->connection = $this->createDefaultDBConnection($pdo, $secrets->getDatabase());
 		}

@@ -2,7 +2,8 @@
 	<testsuites>
 		<testsuite name="Signs on 66">
 			<file>UserTest.php</file>
-			<!-- <file>SignTest.php</file>
+			<!--
+			<file>SignTest.php</file>
 			<file>UserPhotoTest.php</file> -->
 		</testsuite>
 	</testsuites>
