@@ -327,7 +327,7 @@ class User implements \JsonSerializable {
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
 	public static function getUserByUserName(\PDO $pdo, string $userName): \SPLFixedArray {
-		//This sanitizes the at handle before searching
+		//This sanitizes the username before searching
 		$userName = trim($userName);
 		$userName = filter_var($userName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($userName) === true) {
@@ -340,7 +340,7 @@ class User implements \JsonSerializable {
 		//This binds the userName to the place holder in the template
 		$parameters = ["userName" => $userName];
 		$statement->execute($parameters);
-		$users = new \SPLFixedArray($statement->rowCount());  //:::::::::::::::::::::::::::::::::::::IS "USERS" CORRECT:::::::::::::::::::::::
+		$users = new \SPLFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
