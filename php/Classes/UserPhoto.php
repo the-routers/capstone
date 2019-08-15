@@ -419,6 +419,87 @@ class  UserPhoto implements \JsonSerializable {
 		return ($userPhotoIsFeature);
 	}
 
+/**
+* gets the Photo by Sign id
+*
+* @param \PDO $pdo PDO connection object
+* @param string $userPhotoSignId photo with sign id to search by
+* @return \SplFixedArray SplFixedArray of photo found
+* @throws \PDOException when mySQL related errors occur
+* @throws \TypeError when variables are not the correct data type
+**/
+	public static function getUserPhotoByUserPhotoSignId(\PDO $pdo, string $userPhotoSignId): \SPLFixedArray {
+		try {
+			$userPhotoSignId = self::validateUuid($userPhotoSignId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		// create query template
+		$query = "SELECT userPhotoId, userPhotoUserId, userPhotoSignId, userPhotoCaption, userPhotoIsFeature ,userPhotoUrl
+		FROM userPhoto WHERE userPhotoSignId = :userPhotoSignId";
+		$statement = $pdo->prepare($query);
+		// bind the PHOTO SIGN id to the place holder in the template
+		$parameters = ["userPhotoSignId" => $userPhotoSignId->getBytes()];
+		$statement->execute($parameters);
+		// build an array of photo
+		$userPhotos = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$userPhoto= new userPhoto($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"],
+					$row["userPhotoCaption"], $row["UserPhotoIsFeature"], $row["userPhotoUrl"]);
+				$userPhotos[$userPhotos->key()] = $userPhoto;
+				$userPhotos->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($userPhotos);
+	}
+/**
+* gets the Photo by user id
+*
+* @param \PDO $pdo PDO connection object
+* @param string $userPhotoUserID photo with user id to search by
+* @return \SplFixedArray SplFixedArray of photo found
+* @throws \PDOException when mySQL related errors occur
+* @throws \TypeError when variables are not the correct data type
+**/
+
+
+	public static function getUserPhotoByUserPhotoUserId(\PDO $pdo, string $userPhotoUserId): \SPLFixedArray {
+		try {
+			$userPhotoUserId = self::validateUuid($userPhotoUserId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		// create query template
+		$query = "SELECT userPhotoId, userPhotoUserId, userPhotoSignId, userPhotoCaption, userPhotoIsFeature ,userPhotoUrl
+		FROM userPhoto WHERE userPhotoUserId = :userPhotoUserId";
+		$statement = $pdo->prepare($query);
+		// bind the photo user id to the place holder in the template
+		$parameters = ["userPhotoUserId" => $userPhotoUserId->getBytes()];
+		$statement->execute($parameters);
+
+		// build an array of photos
+		$userPhotos = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$userPhoto= new userPhoto($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"],
+					$row["userPhotoCaption"], $row["UserPhotoIsFeature"], $row["userPhotoUrl"]);
+				$userPhotos[$userPhotos->key()] = $userPhoto;
+				$userPhotos->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($userPhotos);
+	}
+
+
 	/**
 	 * formats the state variables for JSON serialization
 	 *

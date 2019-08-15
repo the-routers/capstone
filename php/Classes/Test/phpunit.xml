@@ -1,9 +1,9 @@
 <phpunit>
 	<testsuites>
-		<testsuite name="Signs on 66">
-			<file>UserTest.php</file>
+		<testsuite name="signson66">
+			<file>UserPhotoTest.php</file>
 			<!-- <file>SignTest.php</file>
-			<file>UserPhotoTest.php</file> -->
+			<file>UserTest.php</file> -->
 		</testsuite>
 	</testsuites>
 	<filter>
