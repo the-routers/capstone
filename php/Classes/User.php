@@ -16,11 +16,10 @@ class User implements \JsonSerializable {
 	 **/
 	private $userId;
 
-
-	/**This is the userName for the User.
-	 * @var = string $userName
+	/**This is the token sent by email to user to verify user is valid and not malicious.
+	 * @var string $userActivationToken .
 	 **/
-	private $userName;
+	private $userActivationToken;
 
 
 	/**This is the email address for the User.
@@ -29,26 +28,25 @@ class User implements \JsonSerializable {
 	private $userEmail;
 
 
-	/**This is the password for the User's login.
-	 * @var string $userPassword
+	/**This is the userName for the User.
+	 * @var = string $userName
 	 **/
-	private $userPassword;
+	private $userName;
 
 
-	/**This is the token sent by email to user to verify user is valid and not malicious.
-	 * @var string $userActivationToken .
+	/**This is the hash for the User's password.
+	 * @var string $userHash
 	 **/
-	private $userActivationToken;
-
+	private $userHash;
 
 	/**
 	 * Constructor for this User
 	 *
 	 * @param string|Uuid $newUserId of this User or null if a new User
-	 * @param string $newUserName string containing new userName
-	 * @param string $newUserEmail string containing user's email
-	 * @param string $newUserPassword string containing password
 	 * @param string $newUserActivationToken activation token to safe guard against malicious accounts
+	 * @param string $newUserEmail string containing user's email
+	 * @param string $newUserName string containing new userName
+	 * @param string $newUserHash string containing hash
 	 * @throws \InvalidArgumentException if data types are not valid
 	 * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
 	 * @throws \TypeError if a data type violates a data hint
@@ -56,13 +54,14 @@ class User implements \JsonSerializable {
 	 *
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newUserId, ?string $newUserName, string $newUserEmail, ?string $newUserPassword, ?string $newUserActivationToken) { //Added ? to string at newUserPassword
+	public function __construct($newUserId, ?string $newUserActivationToken, string $newUserEmail, string $newUserName, string $newUserHash) {
 		try {
 			$this->setUserId($newUserId);
-			$this->setUserName($newUserName);
-			$this->setUserEmail($newUserEmail);
-			$this->setUserPassword($newUserPassword);
 			$this->setUserActivationToken($newUserActivationToken);
+			$this->setUserEmail($newUserEmail);
+			$this->setUserName($newUserName);
+			$this->setUserHash($newUserHash);
+
 		} catch(\InvalidArgumentException | \RangeException |\TypeError | \Exception $exception) {
 
 			//Determines what exception type was thrown
@@ -70,7 +69,6 @@ class User implements \JsonSerializable {
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
 	}
-
 
 	/**
 	 * This is the ASSESSOR method for the userId
@@ -101,7 +99,7 @@ class User implements \JsonSerializable {
 	 * This is the ASSESSOR method for the userName
 	 * @return string value of userName
 	 **/
-	public function getUserName() {
+	public function getUserName() : string {
 		return $this->userName;
 	}
 
@@ -112,7 +110,7 @@ class User implements \JsonSerializable {
 	 * @throws \RangeException if $newUserName is > 32 characters
 	 * @throws \TypeError if $newUserName is not a string
 	 **/
-	public function setUserName($newUserName): void {
+	public function setUserName(string $newUserName): void {
 		//The following ensure that the UserName is properly formatted and secure
 		$newUserName = trim($newUserName);
 		$newUserName = filter_var($newUserName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -121,46 +119,46 @@ class User implements \JsonSerializable {
 		}
 		//Verifies the userName will fit in the database
 		if(strlen($newUserName) > 50) {
-			throw(new \RangeException("username length is too large; must be less that 50 characters"));
+			throw(new \RangeException("username length is too large; must be less than 50 characters"));
 		}
 		//Stores the username
-		$this->UserName = $newUserName;
+		$this->userName = $newUserName;
 
 	}
 
 
 	/**
-	 * This is the ASSESSOR method for the userPassword
-	 * @param string $userPassword
-	 * @return string for userPassword
+	 * This is the ASSESSOR method for the userHash
+	 * @param string $userHash
+	 * @return string for userHash
 	 */
-	public function getUserPassword(): string {
-		return $this->userPassword;
+	public function getUserHash(): string {
+		return $this->userHash;
 	}
 
-	/**This is the MUTATOR method for the userPassword
-	 * @param string $userPassword is the new password for the User
-	 * @throws \InvalidArgumentException if $userPassword is not a string or is insecure
-	 * @throws \RangeException is $userPassword is more than 50 characters
-	 * @throws \TypeError if $userPassword is not a string
+	/**This is the MUTATOR method for the userHash
+	 * @param string $userHash is the new hash for the User
+	 * @throws \InvalidArgumentException if $userHash is not a string or is insecure
+	 * @throws \RangeException is $userHash is not 97 characters
+	 * @throws \TypeError if $userHash is not a string
 	 **/
-	public function setUserPassword(string $newUserPassword): void {
-		//This enforces that the password is properly formatted and secure
-		$newUserPassword = trim($newUserPassword);
-		if(empty($newUserPassword) === true) {
-			throw(new \InvalidArgumentException("user password is empty or insecure"));
+	public function setUserHash(string $newUserHash): void {
+		//This enforces that the hash is properly formatted and secure
+		$newUserHash = trim($newUserHash);
+		if(empty($newUserHash) === true) {
+			throw(new \InvalidArgumentException("user password hash is empty or insecure"));
 		}
-		//This enforces that the password is really an Argon password
-		$userPasswordInfo = password_get_info($newUserPassword);
-		if($newUserPassword["algoName"] !== "argon2i") {
-			throw(new \InvalidArgumentException("user password is not a valid password"));
+		//This enforces that the hash is really an Argon hash
+		$userHashInfo = password_get_info($newUserHash);
+		if($userHashInfo["algoName"] !== "argon2i") {
+			throw(new \InvalidArgumentException("user hash is not a valid hash"));
 		}
-		//This enforces that the password is exactly 97 characters. :::::____CHECK THIS VALUE_____:::::::::::::::::::::::::::::::::::::::::
-		if(strlen($newUserPassword) !== 97) {
-			throw(new \RangeException("user password must be 97 characters"));
+
+		if(strlen($newUserHash) !== 97) {
+			throw(new \RangeException("user hash must be 97 characters"));
 		}
-		//This stores the password
-		$this->userPassword = $newUserPassword; //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+		//This stores the hash
+		$this->userHash = $newUserHash; //:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 	}
 
@@ -185,7 +183,7 @@ class User implements \JsonSerializable {
 		//This enforces that the user email is properly formatted and secure
 		$newUserEmail = trim($newUserEmail);
 		$newUserEmail = filter_var($newUserEmail, FILTER_VALIDATE_EMAIL);
-		if(empty($newUserEmaild) == true) {
+		if(empty($newUserEmail) == true) {
 			throw(new \InvalidArgumentException("user email empty or insecure"));
 		}
 		//This verifies the userEmail will fit in the database
@@ -237,11 +235,11 @@ class User implements \JsonSerializable {
 	 **/
 	public function insert(\PDO $pdo): void {
 		//This creates a query template
-		$query = "INSERT INTO user(userId, userName, userEmail, userPassword, userActivationToken) VALUES (:userId, :userName, :userEmail, :userPassword, :userActivationToken)";
+		$query = "INSERT INTO user(userId, userActivationToken, userEmail, userName, userHash) VALUES (:userId, :userActivationToken, :userEmail, :userName, :userHash)";
 		$statement = $pdo->prepare($query);
 
 		//This binds the member variables to the place holder in the template
-		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userPassword" => $this->userPassword, "userActivationToken" => $this->userActivationToken];
+		$parameters = ["userId" => $this->userId->getBytes(), "userActivationToken" => $this->userActivationToken, "userEmail" => $this->userEmail, "userName" => $this->userName, "userHash" => $this->userHash];
 		$statement->execute($parameters);
 	}
 
@@ -269,11 +267,11 @@ class User implements \JsonSerializable {
 	 **/
 	public function update(\PDO $pdo): void {
 		//This creates query template
-		$query = "UPDATE user SET userId = :userId, userName = :userName, userEmail = :userEmail, userPassword = :userPassword, userActivationToken = userActivationToken WHERE userId = :userId";
+		$query = "UPDATE user SET userId = :userId, userActivationToken = :userActivationToken, userEmail = :userEmail, userName = :userName, userHash = :userHash WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		//This binds the member variables to the place holders in the template
-		$parameters = ["userId" => $this->userId->getBytes(), "userName" => $this->userName, "userEmail" => $this->userEmail, "userPassword" => $this->userPassword, "userActivationToker" => $this->userActivationToken];
+		$parameters = ["userId" => $this->userId->getBytes(), "userActivationToken" => $this->userActivationToken, "userEmail" => $this->userEmail, "userName" => $this->userName, "userHash" => $this->userHash];
 		$statement->execute($parameters);
 	}
 
@@ -295,7 +293,7 @@ class User implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//This creates query template
-		$query = "SELECT userId, userName, userEmail, userPassword, userActivationToken FROM user WHERE userId = :userId";
+		$query = "SELECT userId, userActivationToken, userEmail, userName, userHash FROM user WHERE userId = :userId";
 		$statement = $pdo->prepare($query);
 
 		//This binds the userId to the place holder in the template
@@ -308,13 +306,13 @@ class User implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"], $row["userActivationToken"]);
+				$user = new User($row["userId"], $row["userActivationToken"], $row["userEmail"], $row["userName"], $row["userHash"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return ($User);
+		return ($user);
 	}
 
 	/**
@@ -334,7 +332,7 @@ class User implements \JsonSerializable {
 			throw(new \PDOException("not a valid username"));
 		}
 		//This creates the query template
-		$query = "SELECT  userId, userName, userEmail, userPassword, userActivationToken FROM user WHERE userName = :userName";
+		$query = "SELECT  userId, userActivationToken, userEmail, userName, userHash FROM user WHERE userName = :userName";
 		$statement = $pdo->prepare($query);
 
 		//This binds the userName to the place holder in the template
@@ -344,7 +342,7 @@ class User implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"], $row["userActivationToken"]);
+				$user = new User($row["userId"], $row["userActivationToken"], $row["userEmail"], $row["userName"], $row["userHash"]);
 				$users[$users->key()] = $user;
 				$users->next();
 			} catch(\Exception $exception) {
@@ -361,7 +359,7 @@ class User implements \JsonSerializable {
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @param string $userEmail is the email to search for
-	 * @return USer|null USer or null if not found
+	 * @return USer|null User or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
@@ -373,7 +371,7 @@ class User implements \JsonSerializable {
 			throw(new \PDOException("not a valid email"));
 		}
 		//This creates a query template
-		$query = "SELECT userId, userName, userEmail, userPassword, userActivationToken FROM user WHERE userEmail = :userEmail";
+		$query = "SELECT userId, userActivationToken, userEmail, userName, userHash FROM user WHERE userEmail = :userEmail";
 		$statement = $pdo->prepare($query);
 
 		//This binds the user email to the place holder in the template
@@ -386,7 +384,7 @@ class User implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"], $row["userActivationToken"]);
+				$user = new User($row["userId"], $row["userActivationToken"], $row["userEmail"], $row["userName"], $row["userHash"]);
 			}
 		} catch(\Exception $exception) {
 			//If the row couldn't be converted, rethrow it
@@ -412,7 +410,7 @@ class User implements \JsonSerializable {
 		}
 
 		//Creates the query template
-		$query = "SELECT  userId, userName, userEmail, userPassword, userActivationToken FROM user WHERE userActivationToken = :userActivationToken";
+		$query = "SELECT  userId, userActivationToken, userEmail, userName, userHash FROM user WHERE userActivationToken = :userActivationToken";
 		$statement = $pdo->prepare($query);
 		//Binds the user activation token to the placeholder in the template
 		$parameters = ["userActivationToken" => $userActivationToken];
@@ -424,7 +422,7 @@ class User implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$user = new User($row["userId"], $row["userName"], $row["userEmail"], $row["userPassword"], $row["userActivationToken"]);
+				$user = new User($row["userId"], $row["userActivationToken"], $row["userEmail"], $row["userName"], $row["userHash"]);
 			}
 		} catch(\Exception $exception) {
 
@@ -444,7 +442,7 @@ class User implements \JsonSerializable {
 	 **/
 	public static function getAllUsers(\PDO $pdo): \SPLFixedArray {
 		//Creates query template
-		$query = "SELECT userId, userName, userEmail FROM user";
+		$query = "SELECT userId, userActivationToken, userEmail, userName, userHash FROM user";
 
 		$statement = $pdo->prepare($query);
 		$statement->execute();
@@ -453,7 +451,7 @@ class User implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$user = new User($row["userId"], $row["userName"], $row["userEmail"]);
+				$user = new User($row["userId"], $row["userActivationToken"], $row["userEmail"], $row["userName"], $row["userHash"]);
 				$users[$users->key()] = $user;
 				$users->next();
 			} catch(\Exception $exception) {
@@ -502,10 +500,10 @@ class User implements \JsonSerializable {
 	 **/
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-		$fields["userId"] = $this->userId->toString();           //in the tweet profile example
+		$fields["userId"] = $this->userId->toString();
 		$fields["userName"] = $this->userName->toString();
 		$fields["userEmail"] = $this->userEmail->toString();
-		unset($fields["userPassword"]);
+		unset($fields["userHash"]);
 		unset($fields["userActivationToken"]);
 		return ($fields);
 	}

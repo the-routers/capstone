@@ -19,7 +19,7 @@ CREATE TABLE user(
 	userActivationToken CHAR(32) NOT NULL,
 	userEmail VARCHAR(128) NOT NULL,
 	userName VARCHAR(50) NOT NULL,
-	userPassword VARCHAR(50) NOT NULL,
+	userHash CHAR(97) NOT NULL,
 	UNIQUE (userEmail),
 	UNIQUE (userName),
 	PRIMARY KEY(userId)
