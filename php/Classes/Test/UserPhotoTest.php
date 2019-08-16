@@ -84,7 +84,7 @@ class UserPhotoTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("userPhoto");
 		// create a new UserPhoto and insert to into mySQL
 		$userPhotoId = generateUuidV4();
-		$userPhoto = new UserPhoto($userPhotoId, $this->Sign->getSignId(),$this->User->getUserId() ,
+		$userPhoto = new UserPhoto($userPhotoId, $this->Sign->getSignId(),$this->User->getUserId(),
 			$this->VALID_USERPHOTOCAPTION, $this->VALID_USERPHOTOISFEATURE, $this->VALID_USERPHOTOURL);
 		$userPhoto->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
