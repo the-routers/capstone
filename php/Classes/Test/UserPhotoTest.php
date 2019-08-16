@@ -24,9 +24,9 @@ class UserPhotoTest extends SignsOn66Test {
 	protected $User = null;
 
 	/* valid hash to use create object of user
-		 * @var $VALID_USER_PASSWORD
+		 * @var $VALID_UserHash
 		 */
-	protected $VALID_PASSWORD;
+	protected $VALID_Hash;
 	/**
 	 * valid activationToken to create the user object to own the test
 	 * @var string $VALID_ACTIVATION
@@ -62,12 +62,12 @@ class UserPhotoTest extends SignsOn66Test {
 		parent::setUp();
 		// create a salt and hash for the mocked user
 		$password = "abc123";
-		$this->VALID_PASSWORD = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
+		$this->VALID_Hash = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
 		$this->VALID_ACTIVATION = bin2hex(random_bytes(16));
 
 		// create and insert a user to own the test
 		$this->user = new User(generateUuidV4(),"janetherounter", "router@test.com", $this->VALID_ACTIVATION,
-			$this->VALID_PASSWORD);
+			$this->VALID_Hash);
 		$this->user->insert($this->getPDO());
 
 		// create and insert a user to own the test sign
@@ -226,8 +226,5 @@ class UserPhotoTest extends SignsOn66Test {
 		$this->assertEquals($pdoUserPhoto->getUserPhotoIsFeature(), $this->VALID_USERPHOTOISFEATURE);
 		$this->assertEquals($pdoUserPhoto->getUserPhotoUrl(), $this->VALID_USERPHOTOURL);
 	}
-
-
-
 
 	}
