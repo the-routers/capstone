@@ -55,7 +55,6 @@ class Sign implements \JsonSerializable {
 	 **/
 	private $signType;
 
-
 	/**
 	 * constructor for this Sign
 	 *
@@ -71,6 +70,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
+
 	public function __construct($newSignId, string $newSignDescription, float $newSignLat, float $newSignLong, string $newSignName, ?string $newSignType) {
 		try {
 			$this->setSignId($newSignId);
@@ -102,6 +102,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \RangeException if $newSignId is not positive
 	 * @throws \TypeError if $newSignId is not a uuid or string
 	 **/
+
 	public function setSignId($newSignId): void {
 		try {
 			$uuid = self::validateUuid($newSignId);
@@ -109,7 +110,6 @@ class Sign implements \JsonSerializable {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-
 		// convert and store the sign id
 		$this->signId = $uuid;
 	}
@@ -191,11 +191,12 @@ class Sign implements \JsonSerializable {
 	 **/
 	public function setSignLong(float $newSignLong): void {
 		// verify the longitude is in range
-		if(floatval($newSignLong) < -90) {
-			throw(new \RangeException("longitude is not between -90 and 90"));
+
+		if(floatval($newSignLong) < -180) {
+			throw(new \RangeException("longitude is not between -180 and 180"));
 		}
-		if(floatval($newSignLong) > 90) {
-			throw(new \RangeException("longitude is not between -90 and 90"));
+		if(floatval($newSignLong) > 180) {
+			throw(new \RangeException("longitude is not between -180 and 180"));
 		}
 		$this->signLong = $newSignLong;
 	}
@@ -217,6 +218,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \RangeException if $newSignName is > 75 characters
 	 * @throws \TypeError if $newSignName is not a string
 	 **/
+
 	public function setSignName(string $newSignName): void {
 		// verify the sign name is secure
 		$newSignName = trim($newSignName);
@@ -282,7 +284,6 @@ class Sign implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
-
 	/**
 	 * deletes this Sign from mySQL
 	 *
@@ -290,6 +291,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
+
 	public function delete(\PDO $pdo) : void {
 
 		// create query template
@@ -308,13 +310,11 @@ class Sign implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
-	public function update(\PDO $pdo) : void {
 
+	public function update(\PDO $pdo) : void {
 		// create query template
 		$query = "UPDATE sign SET signDescription = :signDescription, signLat = :signLat, signLong = :signLong, signName = :signName, signType = :signType WHERE signId = :signId";
 		$statement = $pdo->prepare($query);
-
-
 		$parameters = ["signId" => $this->signId->getBytes(),"signDescription" => $this->signDescription, "signLat" => $this->signLat, "signLong" => $this->signLong, "signName" => $this->signName, "signType" => $this->signType];
 		$statement->execute($parameters);
 	}
@@ -327,6 +327,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
+
 	public static function getAllSigns(\PDO $pdo) : \SPLFixedArray {
 		// create query template
 		$query = "SELECT signId, signDescription, signLat, signLong, signName, signType FROM sign";
@@ -353,40 +354,39 @@ class Sign implements \JsonSerializable {
 	 * gets the Sign by signName
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param string $signName sign name to search for
-	 * @return Sign|null Sign found or null if not found
+	 * @param string $signName signName to search for
+	 * @return \SPLFixedArray of all Signs found
 	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError when a variable are not the correct data type
+	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getSignBySignName(\PDO $pdo, $signName) : ?Sign {
-		// sanitize the sign name before searching
+	public static function getSignBySignName(\PDO $pdo, string $signName): \SPLFixedArray {
+		//This sanitizes the name before searching
 		$signName = trim($signName);
 		$signName = filter_var($signName, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($signName) === true) {
-			throw(new \PDOException("sign name is invalid"));
+			throw(new \PDOException("not a valid sign name"));
 		}
-
-		// create query template
-		$query = "SELECT signId, signDescription, signLat, signLong, signName, signType FROM sign WHERE signName = :signName";
+		//This creates the query template
+		$query = "SELECT  signId, signDescription, signLat, signLong, signName, signType  FROM sign WHERE signName = :signName";
 		$statement = $pdo->prepare($query);
 
-		// bind the sign name to the place holder in the template
+		//This binds the sign name to the place holder in the template
 		$parameters = ["signName" => $signName];
 		$statement->execute($parameters);
-
-		// grab the sign from mySQL
-		try {
-			$sign = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false) {
+		$signs = new \SPLFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
 				$sign = new Sign($row["signId"], $row["signDescription"], $row["signLat"], $row["signLong"], $row["signName"], $row["signType"]);
-			}
-		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
+				$signs[$signs->key()] = $sign;
+				$signs->next();
+			} catch(\Exception $exception) {
+
+				//If the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($sign);
+		}
+		return ($signs);
 	}
 
 	/**
@@ -409,7 +409,6 @@ class Sign implements \JsonSerializable {
 		// create query template
 		$query = "SELECT signId, signDescription, signLat, signLong, signName, signType FROM sign WHERE signType = :signType";
 		$statement = $pdo->prepare($query);
-
 		// bind the sign type to the place holder in the template
 		$parameters = ["signType" => $signType];
 		$statement->execute($parameters);
@@ -449,9 +448,8 @@ class Sign implements \JsonSerializable {
 		// create query template
 		$query = "SELECT signId, signDescription, signLat, signLong, signName, signType FROM sign WHERE signId = :signId";
 		$statement = $pdo->prepare($query);
-
 		// bind the sign name to the place holder in the template
-		$parameters = ["signId" => $signId];
+		$parameters = ["signId" => $signId->getBytes()];
 		$statement->execute($parameters);
 
 		// grab the sign from mySQL

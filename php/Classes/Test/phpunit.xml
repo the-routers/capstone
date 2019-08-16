@@ -1,8 +1,9 @@
 <phpunit>
 	<testsuites>
-		<testsuite name="signson66">
-			<file>UserPhotoTest.php</file>
-			<!-- <file>SignTest.php</file>
+		<testsuite name="Signs on 66">
+			<file>UserPhoto.php</file>
+			<!--
+			<file>SignTest.php</file>
 			<file>UserTest.php</file> -->
 		</testsuite>
 	</testsuites>

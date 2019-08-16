@@ -32,17 +32,19 @@ class SignTest extends SignsOn66Test {
 	 * valid sign latitude
 	 * @var float $VALID_LAT
 	 **/
-	protected $VALID_LAT = '35.084385';
+	protected $VALID_LAT = 35.084385;
 	/**
 	 * valid sign longitude
 	 * @var float $VALID_LONG
 	 **/
-	protected $VALID_LONG = '-106.650421';
+
+	protected $VALID_LONG = -106.650421;
 	/**
 	 * valid sign name to use
 	 * @var string $VALID_NAME
 	 **/
-	protected $VALID_NAME = "The name of this sample sign is De Anza";
+
+	protected $VALID_NAME = "De Anza";
 	/**
 	 * valid sign type to use
 	 * @var string $VALID_TYPE
@@ -152,7 +154,7 @@ class SignTest extends SignsOn66Test {
 		$sign->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoSign = Sign::getSignBySignId($this->getPDO(), $sign->getSignId());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("Sign"));
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
 		$this->assertEquals($pdoSign->getSignId(), $signId);
 		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
 		$this->assertEquals($pdoSign->getSignLat(), $this->VALID_LAT);
@@ -161,14 +163,6 @@ class SignTest extends SignsOn66Test {
 		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 
-	/**
-	 * test grabbing a Sign by an id that does not exists
-	 **/
-	public function testGetInvalidSignId(): void {
-		// grab an id that does not exist
-		$sign = Sign::getSignBySignId($this->getPDO(), "6675636b646f6e616c646472756d7066");
-		$this->assertNull($sign);
-	}
 
 	public function testGetValidSignByName() {
 		// count the number of rows and save it for later
@@ -192,17 +186,7 @@ class SignTest extends SignsOn66Test {
 		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 
-	/**
-	 * test grabbing a Sign by a name that does not exist
-	 **/
-	public function testGetInvalidSignByName(): void {
-		// grab a name that does not exist
-		$sign = Sign::getSignBySignName($this->getPDO(), "doesnotexist");
-		$this->assertCount(0, $sign);
-	}
-
-	/**
-	 * test grabbing a Sign by type
+	/* * test grabbing a Sign by type
 	 **/
 	public function testGetValidSignByType(): void {
 		// count the number of rows and save it for later
@@ -241,7 +225,7 @@ class SignTest extends SignsOn66Test {
 		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LAT, $this->VALID_LONG, $this->VALID_NAME, $this->VALID_TYPE);
 		$sign->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results Sign::getAllSigns($this->getPDO());
+		$results = Sign::getAllSigns($this->getPDO());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("TheRouters\\Capstone\\Sign", $results);
