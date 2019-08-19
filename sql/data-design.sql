@@ -27,8 +27,8 @@ CREATE TABLE user(
 
 CREATE TABLE userPhoto(
 	userPhotoId BINARY(16) NOT NULL,
-	userPhotoUserId BINARY(16) NOT NULL,
 	userPhotoSignId BINARY(16) NOT NULL,
+	userPhotoUserId BINARY(16) NOT NULL,
 	userPhotoCaption VARCHAR(255),
 	userPhotoIsFeature TINYINT(1) NOT NULL,
 	userPhotoUrl VARCHAR(255) NOT NULL,

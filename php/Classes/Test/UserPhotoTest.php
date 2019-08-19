@@ -82,15 +82,15 @@ class UserPhotoTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("userPhoto");
 		// create a new UserPhoto and insert to into mySQL
 		$userPhotoId = generateUuidV4();
-		$userPhoto = new UserPhoto($userPhotoId, $this->user->getUserId(), $this->sign->getSignId(),
+		$userPhoto = new UserPhoto($userPhotoId, $this->sign->getSignId(), $this->user->getUserId(),
 			$this->VALID_USERPHOTOCAPTION, $this->VALID_USERPHOTOISFEATURE, $this->VALID_USERPHOTOURL);
 		$userPhoto->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoUserPhoto = UserPhoto::getUserPhotoByUserPhotoId($this->getPDO(), $userPhoto->getUserPhotoId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("userPhoto"));
 		$this->assertEquals($pdoUserPhoto->getUserPhotoId(), $userPhotoId);
-		$this->assertEquals($pdoUserPhoto->getUserPhotoUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoUserPhoto->getUserPhotoSignId(), $this->sign->getSignId());
+		$this->assertEquals($pdoUserPhoto->getUserPhotoUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoUserPhoto->getUserPhotoCaption(), $this->VALID_USERPHOTOCAPTION);
 		$this->assertEquals($pdoUserPhoto->getUserPhotoIsFeature(), $this->VALID_USERPHOTOISFEATURE);
 		$this->assertEquals($pdoUserPhoto->getUserPhotoUrl(), $this->VALID_USERPHOTOURL);
@@ -105,7 +105,7 @@ class UserPhotoTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("userPhoto");
 		// create a new photo and insert to into mySQL
 		$userPhotoId = generateUuidV4();
-		$userPhoto = new UserPhoto($userPhotoId, $this->user->getUserId(), $this->sign->getSignId(),
+		$userPhoto = new UserPhoto($userPhotoId,$this->sign->getSignId(), $this->user->getUserId(),
 			$this->VALID_USERPHOTOCAPTION, $this->VALID_USERPHOTOISFEATURE, $this->VALID_USERPHOTOURL);
 		$userPhoto->insert($this->getPDO());
 		// delete the photo from mySQL
@@ -127,7 +127,7 @@ class UserPhotoTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("userPhoto");
 		// create a new photo and insert to into mySQL
 		$userPhotoId = generateUuidV4();
-		$userPhoto = new UserPhoto($userPhotoId, $this->user->getUserId(), $this->sign->getSignId(),
+		$userPhoto = new UserPhoto($userPhotoId, $this->sign->getSignId(),$this->user->getUserId(),
 			$this->VALID_USERPHOTOCAPTION, $this->VALID_USERPHOTOISFEATURE, $this->VALID_USERPHOTOURL);
 		$userPhoto->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -146,7 +146,7 @@ class UserPhotoTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("userPhoto");
 		// create a new photo and insert to into mySQL
 		$userPhotoId = generateUuidV4();
-		$userPhoto = new UserPhoto($userPhotoId, $this->user->getUserId(), $this->sign->getSignId(),
+		$userPhoto = new UserPhoto($userPhotoId, $this->sign->getSignId(), $this->user->getUserId(),
 			$this->VALID_USERPHOTOCAPTION, $this->VALID_USERPHOTOISFEATURE, $this->VALID_USERPHOTOURL);
 		$userPhoto->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -166,7 +166,7 @@ class UserPhotoTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("userPhoto");
 		// create a new Sign and insert to into mySQL
 		$userPhotoId = generateUuidV4();
-		$userPhoto = new UserPhoto($userPhotoId, $this->user->getUserId(), $this->sign->getSignId(),
+		$userPhoto = new UserPhoto($userPhotoId, $this->sign->getSignId(), $this->user->getUserId(),
 			$this->VALID_USERPHOTOCAPTION, $this->VALID_USERPHOTOISFEATURE, $this->VALID_USERPHOTOURL);
 		$userPhoto->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -177,8 +177,8 @@ class UserPhotoTest extends SignsOn66Test {
 		// grab the result from the array and validate it
 		$pdoUserPhoto = $results[0];
 		$this->assertEquals($pdoUserPhoto->getUserPhotoId(), $userPhotoId);
-		$this->assertEquals($pdoUserPhoto->getUserPhotoUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoUserPhoto->getUserPhotoSignId(), $this->sign->getSignId());
+		$this->assertEquals($pdoUserPhoto->getUserPhotoUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoUserPhoto->getUserPhotoCaption(), $this->VALID_USERPHOTOCAPTION);
 		$this->assertEquals($pdoUserPhoto->getUserPhotoIsFeature(), $this->VALID_USERPHOTOISFEATURE);
 		$this->assertEquals($pdoUserPhoto->getUserPhotoUrl(), $this->VALID_USERPHOTOURL);
@@ -191,7 +191,7 @@ class UserPhotoTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("userPhoto");
 		// create a new photo and insert to into mySQL
 		$userPhotoId = generateUuidV4();
-		$userPhoto = new UserPhoto($userPhotoId, $this->user->getUserId(), $this->sign->getSignId(),
+		$userPhoto = new UserPhoto($userPhotoId, $this->sign->getSignId(), $this->user->getUserId(),
 			$this->VALID_USERPHOTOCAPTION, $this->VALID_USERPHOTOISFEATURE, $this->VALID_USERPHOTOURL);
 		$userPhoto->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
@@ -202,8 +202,8 @@ class UserPhotoTest extends SignsOn66Test {
 		// grab the result from the array and validate it
 		$pdoUserPhoto = $pdoUserPhoto[0];
 		$this->assertEquals($pdoUserPhoto->getUserPhotoId(), $userPhotoId);
-		$this->assertEquals($pdoUserPhoto->getUserPhotoUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoUserPhoto->getUserPhotoSignId(), $this->sign->getSignId());
+		$this->assertEquals($pdoUserPhoto->getUserPhotoUserId(), $this->user->getUserId());
 		$this->assertEquals($pdoUserPhoto->getUserPhotoCaption(), $this->VALID_USERPHOTOCAPTION);
 		$this->assertEquals($pdoUserPhoto->getUserPhotoIsFeature(), $this->VALID_USERPHOTOISFEATURE);
 		$this->assertEquals($pdoUserPhoto->getUserPhotoUrl(), $this->VALID_USERPHOTOURL);
