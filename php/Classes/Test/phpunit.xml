@@ -2,9 +2,8 @@
 	<testsuites>
 		<testsuite name="Signs on 66">
 			<file>UserPhotoTest.php</file>
-			<!--
 			<file>SignTest.php</file>
-			<file>UserTest.php</file> -->
+			<file>UserTest.php</file>
 		</testsuite>
 	</testsuites>
 	<filter>

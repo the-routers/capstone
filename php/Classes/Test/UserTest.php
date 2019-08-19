@@ -78,7 +78,7 @@ class UserTest extends SignsOn66Test {
 		// Count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_USERNAME, $this->VALID_HASH);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_HASH, $this->VALID_USERNAME);
 		$user->insert($this->getPDO());
 		// Grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
@@ -87,8 +87,8 @@ class UserTest extends SignsOn66Test {
 
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
 	}
 
 	/**
@@ -99,7 +99,7 @@ class UserTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("user");
 		// Create a new User and insert to into mySQL
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_USERNAME, $this->VALID_HASH);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_HASH, $this->VALID_USERNAME);
 		$user->insert($this->getPDO());
 		// Edit the User and update it in mySQL
 		$user->setUserName($this->VALID_USERNAME);
@@ -111,8 +111,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
 	}
 
 	/**
@@ -123,7 +123,7 @@ class UserTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("user");
 		$userId = generateUuidV4();
 
-		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_USERNAME, $this->VALID_HASH);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_HASH, $this->VALID_USERNAME);
 		$user->insert($this->getPDO());
 		// Delete the User from mySQL
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("user"));
@@ -141,7 +141,7 @@ class UserTest extends SignsOn66Test {
 		// Count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_USERNAME, $this->VALID_HASH);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_HASH, $this->VALID_USERNAME);
 		$user->insert($this->getPDO());
 		// Grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserId($this->getPDO(), $user->getUserId());
@@ -149,8 +149,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
 	}
 
 //	/**
@@ -168,7 +168,7 @@ class UserTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("user");
 		$userId = generateUuidV4();
 
-		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_USERNAME, $this->VALID_HASH);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_HASH, $this->VALID_USERNAME);
 		$user->insert($this->getPDO());
 		//Grab the data from MySQL
 		$results = User::getUserByUserName($this->getPDO(), $this->VALID_USERNAME);
@@ -182,8 +182,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
 	}
 
 	/**
@@ -203,7 +203,7 @@ class UserTest extends SignsOn66Test {
 		$numRows = $this->getConnection()->getRowCount("user");
 		$userId = generateUuidV4();
 
-		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_USERNAME, $this->VALID_HASH);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_HASH, $this->VALID_USERNAME);
 		$user->insert($this->getPDO());
 		// Grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserEmail($this->getPDO(), $user->getUserEmail());
@@ -212,8 +212,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
 	}
 
 	/**
@@ -232,7 +232,7 @@ class UserTest extends SignsOn66Test {
 		// Count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("user");
 		$userId = generateUuidV4();
-		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_USERNAME, $this->VALID_HASH);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_HASH, $this->VALID_USERNAME);
 		$user->insert($this->getPDO());
 		// Grab the data from mySQL and enforce the fields match our expectations
 		$pdoUser = User::getUserByUserActivationToken($this->getPDO(), $user->getUserActivationToken());
@@ -240,8 +240,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
 	}
 
 //	/**
@@ -263,7 +263,7 @@ class UserTest extends SignsOn66Test {
 		// create a new User and insert to into mySQL
 		$userId = generateUuidV4();
 
-		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_USERNAME, $this->VALID_HASH);
+		$user = new User($userId, $this->VALID_ACTIVATION, $this->VALID_USEREMAIL, $this->VALID_HASH, $this->VALID_USERNAME);
 		$user->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = User::getAllUsers($this->getPDO());
@@ -276,7 +276,7 @@ class UserTest extends SignsOn66Test {
         $this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 		  $this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		  $this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
-		  $this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		  $this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
+		  $this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
     }
 }
