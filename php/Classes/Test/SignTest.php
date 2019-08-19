@@ -63,7 +63,6 @@ class SignTest extends SignsOn66Test {
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoSign = Sign::getSignBySignId($this->getPDO(), $sign->getSignId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
-		var_dump($pdoSign);
 		$this->assertEquals($pdoSign->getSignId(), $signId);
 		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
 		$this->assertEquals($pdoSign->getSignLat(), $this->VALID_LAT);
@@ -201,8 +200,12 @@ class SignTest extends SignsOn66Test {
 		$sign = new Sign($signId, $this->VALID_DESCRIPTION, $this->VALID_LAT, $this->VALID_LONG, $this->VALID_NAME, $this->VALID_TYPE);
 		$sign->insert($this->getPDO());
 		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoSign = Sign::getSignBySignType($this->getPDO(), $sign->getSignType());
+		$results = Sign::getSignBySignType($this->getPDO(), $sign->getSignType());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("sign"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("TheRouters\\Capstone\\Sign", $results);
+		// grab the result from the array and validate it
+		$pdoSign = $results[0];
 		$this->assertEquals($pdoSign->getSignId(), $signId);
 		$this->assertEquals($pdoSign->getSignDescription(), $this->VALID_DESCRIPTION);
 		$this->assertEquals($pdoSign->getSignLat(), $this->VALID_LAT);

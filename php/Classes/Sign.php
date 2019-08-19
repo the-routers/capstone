@@ -397,7 +397,7 @@ class Sign implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
-	public static function getSignBySignType(\PDO $pdo, $signType) : ?Sign {
+	public static function getSignBySignType(\PDO $pdo, $signType) : \SPLFixedArray {
 		// sanitize the sign type before searching
 		$signType = trim($signType);
 		$signType = filter_var($signType, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -413,19 +413,23 @@ class Sign implements \JsonSerializable {
 		$parameters = ["signType" => $signType];
 		$statement->execute($parameters);
 
+		// build an array of signs
+		$signs = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+
 		// grab the sign from mySQL
 		try {
 			$sign = null;
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$sign = new Sign($row["signId"], $row["signDescription"], $row["signLat"], $row["signLong"], $row["signName"], $row["signType"]);
+				$signs = new Sign($row["signId"], $row["signDescription"], $row["signLat"], $row["signLong"], $row["signName"], $row["signType"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return($sign);
+		return($signs);
 	}
 
 	/**
