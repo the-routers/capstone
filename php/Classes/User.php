@@ -469,7 +469,7 @@ class User implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 
-	public static function getAllUserEmalis(\PDO $pdo): \SPLFixedArray {
+	public static function getAllUserEmails(\PDO $pdo): \SPLFixedArray {
 		//Creates query template
 		$query = "SELECT userId, userName FROM userEmail";
 
