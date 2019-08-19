@@ -87,8 +87,8 @@ class UserTest extends SignsOn66Test {
 
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
 	}
 
 	/**
@@ -111,8 +111,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
 	}
 
 	/**
@@ -149,8 +149,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
 	}
 
 //	/**
@@ -182,8 +182,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
 	}
 
 	/**
@@ -212,8 +212,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
 	}
 
 	/**
@@ -240,8 +240,8 @@ class UserTest extends SignsOn66Test {
 		$this->assertEquals($pdoUser->getUserId(), $userId);
 		$this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 		$this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		$this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
-		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
+		$this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		$this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
 	}
 
 //	/**
@@ -276,7 +276,7 @@ class UserTest extends SignsOn66Test {
         $this->assertEquals($pdoUser->getUserActivationToken(), $this->VALID_ACTIVATION);
 
 		  $this->assertEquals($pdoUser->getUserEmail(), $this->VALID_USEREMAIL);
-		  $this->assertEquals($pdoUser->getUserName(), $this->VALID_HASH);
-		  $this->assertEquals($pdoUser->getUserHash(), $this->VALID_USERNAME);
+		  $this->assertEquals($pdoUser->getUserHash(), $this->VALID_HASH);
+		  $this->assertEquals($pdoUser->getUserName(), $this->VALID_USERNAME);
     }
 }
