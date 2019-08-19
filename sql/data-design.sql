@@ -34,5 +34,5 @@ CREATE TABLE userPhoto(
 	userPhotoUrl VARCHAR(255) NOT NULL,
 	FOREIGN KEY (userPhotoSignID) REFERENCES sign(signId),
 	FOREIGN KEY (userPhotoUserId) REFERENCES user(userId),
-	PRIMARY KEY(userPhotoId)
+	PRIMARY KEY (userPhotoId)
 );

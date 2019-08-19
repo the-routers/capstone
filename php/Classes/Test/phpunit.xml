@@ -1,7 +1,7 @@
 <phpunit>
 	<testsuites>
 		<testsuite name="Signs on 66">
-			<file>UserPhoto.php</file>
+			<file>UserPhotoTest.php</file>
 			<!--
 			<file>SignTest.php</file>
 			<file>UserTest.php</file> -->
