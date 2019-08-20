@@ -15,3 +15,25 @@ use TheRouters\Capstone\ {
  *
  * @author mbattee (marsha@sanesuite.com)
  */
+
+//verify the session. if it is not active session, start it.
+if(session_status() !== PHP_SESSION_ACTIVE) {
+	session_start();
+}
+//prepare an empty reply
+$reply = new stdClass();
+$reply->status = 200;
+$reply->data = null;
+
+try {
+	//grab the mySQL connection
+	$secrets = new \Secrets("/etc/apache2/capstone-mysql/signson66.ini");
+	$pdo = $secrets->getPdoObject();
+	//determine which HTTP method was used
+	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
+	// sanitize input
+	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$userName = filter_input(INPUT_GET, "userName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$userEmail = filter_input(INPUT_GET, "userEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+}
