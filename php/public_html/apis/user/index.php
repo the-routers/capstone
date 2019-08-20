@@ -36,4 +36,43 @@ try {
 	$userName = filter_input(INPUT_GET, "userName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userEmail = filter_input(INPUT_GET, "userEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
-}
+	// make sure the id is valid for methods that require it
+	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
+		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
+	}
+	if($method === "GET") {
+		//set XSRF cookie
+		setXsrfCookie();
+		//gets photo by content
+		if(empty($id) === false) {
+			$reply->data = User::getUserByUserId($pdo, $id);
+		} else if(empty($userName) === false) {
+			$reply->data = User::getUserByUserName($pdo, $userName);
+		} else if(empty($userEmail) === false) {
+			$reply->data = User::getUserByUserEmail($pdo, $userEmail);
+		}
+
+	} elseif($method === "PUT") {
+		//enforce that the XSRF token is present in the header
+		verifyXsrf();
+		//enforce the end user has a JWT token
+		//validateJwtHeader();
+		//enforce the user is signed in and only trying to edit their own "user" profile
+		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getUserId()->toString() !== $id) {
+			throw(new \InvalidArgumentException("You are not allowed to access this user", 403));
+		}
+		validateJwtHeader();
+		//decode the response from the front end
+		$requestContent = file_get_contents("php://input");
+		$requestObject = json_decode($requestContent);
+		//retrieve the user to be updated
+		$user = User::getUserByUserId($pdo, $id);
+		if($user === null) {
+			throw(new RuntimeException("User does not exist", 404));
+		}
+
+
+
+
+
+
