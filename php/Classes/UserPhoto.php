@@ -5,7 +5,7 @@
 namespace TheRouters\Capstone;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__,1) . "/vendor/autoload.php");
+require_once(dirname(__DIR__, 1) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -19,22 +19,23 @@ class  UserPhoto implements \JsonSerializable {
 	private $userPhotoId;
 
 	/**
-	 * id of the user table that link user to photo; this is a foreign key
-	 * @var Uuid $userPhotoUserId
-	 **/
-	private $userPhotoUserId;
-
-	/**
 	 * id of the sign table that link photos to each sign ; this is a foreign key
 	 * @var Uuid $userPhotoSignId
 	 **/
 	private $userPhotoSignId;
 
+
+	/**
+	 * id of the user table that link user to photo; this is a foreign key
+	 * @var Uuid $userPhotoUserId
+	 **/
+	private $userPhotoUserId;
 	/**
 	 * this attribute of userPhoto table that contains caption for user and description for
 	 * photos to each sign ;
 	 * @var Uuid $userPhotoCaption
 	 **/
+
 	private $userPhotoCaption;
 
 	/**
@@ -66,11 +67,11 @@ class  UserPhoto implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newUserPhotoId, $newUserPhotoUserId, $newUserPhotoSignId, $newUserPhotoCaption, $newUserPhotoIsFeature, $newUserPhotoUrl = null) {
+	public function __construct($newUserPhotoId, $newUserPhotoSignId, $newUserPhotoUserId, $newUserPhotoCaption, $newUserPhotoIsFeature, $newUserPhotoUrl = null) {
 		try {
+			$this->setUserPhotoSignId($newUserPhotoSignId);
 			$this->setUserPhotoId($newUserPhotoId);
 			$this->setUserPhotoUserId($newUserPhotoUserId);
-			$this->setUserPhotoSignId($newUserPhotoSignId);
 			$this->setUserPhotoCaption($newUserPhotoCaption);
 			$this->setUserPhotoIsFeature($newUserPhotoIsFeature);
 			$this->setUserPhotoUrl($newUserPhotoUrl);
@@ -93,13 +94,11 @@ class  UserPhoto implements \JsonSerializable {
 	/**
 	 * mutator method for userPhoto id
 	 *
-	 * @param Uuid|string $newUserPhotoID new value of userPhotoId
-	 * @throws \RangeException if $newUserPhoto is not positive
-	 * @throws \TypeError if $newUserPhoto is not a uuid or string
-	 **/
-	public function setUserPhotoId($newUserPhotoID): void {
+	 * @param $newUserPhotoId
+	 */
+	public function setUserPhotoId($newUserPhotoId): void {
 		try {
-			$uuid = self::validateUuid($newUserPhotoID);
+			$uuid = self::validateUuid($newUserPhotoId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -108,6 +107,7 @@ class  UserPhoto implements \JsonSerializable {
 		// convert and store the userPhoto id
 		$this->userPhotoId = $uuid;
 	}
+
 	/**
 	 * accessor method for userPhotoUserId this is foreign key
 	 *
@@ -159,7 +159,6 @@ class  UserPhoto implements \JsonSerializable {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-
 		// convert and store the userPhoto id
 		$this->userPhotoSignId = $uuid;
 	}
@@ -186,9 +185,9 @@ class  UserPhoto implements \JsonSerializable {
 			$newUserPhotoCaption = trim($newUserPhotoCaption);
 			$newUserPhotoCaption = filter_var($newUserPhotoCaption, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 			//verify the content will fit in the database
-				if(strlen($newUserPhotoCaption) > 255) {
+			if(strlen($newUserPhotoCaption) > 255) {
 				throw(new \RangeException("Caption should be less than 255 characters"));
-				}
+			}
 		}
 		//store the content
 		$this->userPhotoCaption = $newUserPhotoCaption;
@@ -209,10 +208,10 @@ class  UserPhoto implements \JsonSerializable {
 	 * @throws /InvalidArgumentException if image is feature or not
 	 */
 
-	public function setUserPhotoIsFeature(bool $newUserPhotoIsFeature): void {
+	public function setUserPhotoIsFeature(int $newUserPhotoIsFeature): void {
 		// verify the value will fit in the database.
-		if($newUserPhotoIsFeature === 0) {
-			throw(new \InvalidArgumentException("Image is not featured"));
+		if($newUserPhotoIsFeature !== 0 && $newUserPhotoIsFeature !==1) {
+			throw(new \InvalidArgumentException("Feature value must be 0 or 1"));
 		}
 		// store the image  content
 		$this->userPhotoIsFeature = $newUserPhotoIsFeature;
@@ -227,6 +226,7 @@ class  UserPhoto implements \JsonSerializable {
 	public function getUserPhotoUrl(): string {
 		return ($this->userPhotoUrl);
 	}
+
 	/**
 	 * mutator method
 	 *
@@ -253,15 +253,12 @@ class  UserPhoto implements \JsonSerializable {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function insert(\PDO $pdo): void {
-
 		// create query template
-		$query = "INSERT INTO userPhoto(userPhotoId, UserPhotoSignId, userPhotoUserId, userPhotoCaption, userPhotoIsFeature, userPhotoUrl) 
-   VALUES(:UserPhotoId, :userPhotoSignId, :userPhotoUserId, :userPhotoCaption, :userPhotoIsFeature, :userPhotoUrl)";
+		$query = "INSERT INTO userPhoto(userPhotoId, userPhotoSignId, userPhotoUserId, userPhotoCaption, userPhotoIsFeature, userPhotoUrl) 
+   VALUES(:userPhotoId, :userPhotoSignId, :userPhotoUserId,  :userPhotoCaption, :userPhotoIsFeature, :userPhotoUrl)";
 		$statement = $pdo->prepare($query);
-
 		// bind the member variables to the place holders in the template
-		$parameters = ["userPhotoId" => $this->userPhotoId->getBytes(), "userPhotoSignId" => $this->userPhotoSignId ->getBytes(),
-			"userPhotoUserId" => $this->userPhotoUserId->getBytes(), "userPhotoCaption" => $this->userPhotoCaption,
+		$parameters = ["userPhotoId" => $this->userPhotoId->getBytes(), "userPhotoSignId" => $this->userPhotoSignId->getBytes(), "userPhotoUserId" => $this->userPhotoUserId->getBytes(),"userPhotoCaption" => $this->userPhotoCaption,
 			"userPhotoIsFeature" => $this->userPhotoIsFeature, "userPhotoUrl" => $this->userPhotoUrl];
 		$statement->execute($parameters);
 	}
@@ -284,25 +281,6 @@ class  UserPhoto implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
-	/**
-	 * updates this userphoto in mySQL
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError if $pdo is not a PDO connection object
-	 **/
-	public function update(\PDO $pdo): void {
-
-		// create query template update foreign key and make statement not to change it unnecessarily.Change done
-		$query = "UPDATE userPhoto SET userPhotoSignId = :userPhotoSignId, userPhotoUserId = :userPhotoUserId, userPhotoCaption = :userPhotoCaption, userPhotoIsFeature = :userPhotoIsFeature,
-       userPhotoUrl = :userPhotoUrl WHERE userPhotoId = :userPhotoId";
-		$statement = $pdo->prepare($query);
-		$parameters = ["userPhotoId" => $this->userPhotoId ->getBytes(),"userPhotoSignId" => $this->userPhotoSignId->getBytes(),"userPhotoUserId" => $this->userPhotoUserId->getBytes(),
-			"userPhotoCaption" => $this->userPhotoCaption, "userPhotoIsFeature" => $this->userPhotoIsFeature,
-			"userPhotoUrl" => $this->userPhotoUrl];
-		$statement->execute($parameters);
-	}
-
 
 	/**
 	 * gets the photo by UserPhotoId
@@ -311,7 +289,7 @@ class  UserPhoto implements \JsonSerializable {
 	 * @param Uuid|string $userPhotoId author id to search for
 	 * @return userPhoto|null photo found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
-	 **/
+**/
 	public static function getUserPhotoByUserPhotoId(\PDO $pdo, $userPhotoId): ?userPhoto {
 		// sanitize the UserPhotoId  before searching
 		try {
@@ -319,10 +297,8 @@ class  UserPhoto implements \JsonSerializable {
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-
 		// create query template note: do we need userphotoid here or not
-		$query = " SELECT userPhotoId, userPhotoSignId, userPhotoUserId, userPhotoCaption, 
-		 userPhotoIsFeature, userPhotoUrl FROM userPhoto WHERE userPhotoId = :userPhotoId";
+		$query = "SELECT userPhotoId, userPhotoSignId, userPhotoUserId,  userPhotoCaption, userPhotoIsFeature, userPhotoUrl FROM  userPhoto WHERE userPhotoId = :userPhotoId";
 		$statement = $pdo->prepare($query);
 
 		// bind the userPhotoId to the place holder in the template
@@ -335,8 +311,8 @@ class  UserPhoto implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$userPhotoId = new userPhoto($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"],
-					$row["userPhotoCaption"], $row["UserPhotoIsFeature"], $row["userPhotoUrl"]);
+				$userPhotoId = new userPhoto($row["userPhotoId"],  $row["userPhotoSignId"],$row["userPhotoUserId"],
+					$row["userPhotoCaption"], $row["userPhotoIsFeature"], $row["userPhotoUrl"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
@@ -344,6 +320,7 @@ class  UserPhoto implements \JsonSerializable {
 		}
 		return ($userPhotoId);
 	}
+
 
 	/**
 	 **
@@ -353,10 +330,9 @@ class  UserPhoto implements \JsonSerializable {
 	 * @return \SplFixedArray SplFixedArray of photo found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 **/
-	public static function getAllUserPhoto(\PDO $pdo): \SPLFixedArray {
+	public static function getAllUserPhotos(\PDO $pdo): \SPLFixedArray {
 		// create query template
-		$query = "SELECT userPhotoId, userPhotoSignId, userPhotoUserId, userPhotoCaption,
-       userPhotoIsFeature, userPhotoUrl FROM userPhoto";
+		$query = "SELECT userPhotoId, userPhotoSignId, userPhotoUserId,  userPhotoCaption,userPhotoIsFeature, userPhotoUrl FROM userPhoto";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
@@ -364,7 +340,7 @@ class  UserPhoto implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$userPhoto = new userPhoto ($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"], $row["userPhotoCaption"], $row["userPhotoIsFeature"], $row["userPhotoUrl"]);
+				$userPhoto = new userPhoto ($row["userPhotoId"],  $row["userPhotoSignId"], $row["userPhotoUserId"], $row["userPhotoCaption"], $row["userPhotoIsFeature"], $row["userPhotoUrl"]);
 				$userPhotos[$userPhotos->key()] = $userPhoto;
 				$userPhotos->next();
 			} catch(\Exception $exception) {
@@ -385,39 +361,111 @@ class  UserPhoto implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable are not the correct data type
 	 **/
-	public static function getUserPhotoByUserPhotoIsFeature(\PDO $pdo, $userPhotoIsFeature): ?userPhoto {
-		// sanitize the $userPhotoIsFeature before searching
+	public static function getUserPhotoByUserPhotoIsFeature(\PDO $pdo): \SPLFixedArray{
+
+		// create query template
+		$query = " SELECT userPhotoId,  userPhotoSignId, userPhotoUserId, userPhotoCaption, 
+		 userPhotoIsFeature, userPhotoUrl FROM userPhoto where userPhotoIsFeature = 1";
+		$statement = $pdo->prepare($query);
+		// bind the userPhoto feature to the place holder in the template
+		$statement->execute();
+
+		// grab the photo from mySQL
+
+			$userPhotos = new \SplFixedArray($statement->rowCount());
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$userPhoto = new UserPhoto($row["userPhotoId"],  $row["userPhotoSignId"],$row["userPhotoUserId"], $row["userPhotoCaption"], $row["userPhotoIsFeature"], $row["userPhotoUrl"]);
+				$userPhotos[$userPhotos->key()] = $userPhoto;
+				$userPhotos->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($userPhotos);
+	}
+
+	/**
+	 * gets the Photo by Sign id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $userPhotoSignId photo with sign id to search by
+	 * @return \SplFixedArray SplFixedArray of photo found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getUserPhotoByUserPhotoSignId(\PDO $pdo, string $userPhotoSignId): \SPLFixedArray {
 		try {
-			$userPhotoIsFeature = self::validateUuid($userPhotoIsFeature);
+			$userPhotoSignId = self::validateUuid($userPhotoSignId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-
 		// create query template
-		$query = " SELECT userPhotoId, userPhotoSignId, userPhotoUserId, userPhotoCaption, 
-		 userPhotoIsFeature, userPhotoUrl FROM userPhoto where userPhotoIsFeature = :userPhotoIsFeature";
+		$query = "SELECT userPhotoId, userPhotoUserId,  userPhotoCaption, userPhotoSignId, userPhotoIsFeature ,userPhotoUrl
+		FROM userPhoto WHERE userPhotoSignId = :userPhotoSignId";
 		$statement = $pdo->prepare($query);
-
-		// bind the userPhoto feature to the place holder in the template
-		$parameters = ["$userPhotoIsFeature" => $userPhotoIsFeature->getBytes()];
+		// bind the PHOTO SIGN id to the place holder in the template
+		$parameters = ["userPhotoSignId" => $userPhotoSignId->getBytes()];
 		$statement->execute($parameters);
-
-		// grab the photo from mySQL
-		try {
-			$userPhotoIsFeature = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-
-			if($row === true) {
-				$userPhotoIsFeature = new userPhoto($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"],
-					$row["userPhotoCaption"], $row["UserPhotoIsFeature"], $row["userPhotoUrl"]);
+		// build an array of photo
+		$userPhotos = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$userPhoto = new UserPhoto($row["userPhotoId"],  $row["userPhotoSignId"], $row["userPhotoUserId"],
+					$row["userPhotoCaption"], $row["userPhotoIsFeature"], $row["userPhotoUrl"]);
+				$userPhotos[$userPhotos->key()] = $userPhoto;
+				$userPhotos->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
+		}
+		return ($userPhotos);
+	}
+
+	/**
+	 * gets the Photo by user id
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $userPhotoUserId
+	 * @return \SplFixedArray SplFixedArray of photo found
+	 */
+
+
+	public static function getUserPhotoByUserPhotoUserId(\PDO $pdo, string $userPhotoUserId): \SPLFixedArray {
+		try {
+			$userPhotoUserId = self::validateUuid($userPhotoUserId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return ($userPhotoIsFeature);
+		// create query template
+		$query = "SELECT userPhotoId,  userPhotoSignId, userPhotoUserId, userPhotoCaption, userPhotoIsFeature ,userPhotoUrl
+		FROM userPhoto WHERE userPhotoUserId = :userPhotoUserId";
+		$statement = $pdo->prepare($query);
+		// bind the photo user id to the place holder in the template
+		$parameters = ["userPhotoUserId" => $userPhotoUserId->getBytes()];
+		$statement->execute($parameters);
+
+		// build an array of photos
+		$userPhotos = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$userPhoto = new UserPhoto($row["userPhotoId"], $row["userPhotoSignId"], $row["userPhotoUserId"],
+					$row["userPhotoCaption"], $row["userPhotoIsFeature"], $row["userPhotoUrl"]);
+				$userPhotos[$userPhotos->key()] = $userPhoto;
+				$userPhotos->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($userPhotos);
 	}
+
 
 	/**
 	 * formats the state variables for JSON serialization
@@ -429,6 +477,7 @@ class  UserPhoto implements \JsonSerializable {
 		$fields["userPhotoId"] = $this->userPhotoId->toString();
 		$fields["userPhotoSignId"] = $this->userPhotoSignId->toString();
 		$fields["userPhotoUserId"] = $this->userPhotoUserId->toString();
+
 		return ($fields);
 	}
 

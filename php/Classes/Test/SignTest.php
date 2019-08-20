@@ -7,7 +7,6 @@ use TheRouters\Capstone\{
 require_once(dirname(__DIR__) . "/autoload.php");
 // grab the uuid generator
 require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
-
 /**
  * Full PHPUnit test for the Sign class
  *
@@ -17,7 +16,6 @@ require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
  * @see Sign
  * @author Erica Tollefson <etollefson@cnm.edu>
  **/
-
 class SignTest extends SignsOn66Test {
 
 	/**
@@ -39,11 +37,13 @@ class SignTest extends SignsOn66Test {
 	 * valid sign longitude
 	 * @var float $VALID_LONG
 	 **/
+
 	protected $VALID_LONG = -106.650421;
 	/**
 	 * valid sign name to use
 	 * @var string $VALID_NAME
 	 **/
+
 	protected $VALID_NAME = "De Anza";
 	/**
 	 * valid sign type to use
@@ -163,10 +163,6 @@ class SignTest extends SignsOn66Test {
 		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 
-	/**
-	 * test grabbing a Sign by an id that does not exists
-	 **/
-
 
 	public function testGetValidSignByName() {
 		// count the number of rows and save it for later
@@ -190,10 +186,9 @@ class SignTest extends SignsOn66Test {
 		$this->assertEquals($pdoSign->getSignType(), $this->VALID_TYPE);
 	}
 
-	/**
-	 * test grabbing a Sign by type
+	/* * test grabbing a Sign by type
 	 **/
-	public function testGetValidSignByType(): void {
+	public function testGetValidSignBySignType(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("sign");
 		$signId = generateUuidV4();
@@ -217,11 +212,11 @@ class SignTest extends SignsOn66Test {
 	/**
 	 * test grabbing a Sign by a type that does not exist
 	 **/
-	public function testGetInvalidSignByType(): void {
+	/**public function testGetInvalidSignByType(): void {
 		// grab a sign type that does not exist
 		$sign = Sign::getSignBySignType($this->getPDO(), "typedoesnotexist");
 		$this->assertNull($sign);
-	}
+	}**/
 
 	/**
 	 * test grabbing all Signs
