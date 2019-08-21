@@ -1,0 +1,58 @@
+{
+  "displayFieldName": "SIGN_DATA",
+  "fieldAliases": {
+    "SIGN_ID": "SIGN_ID",
+    "SIGN_NAME": "SIGN_NAME",
+    "SIGN_TYPE": "SIGN_TYPE",
+    "SIGN_LAT": "SIGN_LAT",
+    "SIGN_LONG": "SIGN_LONG",
+    "SIGN_DESC": "SIGN_DESC"
+  },
+  "fields": [
+    {
+      "name": "SIGN_ID",
+      "type": "esriFieldTypeOID",
+      "alias": "SIGN_ID"
+    },
+    {
+      "name": "SIGN_NAME",
+      "type": "esriFieldTypeString",
+      "alias": "SIGN_NAME",
+      "length": 75
+    },
+    {
+      "name": "SIGN_TYPE",
+      "type": "esriFieldTypeString",
+      "alias": "SIGN_TYPE",
+      "length": 15
+    },
+    {
+      "name": "SIGN_LAT",
+      "type": "esriFieldTypeDouble",
+      "alias": "SIGN_LAT"
+    },
+    {
+      "name": "SIGN_LONG",
+      "type": "esriFieldTypeDouble",
+      "alias": "SIGN_LONG"
+    },
+    {
+      "name": "SIGN_DESC",
+      "type": "esriFieldTypeString",
+      "alias": "SIGN_DESC",
+      "length": 255
+    }
+  ],
+  "features": [
+    {
+      "attributes": {
+        "SIGN_ID": 1000,
+        "SIGN_NAME": "La Puerta Motor Lodge",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.0724722,
+        "SIGN_LONG": -106.542067,
+        "SIGN_DESC": "On the corner of Altez SE and Central Avenue SE"
+      },
+    },
+  ]
+}
