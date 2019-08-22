@@ -35,7 +35,15 @@ class UserTest extends SignsOn66Test {
 
 	protected $VALID_USERNAME = "johntherouter";
 	/**
+<<<<<<< HEAD
 	 * Second valid username to use to test for updates
+=======
+<<<<<<< HEAD
+	 * Second valid username to use
+=======
+	 * Second valid username to use to test for updates
+>>>>>>> sprint-2
+>>>>>>> user-api
 	 * @var string $VALID_USERNAME2
 	 **/
 
