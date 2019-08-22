@@ -54,5 +54,315 @@
         "SIGN_DESC": "On the corner of Altez SE and Central Avenue SE"
       },
     },
+    {
+      "attributes": {
+        "SIGN_ID": 1010,
+        "SIGN_NAME": "Luna Lodge Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.0739388,
+        "SIGN_LONG": -106.5477188,
+        "SIGN_DESC": "On the corner of General Hodges NE and Central Avenue SE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1020,
+        "SIGN_NAME": "Piñon Motel & Apartments",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.0745568,
+        "SIGN_LONG": -106.5543442,
+        "SIGN_DESC": "Between Wisconsin NE and Virginia NE on Central Avenue SE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1020,
+        "SIGN_NAME": "Piñon Motel & Apartments",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.0745568,
+        "SIGN_LONG": -106.5543442,
+        "SIGN_DESC": "Between Wisconsin NE and Virginia NE on Central Avenue SE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1030,
+        "SIGN_NAME": "Bow and Arrow Lodge",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.0737512,
+        "SIGN_LONG": -106.5567418,
+        "SIGN_DESC": "On the corner of Utah SE and Central Avenue SE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1040,
+        "SIGN_NAME": "Loma Verde Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.0755971,
+        "SIGN_LONG": -106.565972,
+        "SIGN_DESC": "On the corner of Espanola NE and Central Avenue NE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1050,
+        "SIGN_NAME": "Tewa Lodge",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.077534,
+        "SIGN_LONG": -106.582078,
+        "SIGN_DESC": "On the corner of Alvarado Drive NE and Central Avenue NE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1060,
+        "SIGN_NAME": "Hiland Theater",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.078094,
+        "SIGN_LONG": -106.590900,
+        "SIGN_DESC": "On the corner of Monroe Street SE and Central Avenue SE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1070,
+        "SIGN_NAME": "Zia Motor Lodge",
+        "SIGN_TYPE": "Orphan",
+        "SIGN_LAT": 35.078714,
+        "SIGN_LONG": -106.592609,
+        "SIGN_DESC": "On the corner of Madison Street NE and Central Avenue NE, the motel has been demolished but the sign is still standing in an empty lot"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1080,
+        "SIGN_NAME": "De Anza Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.079031,
+        "SIGN_LONG": -106.595553,
+        "SIGN_DESC": "On the corner of Washington Street and Central Avenue NE, the motel has been recently redeveloped into a motel and apartments"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1090,
+        "SIGN_NAME": "Premiere Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.079264,
+        "SIGN_LONG": -106.601238,
+        "SIGN_DESC": "On the corner of Aliso Drive SE and Central Avenue SE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1100,
+        "SIGN_NAME": "Nob Hill Court",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.079264,
+        "SIGN_LONG": -106.601238,
+        "SIGN_DESC": "On the corner of Hermosa Drive SE and Central Avenue SE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1110,
+        "SIGN_NAME": "Nob Hill Business Center",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.079449,
+        "SIGN_LONG": -106.605203,
+        "SIGN_DESC": "On the corner of Carlisle Blvd SE and Central Avenue SE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1120,
+        "SIGN_NAME": "Hiway House Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.080143,
+        "SIGN_LONG": -106.609234,
+        "SIGN_DESC": "On the corner of Bryn Mawr Drive SE and Central Avenue SE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1130,
+        "SIGN_NAME": "Route 66 Diner",
+        "SIGN_TYPE": "Iconic",
+        "SIGN_LAT": 35.082202,
+        "SIGN_LONG": -106.630692,
+        "SIGN_DESC": "On the corner of Sycamore Street NE and Central Avenue NE"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1140,
+        "SIGN_NAME": "El Camino Motel",
+        "SIGN_TYPE": "Iconic",
+        "SIGN_LAT": 35.160145,
+        "SIGN_LONG": -106.637754,
+        "SIGN_DESC": "On the corner of 4th Street NW and Tyler Road NW on the original routing of Route 66 through Albuquerque"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1150,
+        "SIGN_NAME": "Kimo Theater",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.084964,
+        "SIGN_LONG": -106.652568,
+        "SIGN_DESC": "On the corner of 5th Street NW and Central Avenue SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1160,
+        "SIGN_NAME": "Firestone",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.085414,
+        "SIGN_LONG": -106.655476,
+        "SIGN_DESC": "On the corner of 7th Street NW and Central Avenue SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1170,
+        "SIGN_NAME": "The Dog House Drive-In",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.087980,
+        "SIGN_LONG": -106.661586,
+        "SIGN_DESC": "On the corner of 7th Street NW and Central Avenue SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1180,
+        "SIGN_NAME": "Garcia's Cafe",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.091595,
+        "SIGN_LONG": -106.666645,
+        "SIGN_DESC": "On Central Ave SW North of Laguna Blvd SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1190,
+        "SIGN_NAME": "El Don Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.095086,
+        "SIGN_LONG": -106.673920,
+        "SIGN_DESC": "On Central Ave SW just West of Clayton Street SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1200,
+        "SIGN_NAME": "Monterey Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.095188,
+        "SIGN_LONG": -106.675713,
+        "SIGN_DESC": "On Central Ave SW North of New York Ave SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1210,
+        "SIGN_NAME": "21 Motel",
+        "SIGN_TYPE": "Orphan",
+        "SIGN_LAT": 35.095375,
+        "SIGN_LONG": -106.676400,
+        "SIGN_DESC": "The motel is no longer standing, sign is on an empty lot at Central Ave NW and Simonds Street NW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1220,
+        "SIGN_NAME": "El Vado Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.094302,
+        "SIGN_LONG": -106.677285,
+        "SIGN_DESC": "Recently redeveloped motel at corner of Central Ave SW and New York Avenue SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1230,
+        "SIGN_NAME": "Rainbow Apartments",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.083987,
+        "SIGN_LONG": -106.691820,
+        "SIGN_DESC": "On the corner of 48th SW and Central Avenue NW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1240,
+        "SIGN_NAME": "Americana Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.081252,
+        "SIGN_LONG": -106.702801,
+        "SIGN_DESC": "On the corner of 59th SW and Central Avenue NW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1250,
+        "SIGN_NAME": "La Hacienda Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.080545,
+        "SIGN_LONG": -106.706234,
+        "SIGN_DESC": "Between 61st SW and 64th SW on Central Avenue NW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1260,
+        "SIGN_NAME": "Adobe Manor Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.077771,
+        "SIGN_LONG": -106.718545,
+        "SIGN_DESC": "On the corner of 75th SW and Central Avenue SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1270,
+        "SIGN_NAME": "Westward Ho Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.077696,
+        "SIGN_LONG": -106.719028,
+        "SIGN_DESC": "On the corner of 75th SW and Central Avenue SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1280,
+        "SIGN_NAME": "Cafe 66 New Mexican Restaurant",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.073711,
+        "SIGN_LONG": -106.736220,
+        "SIGN_DESC": "At the intersection of Bridge Blvd SW and Central Avenue SW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1290,
+        "SIGN_NAME": "French Quarter Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.074299,
+        "SIGN_LONG": -106.737717,
+        "SIGN_DESC": "On the corner of 94th NW and Central Avenue NW"
+      },
+    },
+    {
+      "attributes": {
+        "SIGN_ID": 1300,
+        "SIGN_NAME": "Grandview Motel",
+        "SIGN_TYPE": "Historic",
+        "SIGN_LAT": 35.072749,
+        "SIGN_LONG": -106.741231,
+        "SIGN_DESC": "Near the corner of 98th NW and Central Avenue NW"
+      },
+    }
   ]
 }
