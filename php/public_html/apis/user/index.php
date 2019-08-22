@@ -1,4 +1,5 @@
 <?php
+
 require_once dirname(__DIR__, 3) . "/vendor/autoload.php";
 require_once dirname(__DIR__, 3) . "/Classes/autoload.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
@@ -10,6 +11,7 @@ require_once("/etc/apache2/capstone-mysql/Secrets.php");
 use TheRouters\Capstone\ {
 	User
 };
+
 /**
  * API for User
  *
@@ -70,6 +72,59 @@ try {
 		if($user === null) {
 			throw(new RuntimeException("User does not exist", 404));
 		}
+
+		//user's user name
+		if(empty($requestObject->userName) === true) {
+			throw(new \InvalidArgumentException ("No user username", 405));
+		}
+		//user email is a required field
+		if(empty($requestObject->userEmail) === true) {
+			throw(new \InvalidArgumentException ("No user email present", 405));
+		}
+		//user phone # | took out 3 lines of code for phone number//
+
+		$user->setUserName($requestObject->userName);
+		$user->setUserEmail($requestObject->userEmail);
+		$user->update($pdo);
+		// update reply
+		$reply->message = "user information updated";
+
+	} elseif($method === "DELETE") {
+		//verify the XSRF Token
+		verifyXsrf();
+		//enforce the end user has a JWT token
+		//validateJwtHeader();
+		$user = User::getUserByUserId($pdo, $id);
+		if($user === null) {
+			throw (new RuntimeException("User does not exist"));
+		}
+		//enforce the user is signed in and only trying to edit their own user profile
+		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getProfileId()->toString() !== $user->getUserId()->toString()) {
+			throw(new \InvalidArgumentException("You are not allowed to access this user profile", 403));
+		}
+		validateJwtHeader();
+		//delete the post from the database
+		$user->delete($pdo);
+		$reply->message = "User Deleted";
+
+	} else {
+		throw (new InvalidArgumentException("Invalid HTTP request", 400));
+	}
+	// catch any exceptions that were thrown and update the status and message state variable fields
+} catch
+(\Exception | \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
+}
+header("Content-type: application/json");
+if($reply->data === null) {
+	unset($reply->data);
+}
+// encode and return reply to front end caller
+echo json_encode($reply);
+
+?>
+
 
 
 
