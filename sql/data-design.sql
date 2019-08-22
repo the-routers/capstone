@@ -19,7 +19,7 @@ CREATE TABLE user(
 	userActivationToken CHAR(32) NOT NULL,
 	userEmail VARCHAR(128) NOT NULL,
 	userName VARCHAR(50) NOT NULL,
-	userPassword VARCHAR(50) NOT NULL,
+	userHash CHAR(97) NOT NULL,
 	UNIQUE (userEmail),
 	UNIQUE (userName),
 	PRIMARY KEY(userId)
@@ -27,12 +27,12 @@ CREATE TABLE user(
 
 CREATE TABLE userPhoto(
 	userPhotoId BINARY(16) NOT NULL,
-	userPhotoUserId BINARY(16) NOT NULL,
 	userPhotoSignId BINARY(16) NOT NULL,
+	userPhotoUserId BINARY(16) NOT NULL,
 	userPhotoCaption VARCHAR(255),
 	userPhotoIsFeature TINYINT(1) NOT NULL,
 	userPhotoUrl VARCHAR(255) NOT NULL,
 	FOREIGN KEY (userPhotoSignID) REFERENCES sign(signId),
 	FOREIGN KEY (userPhotoUserId) REFERENCES user(userId),
-	PRIMARY KEY(userPhotoId)
+	PRIMARY KEY (userPhotoId)
 );
