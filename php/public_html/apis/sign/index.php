@@ -31,12 +31,12 @@ try {
 	//determine which HTTP method was used
 	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
 	// sanitize input
-	$signId = filter_input(INPUT_GET, "signId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$signId = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$signName = filter_input(INPUT_GET, "signName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$signType = filter_input(INPUT_GET, "signType", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	// make sure the sign id is valid for methods that require it
-	if(($method === "DELETE" || $method === "PUT") && (empty($signId) === true)) {
-		throw(new InvalidArgumentException("sign id cannot be empty or negative", 405));
+	if(($method === "GET") && (empty($signName) === true)) {
+		throw(new InvalidArgumentException("sign name cannot be empty", 405));
 	}
 	if($method === "GET") {
 		//set XSRF cookie
@@ -51,7 +51,7 @@ try {
 		} else {
 			$reply->data = Sign::getAllSigns($pdo)->toArray();
 		}
-	} elseif($method === "PUT") {
+	} /*elseif($method === "PUT") {
 		//enforce that the XSRF token is present in the header
 		verifyXsrf();
 		//enforce the end user has a JWT token
@@ -114,7 +114,7 @@ try {
 		$reply->message = "Sign Deleted";
 	} else {
 		throw (new InvalidArgumentException("Invalid HTTP request", 400));
-	}
+	}*/
 	// catch any exceptions that were thrown and update the status and message state variable fields
 } catch
 (\Exception | \TypeError $exception) {
