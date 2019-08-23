@@ -6,7 +6,7 @@ require_once dirname(__DIR__, 3) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 use TheRouters\Capstone\User;
 /**
- * api for handling sign-in
+ * api for handling log-in
  *
  * @author Gkephart
  **/
@@ -24,7 +24,7 @@ try {
 	$pdo = $secrets->getPdoObject();
 	//determine which HTTP method is being used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
-	//If method is post handle the sign in logic
+	//If method is post handle the log in logic
 	if($method === "POST") {
 		//make sure the XSRF Token is valid
 		verifyXsrf();
@@ -42,7 +42,7 @@ try {
 		} else {
 			$profilePassword = $requestObject->profilePassword;
 		}
-		//grab the profile from the database by the email provided
+		//grab the user from the database by the email provided
 
 		$user = User::getUserByUserEmail($pdo, $userEmail);
 		if(empty($user) === true) {
@@ -54,7 +54,7 @@ try {
 		if(password_verify($requestObject->profilePassword, $user->getuserHash()) === false) {
 			throw(new \InvalidArgumentException("Password or email is incorrect.", 401));
 		}
-		//grab profile from database and put into a session
+		//grab user from database and put into a session
 		$user = User::getUserByUserId($pdo, $user->getuserd());
 		$_SESSION["user"] = $user;
 		//create the Auth payload
