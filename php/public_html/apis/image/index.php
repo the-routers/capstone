@@ -5,8 +5,8 @@ require_once("/etc/apache2/capstone-mysql/Secrets.php");
 require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/lib/uuid.php";
 require_once dirname(__DIR__, 3) . "/lib/jwt.php";
-use UssHopper\DataDesign\{
-	Tweet, Image, Profile
+use TheRouters\Capstone\{
+	Sign, User, UserPhoto
 };
 /**
  * Cloudinary API for Images
