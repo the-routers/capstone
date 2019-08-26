@@ -331,7 +331,7 @@ class User implements \JsonSerializable {
 			throw(new \PDOException("not a valid username"));
 		}
 		//This creates the query template
-		$query = "SELECT  userId, userActivationToken, userEmail, userHash, userName FROM user WHERE userName = :userName";
+		$query = "SELECT userId, userActivationToken, userEmail, userHash, userName FROM user WHERE userName = :userName";
 		$statement = $pdo->prepare($query);
 
 		//This binds the userName to the place holder in the template
