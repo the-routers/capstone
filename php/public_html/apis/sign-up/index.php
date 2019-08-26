@@ -33,14 +33,15 @@ try {
 		//decode the json and turn it into a php object
 		$requestContent = file_get_contents("php://input");
 		$requestObject = json_decode($requestContent);
-		//profile user name is a required field
-		if(empty($requestObject->userName) === true) {
-			throw(new \InvalidArgumentException ("No profile username entered", 405)); //::::::::::::::: '@handle' :::::::::::::::::
-		}
 		//user email is a required field
 		if(empty($requestObject->userEmail) === true) {
 			throw(new \InvalidArgumentException ("No user email present", 405));
 		}
+		//profile user name is a required field
+		if(empty($requestObject->userName) === true) {
+			throw(new \InvalidArgumentException ("No profile username entered", 405)); //::::::::::::::: '@handle' :::::::::::::::::
+		}
+		var_dump($requestObject);
 		//verify that user password is present
 		if(empty($requestObject->userPassword) === true) {
 			throw(new \InvalidArgumentException ("Must input valid password", 405));
