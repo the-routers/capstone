@@ -39,7 +39,7 @@ try {
 	$userEmail = filter_input(INPUT_GET, "userEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	// make sure the id is valid for methods that require it
-	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
+	if((/*$method === "DELETE" || */ $method === "PUT") && (empty($id) === true)) {
 		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
 	}
 	if($method === "GET") {
@@ -89,23 +89,23 @@ try {
 		// update reply
 		$reply->message = "user information updated";
 
-	} elseif($method === "DELETE") {
-		//verify the XSRF Token
-		verifyXsrf();
-		//enforce the end user has a JWT token
-		//validateJwtHeader();
-		$user = User::getUserByUserId($pdo, $id);
-		if($user === null) {
-			throw (new RuntimeException("User does not exist"));
-		}
-		//enforce the user is signed in and only trying to edit their own user profile
-		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getProfileId()->toString() !== $user->getUserId()->toString()) {
-			throw(new \InvalidArgumentException("You are not allowed to access this user profile", 403));
-		}
-		validateJwtHeader();
-		//delete the post from the database
-		$user->delete($pdo);
-		$reply->message = "User Deleted";
+//	} elseif($method === "DELETE") {
+//		//verify the XSRF Token
+//		verifyXsrf();
+//		//enforce the end user has a JWT token
+//		//validateJwtHeader();
+//		$user = User::getUserByUserId($pdo, $id);
+//		if($user === null) {
+//			throw (new RuntimeException("User does not exist"));
+//		}
+//		//enforce the user is signed in and only trying to edit their own user profile
+//		if(empty($_SESSION["user"]) === true || $_SESSION["user"]->getProfileId()->toString() !== $user->getUserId()->toString()) {
+//			throw(new \InvalidArgumentException("You are not allowed to access this user profile", 403));
+//		}
+//		validateJwtHeader();
+//		//delete the post from the database
+//		$user->delete($pdo);
+//		$reply->message = "User Deleted";
 
 	} else {
 		throw (new InvalidArgumentException("Invalid HTTP request", 400));
