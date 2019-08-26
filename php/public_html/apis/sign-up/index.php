@@ -11,7 +11,7 @@ use TheRouters\Capstone\User;
 ////Edu\Cnm\DataDesign\Profile; :::::::::::::::::::::::::::::::::::: Is mine correct?? This was the example ::::::::::::
 
 /**
- * api for signing up to 'Signs on 66' website
+ * apis for signing up to 'Signs on 66' website
  *
  * @author mbattee <mbattee@sanesuite.com>
  **/
@@ -63,10 +63,10 @@ try {
 		//compose the email message to send with th activation token
 		$messageSubject = "One step closer to Sticky Head -- Account Activation"; //::::::::::what is Sticky Head:::::::::::::::::://////
 		//building the activation link that can travel to another server and still work. This is the link that will be clicked to confirm the account.
-		//make sure URL is /public_html/api/activation/$activation
+		//make sure URL is /public_html/apis/activation/$activation
 		$basePath = dirname($_SERVER["SCRIPT_NAME"], 3);
 		//create the path
-		$urlglue = $basePath . "/api/activation/?activation=" . $userActivationToken;
+		$urlglue = $basePath . "/apis/activation/?activation=" . $userActivationToken;
 		//create the redirect link
 		$confirmLink = "https://" . $_SERVER["SERVER_NAME"] . $urlglue;
 		//compose message to send with email

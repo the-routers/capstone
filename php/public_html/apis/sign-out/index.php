@@ -2,7 +2,7 @@
 require_once dirname(__DIR__, 3) . "/Classes/autoload.php";
 require_once dirname(__DIR__, 3) . "/lib/xsrf.php";
 /**
- * api for signing out
+ * apis for signing out
  *
  * @author mbattee
  * @version 1.0
