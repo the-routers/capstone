@@ -18,8 +18,8 @@ CREATE TABLE user(
 	userId BINARY(16) NOT NULL,
 	userActivationToken CHAR(32),
 	userEmail VARCHAR(128) NOT NULL,
-	userName VARCHAR(50) NOT NULL,
 	userHash CHAR(97) NOT NULL,
+	userName VARCHAR(50) NOT NULL,
 	UNIQUE (userEmail),
 	UNIQUE (userName),
 	PRIMARY KEY(userId)
