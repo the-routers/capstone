@@ -478,7 +478,7 @@ class Sign implements \JsonSerializable {
 	 **/
 	public function jsonSerialize(): array {
 		$fields = get_object_vars($this);
-
+		$fields["userId"] = $this->userId->toString();
 		$fields["signId"] = $this->signId->toString();
 
 		return ($fields);

@@ -43,7 +43,7 @@ class UserTest extends SignsOn66Test {
 =======
 	 * Second valid username to use to test for updates
 >>>>>>> sprint-2
->>>>>>> user-api
+>>>>>>> user-apis
 	 * @var string $VALID_USERNAME2
 	 **/
 
