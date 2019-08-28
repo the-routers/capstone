@@ -1,49 +1,4 @@
-{
-  "displayFieldName": "sign",
-  "fieldAliases": {
-    "signId": "signId",
-    "signDescription": "signDescription",
-    "signLat": "signLat",
-    "signLong": "signLong",
-    "signName": "signName",
-    "signType": "signType"
-  },
-  "fields": [
-    {
-      "name": "signId",
-      "type": "esriFieldTypeOID",
-      "alias": "signId"
-    },
-    {
-      "name": "signDescription",
-      "type": "esriFieldTypeString",
-      "alias": "signDescription",
-      "length": 255
-    },
-    {
-      "name": "signLat",
-      "type": "esriFieldTypeGeometry",
-      "alias": "signLat"
-    },
-    {
-      "name": "signLong",
-      "type": "esriFieldTypeGeometry",
-      "alias": "signLong"
-    },
-    {
-      "name": "signName",
-      "type": "esriFieldTypeString",
-      "alias": "signName",
-      "length": 75
-    },
-    {
-      "name": "signType",
-      "type": "esriFieldTypeString",
-      "alias": "signType",
-      "length": 15
-    }
-  ],
-  "features": [
+[
     {
       "attributes": {
         "signId": 1000,
@@ -355,4 +310,3 @@
       }
     }
   ]
-}

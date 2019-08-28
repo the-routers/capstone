@@ -41,7 +41,6 @@ try {
 		if(empty($requestObject->userName) === true) {
 			throw(new \InvalidArgumentException ("No profile username entered", 405)); //::::::::::::::: '@handle' :::::::::::::::::
 		}
-		var_dump($requestObject);
 		//verify that user password is present
 		if(empty($requestObject->userPassword) === true) {
 			throw(new \InvalidArgumentException ("Must input valid password", 405));
