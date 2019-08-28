@@ -19,7 +19,6 @@ if($signJson == false) {
 $signData = json_decode($signJson);
 
 foreach($signData as $value) {
-	var_dump($value);
 	$sign = new Sign (generateUuidV4(), $value->attributes->signDescription, $value->attributes->signLat, $value->attributes->signLong, $value->attributes->signName, $value->attributes->signType);
 	$sign->insert($pdo);
 }

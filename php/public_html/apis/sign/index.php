@@ -35,9 +35,9 @@ try {
 	$signName = filter_input(INPUT_GET, "signName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$signType = filter_input(INPUT_GET, "signType", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	// make sure the sign id is valid for methods that require it
-	if(($method === "GET") && (empty($signName) === true)) {
-		throw(new InvalidArgumentException("sign name cannot be empty", 405));
-	}
+	//if(($method === "GET") && (empty($signName) === true)) {
+		//throw(new InvalidArgumentException("sign name cannot be empty", 405));
+	//}
 	if($method === "GET") {
 		//set XSRF cookie
 		setXsrfCookie();
@@ -46,7 +46,7 @@ try {
 			$reply->data = Sign::getSignBySignId($pdo, $signId);
 		} else if(empty($signName) === false) {
 			$reply->data = Sign::getSignBySignName($pdo, $signName);
-		} else if(empty($profileEmail) === false) {
+		} else if(empty($signType) === false) {
 			$reply->data = Sign::getSignBySignType($pdo, $signType);
 		} else {
 			$reply->data = Sign::getAllSigns($pdo)->toArray();

@@ -122,7 +122,7 @@ EOF;
 			throw(new RuntimeException("unable to send email", 400));
 		}
 		// update reply
-		$reply->message = "Thank you for creating a profile with Signs on 66\";
+		$reply->message = "Thank you for creating a profile with Signs on 66";
 	} else {
 		throw (new InvalidArgumentException("invalid http request"));
 	}
