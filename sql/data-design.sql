@@ -1,8 +1,8 @@
 ALTER DATABASE signson66 CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 
-DROP TABLE IF EXISTS userPhoto;
-DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS sign;
+# DROP TABLE IF EXISTS userPhoto;
+# DROP TABLE IF EXISTS user;
+# DROP TABLE IF EXISTS sign;
 
 CREATE TABLE sign(
    signId BINARY(16) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE userPhoto(
 	userPhotoCaption VARCHAR(255),
 	userPhotoIsFeature TINYINT(1) NOT NULL,
 	userPhotoUrl VARCHAR(255) NOT NULL,
-	FOREIGN KEY (userPhotoSignID) REFERENCES sign(signId),
+	FOREIGN KEY (userPhotoSignId) REFERENCES sign(signId),
 	FOREIGN KEY (userPhotoUserId) REFERENCES user(userId),
 	PRIMARY KEY (userPhotoId)
 );

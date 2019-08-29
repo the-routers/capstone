@@ -67,7 +67,7 @@ class  UserPhoto implements \JsonSerializable {
 	 * @throws \Exception if some other exception occurs
 	 * @Documentation https://php.net/manual/en/language.oop5.decon.php
 	 **/
-	public function __construct($newUserPhotoId, $newUserPhotoSignId, $newUserPhotoUserId, $newUserPhotoCaption, $newUserPhotoIsFeature, $newUserPhotoUrl = null) {
+	public function __construct($newUserPhotoId, $newUserPhotoSignId, $newUserPhotoUserId, string $newUserPhotoCaption, int $newUserPhotoIsFeature, $newUserPhotoUrl = null) {
 		try {
 			$this->setUserPhotoSignId($newUserPhotoSignId);
 			$this->setUserPhotoId($newUserPhotoId);
