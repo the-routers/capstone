@@ -36,7 +36,7 @@ try {
 	if($method === "GET") {
 		//set XRRF token
 		setXsrfCookie();
-		$reply->data = UserPhoto:: getAllUserPhotos($pdo)->toArray; //per Anna: Location:: getAllLocations
+		$reply->data = UserPhoto:: getAllUserPhotos($pdo)->toArray(); //per Anna: Location:: getAllLocations
 	}
 	else if($method === "PUT" || $method === "POST") {
 		// enforce the user has a XSRF token
