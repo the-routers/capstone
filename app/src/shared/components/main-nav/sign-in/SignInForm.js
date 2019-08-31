@@ -7,11 +7,11 @@ import {SignInFormContent} from "./SignInFormContent";
 
 
 export const SignInForm = () => {
-	const validator = Yup.object().shape({
-		profileEmail: Yup.string()
-			.email("email must be a valid email")
-			.required('email is required'),
-		profilePassword: Yup.string()
+	const validator = Yup.object().shape({              //::::::::::::::::::::::::::::: deprecated symbol :::::::::::::::
+		userEmail: Yup.string()
+			.email("Email must be a valid email")
+			.required('Email is required'),
+		userPassword: Yup.string()
 			.required("Password is required")
 			.min(8, "Password must be at least eight characters")
 	});
@@ -19,8 +19,8 @@ export const SignInForm = () => {
 
 	//the initial values object defines what the request payload is.
 	const signIn = {
-		profileEmail: "",
-		profilePassword: ""
+		userEmail: "",
+		userPassword: ""
 	};
 
 	const submitSignIn = (values, {resetForm, setStatus}) => {
@@ -38,13 +38,13 @@ export const SignInForm = () => {
 
 	return (
 		<>
-		<Formik
-	initialValues={signIn}
-	onSubmit={submitSignIn}
-	validationSchema={validator}
-		>
-		{SignInFormContent}
-		</Formik>
+			<Formik
+				initialValues={signIn}
+				onSubmit={submitSignIn}
+				validationSchema={validator}
+			>
+				{SignInFormContent}
+			</Formik>
 		</>
-)
+	)
 };
