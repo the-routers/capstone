@@ -8,6 +8,9 @@ import {Home} from "./pages/Home";
 import {Example} from "./pages/Example";
 import {Map} from "./pages/Map";
 
+import ReactMapGL from "react-map-gl"
+
+
 const Routing = () => (
 	<>
 		<BrowserRouter>
@@ -16,11 +19,9 @@ const Routing = () => (
 				<Route exact path="/example" component={Example}/>
 				<Route exact path="/map" component={Map}/>
 				<Route component={FourOhFour}/>
-
-
-
 			</Switch>
 		</BrowserRouter>
+
 	</>
 );
 ReactDOM.render(<Routing/>, document.querySelector('#root'));
