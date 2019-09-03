@@ -7,6 +7,11 @@ import {FourOhFour} from "./pages/FourOhFour";
 import {Home} from "./pages/Home";
 import {Example} from "./pages/Example";
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import "./index.css";
+
+
 const Routing = () => (
 	<>
 		<BrowserRouter>
