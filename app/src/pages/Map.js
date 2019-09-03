@@ -1,5 +1,5 @@
 import React from "react"
-import {Map} from "./Map";
+import {MapComponent} from "./Map";
 
 
 export const Map = () => {

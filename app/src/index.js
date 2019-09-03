@@ -6,7 +6,7 @@ import {Route, Switch} from "react-router";
 import {FourOhFour} from "./pages/FourOhFour";
 import {Home} from "./pages/Home";
 import {Example} from "./pages/Example";
-import {Map} from "./pages/Map";
+import {MapComponent} from "./shared/components/MapComponent";
 
 import ReactMapGL from "react-map-gl"
 
@@ -17,7 +17,7 @@ const Routing = () => (
 			<Switch>
 				<Route exact path="/" component={Home}/>
 				<Route exact path="/example" component={Example}/>
-				<Route exact path="/map" component={Map}/>
+				<Route exact path="/map" component={MapComponent}/>
 				<Route component={FourOhFour}/>
 			</Switch>
 		</BrowserRouter>
