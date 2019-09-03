@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.css';
+import {Jumbotron} from 'react-bootstrap/Jumbotron';
 import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
 import {FourOhFour} from "./pages/FourOhFour";
@@ -12,7 +13,7 @@ import ReactMapGL from "react-map-gl"
 
 
 import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+//import 'bootstrap/dist/js/bootstrap.bundle.min';
 import "./index.css";
 
 
