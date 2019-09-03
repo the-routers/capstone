@@ -11,6 +11,11 @@ import {MapComponent} from "./shared/components/MapComponent";
 import ReactMapGL from "react-map-gl"
 
 
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+import "./index.css";
+
+
 const Routing = () => (
 	<>
 		<BrowserRouter>
