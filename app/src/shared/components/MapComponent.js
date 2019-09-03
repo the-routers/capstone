@@ -5,16 +5,22 @@ import ReactMapGL from 'react-map-gl';
 
 export const MapComponent = () => {
 		const [viewport, setViewport] = useState({
-			width: "60vw",
-			height: "60vh",
 			latitude: 35.0739388,
 			longitude: -106.5477188,
-			zoom: 6
+			width: "90vw",
+			height: "90vh",
+			zoom: 10
 		});
 
 		return (
 			<div>
-				<ReactMapGL {...viewport} mapboxApiAccessToken={"pk.eyJ1Ijoic2lnbnNvbjY2IiwiYSI6ImNrMDJ1N253NzJ5bGIzbW1sMmQycTY1NXgifQ.PfiX1yUH8Ximn1NRPsIGpw"}>
+				<ReactMapGL
+					{...viewport}
+					mapboxApiAccessToken={"pk.eyJ1Ijoic2lnbnNvbjY2IiwiYSI6ImNrMDJ1N253NzJ5bGIzbW1sMmQycTY1NXgifQ.PfiX1yUH8Ximn1NRPsIGpw"}
+					onViewportChange={viewport => {
+						setViewport(viewport);
+					}}
+				>
 				Markers Here
 
 				</ReactMapGL>
