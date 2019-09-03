@@ -6,4 +6,4 @@ export const Example = () => {
 			<h1>Example</h1>
 		</>
 	)
-};
+}
