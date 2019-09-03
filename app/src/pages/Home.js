@@ -2,8 +2,11 @@ import React from "react"
 
 export const Home = () => {
 	return (
-		<>
-			<h1>Home</h1>
-		</>
-	)
-}
+		<div className='container'>
+			<Image src="./cellwireframe.png" fluid />
+		</div>
+
+			);
+		};
+
+
