@@ -17,8 +17,8 @@ export const SignUpFormContent = (props) => {
 	// } = props;
 	return (
 		<>
-			<form>
-				<h1> Sign Up </h1>
+			<form className="background-pattern-1">
+				<h4 className="mt-5">Sign-up here</h4>
 				{/*controlId must match what is passed to the initialValues prop*/}
 				<div className="form-group">
 					<label htmlFor="userEmail">Email Address</label>
@@ -32,6 +32,7 @@ export const SignUpFormContent = (props) => {
 							className="form-control"
 							id="userEmail"
 							type="email"
+							placeholder="Enter your email"
 						/>
 					</div>
 							<div className="alert alert-danger">
@@ -57,7 +58,7 @@ export const SignUpFormContent = (props) => {
 						/>
 					</div>
 						<div className="alert alert-danger">
-							<p>Enter Password</p>
+							<p>Enter password</p>
 						</div>
 				</div>
 				<div className="form-group">
@@ -96,18 +97,19 @@ export const SignUpFormContent = (props) => {
 							className="form-control"
 							id="userName"
 							type="text"
+							placeholder="Enter your username"
 						/>
 					</div>
 
 							<div className="alert alert-danger">
-								<p>User name is must</p>
+								<p>You must enter your username</p>
 							</div>
 				</div>
 
 				<div className="form-group">
-					<button className="btn btn-primary mb-2" type="submit">Submit</button>
+					<button className="btn mb-2 b-submit-signin" type="submit">Submit</button>
 					<button
-						className="btn btn-danger mb-2"
+						className="btn b-submit-reset mb-2"
 					>Reset
 					</button>
 				</div>

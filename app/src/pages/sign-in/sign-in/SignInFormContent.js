@@ -18,13 +18,11 @@ export const SignInFormContent = (props) => {
 	return (
 		<>
 			<header/>
-			<div className="container-fluid">
-				<section className="background-pattern-1">
-					<form>
-						<h2 className="h2-center">Sign-in or sign-up to post content for a Route 66 Sign</h2>
-						<h4 className="mt-5">Sign-in here</h4>
+			<form className="background-pattern-1">
+				<h2 className="h2-center">Sign-in or sign-up to post content for a Route 66 Sign</h2>
+				<h4 className="mt-5">Sign-in here</h4>
 						{/*controlId must match what is passed to the initialValues prop*/}
-						<div className="form-group">
+					<div className="form-group">
 							<label htmlFor="userEmail">Email Address</label>
 							<div className="input-group">
 								<div className="input-group-prepend">
@@ -64,16 +62,14 @@ export const SignInFormContent = (props) => {
 							</div>
 						</div>
 						<div className="form-group">
-							<button className="btn mb-2" type="submit">Submit</button>
+							<button className="btn mb-2 b-submit-signin" type="submit">Submit</button>
 							<button
-								className="btn btn-danger mb-2"
+								className="btn b-submit-reset mb-2"
 							>Reset
 							</button>
 						</div>
 						{/*<FormDebugger {...props} />*/}
 					</form>
-				</section>
-			</div>
 		</>
 	)
 };
