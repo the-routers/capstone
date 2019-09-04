@@ -1,5 +1,4 @@
 import React from "react"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 export const PhotoUpload = () => {
 	return (
@@ -8,13 +7,12 @@ export const PhotoUpload = () => {
 <form>
 	<h4>To Upload Photo for sign drag and drop files below</h4>
 	<div style={{ width: 660, height: 450 }}>
-	<div className="upload-drop-zone" id="drop-zone" >
-		Just drag and drop files here
+		<div className="App" id="drop-zone">
+			<h5>Just drag and drop files here</h5>
+
+		</div>
 	</div>
-	</div>
-	<div>
-		<FontAwesomeIcon icon="fal fa-cloud-upload"/>
-	</div>
+
 
 	<div class="progress">
 		<div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" >
@@ -46,7 +44,7 @@ export const PhotoUpload = () => {
 	<div style={{ width: 660, height:50 }}>
 	</div>
 	<div className="autocomplete">
-		<input id="mysigns" type="text" name="mysign" placeholder="Enter sign"/>
+		<input id="mySigns" type="text" name="mySign" placeholder="Enter sign"/>
 			<input type="submit"/>
 	</div>
 	<div  style={{ width: 660, height:20 }}>

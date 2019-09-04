@@ -37,9 +37,9 @@ export function getStocks() {
 	];
 }
 
-export function matchStocks(state, value) {
+export function matchStocks(sign, value) {
 	return (
-		state.name.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
-		state.abbr.toLowerCase().indexOf(value.toLowerCase()) !== -1
+		sign.name.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
+		sign.abbr.toLowerCase().indexOf(value.toLowerCase()) !== -1
 	);
 }
