@@ -13,21 +13,19 @@ export const Footer = () => {
 			<footer className="page-footer text-muted py-2 py-md-4">
 				<Container fluid="true">
 					<Row>
-						<Col sm="6" className="text-center text-sm-left small">
-							Octo Meow 7.0 => A DDC React Demo.
-						</Col>
-						<Col sm="6" className="text-center text-sm-right small">
-							<a href="#" className="text-muted" target="_blank" rel="noopener noreferrer">Suggestion? Email US!</a>
-						</Col>
-						<Col sm="6" className="text-center text-sm-right small">
-							<a href="#" className="text-muted" target="_blank" rel="noopener noreferrer">Home</a>
-							<a href="#" className="text-muted" target="_blank" rel="noopener noreferrer">Find a Sign</a>
-							<a href="#" className="text-muted" target="_blank" rel="noopener noreferrer">Gallery</a>
-							<a href="#" className="text-muted" target="_blank" rel="noopener noreferrer">Post Your Photos </a>
-							<a href="#" className="text-muted" target="_blank" rel="noopener noreferrer">About</a>
-							<a href="#" className="text-muted" target="_blank" rel="noopener noreferrer">Contact Us</a>
-							s
-						</Col>
+						<div className="d-flex justify-content-center">
+							<a href="#" className="d-flex justify-content-center" target="_blank" rel="noopener noreferrer">Suggestion? Email US!</a>
+						</div>
+					</Row>
+					<Row>
+						<div className="d-flex justify-content-center">
+							<a href="#" className="text-center" target="_blank" rel="noopener noreferrer">Home</a>|
+							<a href="#" className="text-center" target="_blank" rel="noopener noreferrer">Find a Sign</a>|
+							<a href="#" className="text-center" target="_blank" rel="noopener noreferrer">Gallery</a>|
+							<a href="#" className="text-center" target="_blank" rel="noopener noreferrer">Post Your Photos </a>|
+							<a href="#" className="text-center" target="_blank" rel="noopener noreferrer">About</a>|
+							<a href="#" className= "text-center" target="_blank" rel="noopener noreferrer">Contact Us</a>
+						</div>
 					</Row>
 				</Container>
 			</footer>
