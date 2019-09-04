@@ -10,7 +10,7 @@ export const Gallery =() => {
 			<div className="container">
 				<h2>Gallery</h2>
 				<div className="container">
-					<div  className="row" id="firstBox">
+					<div  className="row">
 					<div class="box">
 						<div class="boxInner col-2">
 							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/7.jpg" />
@@ -32,25 +32,13 @@ export const Gallery =() => {
 						</div>
 					</div>
 
-					<div class="box">
-						<div class="boxInner col-2">
-							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/3.jpg" />
-							<div class="titleBox">A birdfeeder</div>
-						</div>
 					</div>
-					</div>
+
 					<div className="row">
 					<div class="box">
 						<div class="boxInner col-2">
 							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/10.jpg" />
 							<div class="titleBox">Crocus close-up</div>
-						</div>
-					</div>
-
-					<div class="box">
-						<div class="boxInner col-2">
-							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/4.jpg" />
-							<div class="titleBox">The garden shop</div>
 						</div>
 					</div>
 
@@ -68,6 +56,7 @@ export const Gallery =() => {
 						</div>
 					</div>
 					</div>
+
 					<div className="row">
 					<div class="box">
 						<div class="boxInner col-2">
@@ -87,12 +76,29 @@ export const Gallery =() => {
 							<div class="titleBox">Bumble bee collecting nectar</div>
 						</div>
 					</div>
+					</div>
+
+					<div className="row">
 					<div class="box">
 						<div class="boxInner col-2">
 							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/12.jpg" />
 							<div class="titleBox">Winding garden path</div>
 						</div>
 					</div>
+						<div className="box">
+							<div className="boxInner col-2">
+								<img style={{width: 320, height: 320}}
+									  src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/11.jpg"/>
+								<div className="titleBox">Bumble bee collecting nectar</div>
+							</div>
+						</div>
+						<div className="box">
+							<div className="boxInner col-2">
+								<img style={{width: 320, height: 320}}
+									  src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/11.jpg"/>
+								<div className="titleBox">Bumble bee collecting nectar</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
