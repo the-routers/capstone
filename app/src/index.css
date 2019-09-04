@@ -5,3 +5,12 @@
 	background-size: cover;
 	height: 100vh;
 }
+
+#small-header-image {
+	background-image: url("images/homeheaderpic.jpg");
+	background-attachment: scroll;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 20vh;
+}
+
