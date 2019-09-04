@@ -21,12 +21,12 @@ export const Footer = () => {
 					</Row>
 					<Row>
 						<div className="text-center">
-							<a href="/app/src/pages/Home.js" className="text-center" target="_blank" rel="noopener noreferrer">Home</a>|
-							<a href="/app/src/pages/" className="text-center" target="_blank" rel="noopener noreferrer">Find a Sign</a>|
-							<a href="/app/src/pages/Gallery.js" className="text-center" target="_blank" rel="noopener noreferrer">Gallery</a>|
-							<a href="/app/src/pages/PhotoUpload.js" className="text-center" target="_blank" rel="noopener noreferrer">Post Your Photos </a>|
-							<a href="#" className="text-center" target="_blank" rel="noopener noreferrer">About</a>|
-							<a href="#" className= "text-center" target="_blank" rel="noopener noreferrer">Contact Us</a>
+							<Link to="/" className="text-center" target="_blank" rel="noopener noreferrer">Home</Link>|
+							<Link to="" className="text-center" target="_blank" rel="noopener noreferrer">Find a Sign</Link>|
+							<Link to="/gallery" className="text-center" target="_blank" rel="noopener noreferrer">Galles ry</Link>|
+							<Link to="/photo-upload" className="text-center" target="_blank" rel="noopener noreferrer">Post Your Photos </Link>|
+							<Link to="" className="text-center" target="_blank" rel="noopener noreferrer">About</Link>|
+							<Link to="" className= "text-center" target="_blank" rel="noopener noreferrer">Contact Us</Link>
 						</div>
 					</Row>
 				</Container>
