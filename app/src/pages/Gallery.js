@@ -10,94 +10,91 @@ export const Gallery =() => {
 			<div className="container">
 				<h2>Gallery</h2>
 				<div className="container">
-					<div className="row">
-						<div className='list-group gallery'>
-							<div className='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-								<a className="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-									<img className="img-responsive" alt="" src="http://placehold.it/320x320"/>
-									<div className='text-right'>
-										<small className='text-muted'>Image Title</small>
-									</div>
-									<!-- text-right / end -->
-								</a>
-							</div>
-							<!-- col-6 / end -->
-							<div className='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-								<a className="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-									<img className="img-responsive" alt="" src="http://placehold.it/320x320"/>
-									<div className='text-right'>
-										<small className='text-muted'>Image Title</small>
-									</div>
-									<!-- text-right / end -->
-								</a>
-							</div>
-							<!-- col-6 / end -->
-							<div className='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-								<a className="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-									<img className="img-responsive" alt="" src="http://placehold.it/320x320"/>
-									<div className='text-right'>
-										<small className='text-muted'>Image Title</small>
-									</div>
-									<!-- text-right / end -->
-								</a>
-							</div>
-							<!-- col-6 / end -->
-							<div className='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-								<a className="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-									<img className="img-responsive" alt="" src="http://placehold.it/320x320"/>
-									<div className='text-right'>
-										<small className='text-muted'>Image Title</small>
-									</div>
-									<!-- text-right / end -->
-								</a>
-							</div>
-							<!-- col-6 / end -->
-							<div className='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-								<a className="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-									<img className="img-responsive" alt="" src="http://placehold.it/320x320"/>
-									<div className='text-right'>
-										<small className='text-muted'>Image Title</small>
-									</div>
-									<!-- text-right / end -->
-								</a>
-							</div>
-							<!-- col-6 / end -->
-							<div className='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-								<a className="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-									<img className="img-responsive" alt="" src="http://placehold.it/320x320"/>
-									<div className='text-right'>
-										<small className='text-muted'>Image Title</small>
-									</div>
-									<!-- text-right / end -->
-								</a>
-							</div>
-							<!-- col-6 / end -->
-							<!-- col-6 / end -->
-							<div className='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-								<a className="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-									<img className="img-responsive" alt="" src="http://placehold.it/320x320"/>
-									<div className='text-right'>
-										<small className='text-muted'>Image Title</small>
-									</div>
-									<!-- text-right / end -->
-								</a>
-							</div>
-							<!-- col-6 / end -->
-							<div className='col-sm-4 col-xs-6 col-md-3 col-lg-3'>
-								<a className="thumbnail fancybox" rel="ligthbox" href="http://placehold.it/300x320.png">
-									<img className="img-responsive" alt="" src="http://placehold.it/320x320"/>
-									<div className='text-right'>
-										<small className='text-muted'>Image Title</small>
-									</div>
-									<!-- text-right / end -->
-								</a>
-							</div>s
+					<div  className="row" id="firstBox">
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/7.jpg" />
+							<div class="titleBox">Butterfly</div>
 						</div>
-						<!-- list-group / end -->
 					</div>
-					<!-- row / end -->
+
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/1.jpg" />
+							<div class="titleBox">An old greenhouse</div>
+						</div>
+					</div>
+
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/2.jpg" />
+							<div class="titleBox">Purple wildflowers</div>
+						</div>
+					</div>
+
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/3.jpg" />
+							<div class="titleBox">A birdfeeder</div>
+						</div>
+					</div>
+					</div>
+					<div className="row">
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/10.jpg" />
+							<div class="titleBox">Crocus close-up</div>
+						</div>
+					</div>
+
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/4.jpg" />
+							<div class="titleBox">The garden shop</div>
+						</div>
+					</div>
+
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/5.jpg" />
+							<div class="titleBox">Spring daffodils</div>
+						</div>
+					</div>
+
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/6.jpg" />
+							<div class="titleBox">Iris along the path</div>
+						</div>
+					</div>
+					</div>
+					<div className="row">
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/8.jpg" />
+							<div class="titleBox">The garden blueprint</div>
+						</div>
+					</div>
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/9.jpg" />
+							<div class="titleBox">The patio</div>
+						</div>
+					</div>
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/11.jpg" />
+							<div class="titleBox">Bumble bee collecting nectar</div>
+						</div>
+					</div>
+					<div class="box">
+						<div class="boxInner col-2">
+							<img style={{ width: 320, height:320 }} src="http://www.dwuser.com/education/content/creating-responsive-tiled-layout-with-pure-css/images/demo/12.jpg" />
+							<div class="titleBox">Winding garden path</div>
+						</div>
+					</div>
+					</div>
 				</div>
-				<!-- container / end -->
 			</div>
 			<div className="container">
 				<Footer />
