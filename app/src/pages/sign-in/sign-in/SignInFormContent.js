@@ -19,7 +19,7 @@ export const SignInFormContent = (props) => {
 		<>
 			<header/>
 			<form className="background-pattern-1">
-				<h2 className="h2-center">Sign-in or sign-up to post content for a Route 66 Sign</h2>
+				<h2 className="h2-center">Sign-in or sign-up to post content for a Route 66 sign</h2>
 				<h4 className="mt-5">Sign-in here</h4>
 						{/*controlId must match what is passed to the initialValues prop*/}
 					<div className="form-group">
