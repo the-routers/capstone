@@ -14,21 +14,18 @@ export const Home = () => {
 		<>
 			<Jumbotron fluid id="header-image">
 				<Container>
-					<div>
-						<h1>Fluid jumbotron</h1>
-						<p>
-							This is a modified jumbotron that occupies the entire horizontal space of
-							its parent.
-						</p>
-					</div>
+					<Row>
+						<Col md={10}></Col>
+						<Col md={2}><p>Sample Text</p></Col>
+					</Row>
 				</Container>
 			</Jumbotron>
 
 
-			<container className="links">
+			<container>
 				<Row>
-					<Col><Image src={map} fluid /></Col>
-					<Col><Image src={map} fluid /></Col>
+					<Col md={6}><Image className="link" src={map} fluid/></Col>
+					<Col md={6}><Image className="gallery" src={map} fluid/></Col>
 				</Row>
 			</container>
 
