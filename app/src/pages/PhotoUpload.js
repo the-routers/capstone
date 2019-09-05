@@ -6,7 +6,7 @@ export const PhotoUpload = () => {
 			<div className="container">
 <form>
 	<h4>To Upload Photo for sign drag and drop files below</h4>
-	<div style={{ width: 660, height: 450 }}>
+	<div style={{ width: 660, height: 400 }}>
 		<div className="App" id="drop-zone">
 			<h5>Just drag and drop files here</h5>
 
@@ -29,6 +29,14 @@ export const PhotoUpload = () => {
 	<div style={{ width: 660, height:50 }}>
 	</div>
 	<div className="input-group" id="mainApp">
+		<div style={{ width: 660, height:50 }}>
+			<InputGroup>
+				<InputGroup.Prepend>
+					<InputGroup.Text>PhotoCaption</InputGroup.Text>
+				</InputGroup.Prepend>
+				<FormControl as="textarea" aria-label="With textarea" />
+			</InputGroup>
+		</div>
 		<div className="custom-file">
 			<input
 				type="file"
