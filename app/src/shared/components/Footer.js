@@ -22,11 +22,11 @@ export const Footer = () => {
 					<Row>
 						<div className="text-center">
 							<Link to="/" className="text-center" target="_blank" rel="noopener noreferrer">Home</Link>|
-							<Link to="/" className="text-center" target="_blank" rel="noopener noreferrer">Find a Sign</Link>|
-							<Link to="/gallery" className="text-center" target="_blank" rel="noopener noreferrer">Galles ry</Link>|
+							<Link to="/map" className="text-center" target="_blank" rel="noopener noreferrer">Find a Sign</Link>|
+							<Link to="/gallery" className="text-center" target="_blank" rel="noopener noreferrer">Gallery</Link>|
 							<Link to="/photo-upload" className="text-center" target="_blank" rel="noopener noreferrer">Post Your Photos </Link>|
-							<Link to="" className="text-center" target="_blank" rel="noopener noreferrer">About</Link>|
-							<Link to="" className= "text-center" target="_blank" rel="noopener noreferrer">Contact Us</Link>
+							<Link to="/about" className="text-center" target="_blank" rel="noopener noreferrer">About</Link>|
+							<Link to="/contact-us" className= "text-center" target="_blank" rel="noopener noreferrer">Contact Us</Link>
 						</div>
 					</Row>
 				</Container>
