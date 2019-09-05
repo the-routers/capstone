@@ -2,6 +2,10 @@ import React from "react"
 
 import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from 'react-bootstrap/Image'
+import map from '../images/map.png';
 import {Footer} from "../shared/components/Footer";
 
 
@@ -10,7 +14,7 @@ export const Home = () => {
 		<>
 			<Jumbotron fluid id="header-image">
 				<Container>
-					<div className="justify-content-end">
+					<div>
 						<h1>Fluid jumbotron</h1>
 						<p>
 							This is a modified jumbotron that occupies the entire horizontal space of
@@ -20,16 +24,13 @@ export const Home = () => {
 				</Container>
 			</Jumbotron>
 
-			<div className="container my-5">
-				<div className="row justify-content-center">
-					<div className="col-6-md map">
-						<img src="https://placekitten.com/500/300" alt="map"/>
-					</div>
-					<div className="col-6-md gallery">
-						<img src="https://placekitten.com/500/300" alt="gallery"/>
-					</div>
-				</div>
-			</div>
+
+			<container className="links">
+				<Row>
+					<Col><Image src={map} fluid /></Col>
+					<Col><Image src={map} fluid /></Col>
+				</Row>
+			</container>
 
 			<div className="container">
 				<h3>About Signs on 66</h3>
