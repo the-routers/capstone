@@ -17,7 +17,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
 	faEnvelope,
 	faKey,
-	faMapMarkerAlt
+	faMapMarkerAlt,
+	faCloudUploadAlt
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(faEnvelope, faKey, faMapMarkerAlt);
