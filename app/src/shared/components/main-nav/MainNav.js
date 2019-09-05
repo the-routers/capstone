@@ -1,8 +1,8 @@
 import React from "react";
 
 import {LinkContainer} from "react-router-bootstrap"
-import {SignInModal} from "./sign-in/SigninModal";
-import {SignUpModal} from "./sign-up/SignUpModal";
+import {SignInModal} from "../../../pages/sign-in/sign-in/SigninModal";
+import {SignUpModal} from "../../../pages/sign-in/sign-up/SignUpModal";
 
 
 export const MainNav = () => (
