@@ -5,6 +5,7 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from 'react-bootstrap/Image'
+import logo from '../images/66_Logo.png';
 import map from '../images/map.png';
 import {Footer} from "../shared/components/Footer";
 
@@ -17,6 +18,11 @@ export const Home = () => {
 					<Row>
 						<Col md={10}></Col>
 						<Col md={2}><p>Sample Text</p></Col>
+
+					</Row>
+					<Row>
+						<Col md={10}></Col>
+						<Col md={2}><Image src={logo} fluid/></Col>
 					</Row>
 				</Container>
 			</Jumbotron>
