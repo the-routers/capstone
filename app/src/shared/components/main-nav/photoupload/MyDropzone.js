@@ -7,9 +7,10 @@ export const MyDropzone =() => {
 	}, []);
 	const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop});
 
+	let black;
 	return (
 		<div {...getRootProps()}>
-			<input {...getInputProps()} />
+			<input {...getInputProps()} style={{ width: 850, height:400 }}/>
 			{
 				isDragActive ?
 					<p>Drop the files here ...</p> :

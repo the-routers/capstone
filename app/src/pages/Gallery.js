@@ -4,6 +4,7 @@ import {Footer} from "../shared/components/Footer";
 export const Gallery =() => {
 	return (
 		<>
+			<form className="background-pattern-1">
 			<div className="container">
 			{/*	header section with logo and navbar*/}
 			</div>
@@ -105,6 +106,7 @@ export const Gallery =() => {
 			<div className="container">
 				<Footer />
 			</div>
+			</form>
 		</>
 	)
 }
