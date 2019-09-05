@@ -7,21 +7,22 @@ import {Route, Switch} from "react-router";
 import {FourOhFour} from "./pages/FourOhFour";
 import {Home} from "./pages/Home";
 import {Example} from "./pages/Example";
-import {MapComponent} from "./shared/components/MapComponent";
-import ReactMapGL from "react-map-gl"
-
-import 'bootstrap/dist/css/bootstrap.css';
-//import 'bootstrap/dist/js/bootstrap.bundle.min';
-import "./index.css";
-
+import {MapComponent} from "./pages/MapComponent";
 import {PhotoUpload} from "./pages/PhotoUpload";
 import {SignIn} from "./pages/sign-in/SignIn";
+//import 'bootstrap/dist/js/bootstrap.bundle.min';
+import "./index.css";
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
 	faEnvelope,
-	faKey
+	faKey,
+	faMapMarkerAlt
 } from "@fortawesome/free-solid-svg-icons";
-library.add(faEnvelope, faKey)
+
+library.add(faEnvelope, faKey, faMapMarkerAlt);
+
+
+
 const Routing = () => (
 	<>
 		<BrowserRouter>
