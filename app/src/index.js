@@ -7,11 +7,8 @@ import {Route, Switch} from "react-router";
 import {FourOhFour} from "./pages/FourOhFour";
 import {Home} from "./pages/Home";
 import {Example} from "./pages/Example";
-<<<<<<< HEAD
 import {Gallery} from "./pages/Gallery"
-=======
 import {MapComponent} from "./pages/MapComponent";
->>>>>>> sprint-4
 import {PhotoUpload} from "./pages/PhotoUpload";
 import {SignIn} from "./pages/sign-in/SignIn";
 //import 'bootstrap/dist/js/bootstrap.bundle.min';
