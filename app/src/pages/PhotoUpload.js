@@ -21,7 +21,7 @@ export const PhotoUpload = () => {
 		</div>
 			<div style={{ width: 660, height:20 }}>
 			</div>
-s
+
 <div className="container text-center">
 	<div className="input-group" style={{height:80 }}>
 		<div className="input-group-prepend">
