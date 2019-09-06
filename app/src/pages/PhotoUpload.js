@@ -8,7 +8,8 @@ import {Footer} from "../shared/components/Footer";
 
 export const PhotoUpload = () => {
 	return (
-		<form className="background-pattern-1 ">
+		<div className="background-pattern-1">
+		<form>
 
 		<div className="container text-center">
 					<h4>To Upload Photo for sign drag and drop files below</h4>
@@ -61,6 +62,7 @@ s
 <Footer/>
 </div>
 		</form>
+		</div>
 
 	)
 };
