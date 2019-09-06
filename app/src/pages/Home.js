@@ -7,6 +7,7 @@ import Col from "react-bootstrap/Col";
 import Image from 'react-bootstrap/Image'
 import logo from '../images/66_Logo.png';
 import map from '../images/map.png';
+import Button from 'react-bootstrap/Button'
 import {Footer} from "../shared/components/Footer";
 
 
@@ -16,20 +17,21 @@ export const Home = () => {
 			<Jumbotron fluid id="header-image">
 				<Container>
 					<Row>
-						<Col md={10}></Col>
-						<Col md={2}><p>Sample Text</p></Col>
-
+						<Col md={5} className="mx-auto"><Image src={logo} fluid/></Col>
 					</Row>
 					<Row>
-						<Col md={10}></Col>
-						<Col md={2}><Image src={logo} fluid/></Col>
+						<Col className="mx-auto margin-left text-right">
+							<Button variant="warning" className="p-3">Sign In or Sign Up</Button>
+						</Col>
+						<Col className="mx-auto margin-right">
+							<Button variant="warning" className="px-5 py-3">Find a Sign</Button>
+						</Col>
 					</Row>
 				</Container>
 			</Jumbotron>
 
-
 			<container>
-				<Row>
+				<Row className="text-center">
 					<Col md={6}><Image className="link" src={map} fluid/></Col>
 					<Col md={6}><Image className="gallery" src={map} fluid/></Col>
 				</Row>

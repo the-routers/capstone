@@ -1,20 +1,34 @@
 /*::::::::::::::::::::::::::::::::::::::::::::BANNER IMAGE::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 #header-image {
-	background-image: url("images/homeheaderpic.jpg");
+	background-image: url("images/cloud_background.jpg");
+	background-color: black;
 	background-attachment: scroll;
 	background-repeat: no-repeat;
 	background-size: cover;
 	height: 100vh;
 }
-/*::::::::::::::::::::::::::::::::::::::::::::IMAGE LINK SECTION::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-.link {
-	width: 500px;
-	height: 300px;
 
+
+/*::::::::::::::::::::::::::::::::::::::::::::IMAGE LINK SECTION::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+@media (max-width: 765px) {
+	.link {
+		margin-left: 0 !important;
+		margin-bottom: 2vw;
+	}
+	.gallery {
+		margin-right: 0 !important;
+	}
+}
+
+.link {
+	width: 35vw;
+	height: auto;
+	margin-left: 5vw;
 }
 .gallery {
-	width: 500px;
-	height: 300px;
+	width: 35vw;
+	height: auto;
+	margin-right: 5vw;
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::SIGN-IN SECTION:::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
