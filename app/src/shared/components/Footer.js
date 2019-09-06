@@ -25,7 +25,6 @@ export const Footer = () => {
 							<Link to="/map" className="text-center" rel="noopener noreferrer"> Find a Sign </Link>|
 							<Link to="/gallery" className="text-center" rel="noopener noreferrer"> Gallery </Link>|
 							<Link to="/photo-upload" className="text-center" rel="noopener noreferrer"> Post Your Photos </Link>
-							{/*<Link to="/about" className="text-center" rel="noopener noreferrer">About</Link>|*/}
 						</div>
 					</Row>
 				</Container>
