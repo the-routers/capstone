@@ -18,8 +18,6 @@ export const Home = () => {
 					</div>
 				</Container>
 			</Jumbotron>
-
-
 		</>
 	)
 };

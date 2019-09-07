@@ -6,11 +6,33 @@
 	height: 100vh;
 }
 
-#small-header-image {
-	background-image: url("images/homeheaderpic.jpg");
-	background-attachment: scroll;
-	background-repeat: no-repeat;
-	background-size: cover;
-	height: 20vh;
+.small-header-image {
+	height: 12vh;
+	background-color: #282828;
+	padding: 0;
+	padding-top: 2vh;
+	margin-bottom: 0;
 }
+
+.logo {
+	height: 5rem;
+}
+
+.navbar{
+	padding-left: 6vw;
+}
+
+.dropleft {
+	margin-top: 3px;
+}
+
+#dropdown-button-drop-left {
+	background-color: grey;
+}
+
+.nav-item a:hover {
+	background-color: darkgrey;
+}
+
+
 
