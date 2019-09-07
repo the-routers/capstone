@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {httpConfig} from "../../../misc/http-config";
+//import {httpConfig} from "../../../misc/http-config";
 import * as Yup from "yup";
 import {Formik} from "formik";
 
@@ -29,15 +29,15 @@ export const SignUpForm = () => {
 	});
 
 	const submitSignUp = (values, {resetForm}) => {
-		httpConfig.post("/apis/sign-up/", values) //:::::::::::::::::::::::::::::::::::check directory structure::::::::::
-			.then(reply => {
-					let {message, type} = reply;
-					setStatus({message, type});
-					if(reply.status === 200) {
-						resetForm();
-					}
-				}
-			);
+		//httpConfig.post("/apis/sign-up/", values) //:::::::::::::::::::::::::::::::::::check directory structure::::::::::
+			//.then(reply => {
+			// 		let {message, type} = reply;
+			// 		setStatus({message, type});
+			// 		if(reply.status === 200) {
+			// 			resetForm();
+			// 		}
+			// 	}
+			// );
 	};
 
 

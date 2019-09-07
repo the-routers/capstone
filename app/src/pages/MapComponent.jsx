@@ -3,6 +3,10 @@ import ReactMapboxGl from "react-mapbox-gl";
 import {ZoomControl} from "react-mapbox-gl";
 import {Marker} from "react-mapbox-gl";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {Header} from "../shared/components/header";
+import {Footer} from "../shared/components/Footer";
+import Container from "react-bootstrap/Container";
+
 
 export const MapComponent = () => {
 
@@ -20,12 +24,15 @@ export const MapComponent = () => {
 
 	return (
 		<>
-			< Map
+
+			<Header />
+			<Container fluid>
+			<Map
 				style="mapbox://styles/signson66/ck05pmcef0kj11cob7zfe4c7r"
 				containerStyle={
 					{
 						height: "100vh",
-						width: "100vw"
+						width: "98vw"
 					}
 				}
 				center={[-106.630692, 35.082202]}
@@ -38,6 +45,12 @@ export const MapComponent = () => {
 					<FontAwesomeIcon icon="map-marker-alt" size="2x"/>
 				</Marker>
 			</Map>
+
+			</Container>
+
+			<div className="container">
+				<Footer />
+			</div>
 		</>
 	)
 };

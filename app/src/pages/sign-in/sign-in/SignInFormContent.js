@@ -17,59 +17,60 @@ export const SignInFormContent = (props) => {
 	// } = props;
 	return (
 		<>
-			<header/>
-			<form className="background-pattern-1">
-				<h2 className="h2-center">Sign-in or sign-up to post content for a Route 66 sign</h2>
-				<h4 className="mt-5">Sign-in here</h4>
-						{/*controlId must match what is passed to the initialValues prop*/}
-					<div className="form-group">
-							<label htmlFor="userEmail">Email Address</label>
-							<div className="input-group">
-								<div className="input-group-prepend">
-									<div className="input-group-text">
-										<FontAwesomeIcon icon="envelope"/>
-									</div>
-								</div>
-								<input
-									className="form-control"
-									id="userEmail"
-									type="email"
-									placeholder="Enter your email"
-								/>
+			<form>
+				<h1> Sign In </h1>
+				{/*controlId must match what is passed to the initialValues prop*/}
+				<div className="form-group">
+					<label htmlFor="userEmail">Email Address</label>
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon="envelope"/>
 							</div>
+						</div>
+						<input
+							className="form-control"
+							id="userEmail"
+							type="email"
+						/>
+					</div>
 							<div className="alert alert-danger">
 								<p>Email error</p>
 							</div>
-						</div>
-						{/*controlId must match what is defined by the initialValues object*/}
-						<div className="form-group">
-							<label htmlFor="userPassword">Password</label>
-							<div className="input-group">
-								<div className="input-group-prepend">
-									<div className="input-group-text">
-										<FontAwesomeIcon icon="key"/>
-									</div>
-								</div>
-								<input
-									id="userPassword"
-									className="form-control"
-									type="password"
-									placeholder="Enter your password"
-								/>
-							</div>
-							<div className="alert alert-danger">
-								<p> Password error</p>
+
+
+				</div>
+				{/*controlId must match what is defined by the initialValues object*/}
+				<div className="form-group">
+					<label htmlFor="userPassword">Password</label>
+					<div className="input-group">
+						<div className="input-group-prepend">
+							<div className="input-group-text">
+								<FontAwesomeIcon icon="key"/>
 							</div>
 						</div>
-						<div className="form-group">
-							<button className="btn mb-2 b-submit-signin" type="submit">Submit</button>
-							<button
-								className="btn b-submit-reset mb-2"
-							>Reset
-							</button>
+						<input
+							id="userPassword"
+							className="form-control"
+							type="password"
+							placeholder="Enter your password"
+													/>
+					</div>
+						<div className="alert alert-danger">
+							<p> Password error</p>
 						</div>
-						{/*<FormDebugger {...props} />*/}
-					</form>
+
+				</div>
+
+				<div className="form-group">
+					<button className="btn btn-primary mb-2" type="submit">Submit</button>
+					<button
+						className="btn btn-danger mb-2"
+					>Reset
+					</button>
+				</div>
+				{/*<FormDebugger {...props} />*/}
+			</form>
 		</>
 	)
 };

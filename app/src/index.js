@@ -10,6 +10,7 @@ import {Example} from "./pages/Example";
 import {MapComponent} from "./pages/MapComponent";
 import {PhotoUpload} from "./pages/PhotoUpload";
 import {SignIn} from "./pages/sign-in/SignIn";
+import {Gallery} from "./pages/Gallery";
 //import 'bootstrap/dist/js/bootstrap.bundle.min';
 import "./index.css";
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -31,6 +32,7 @@ const Routing = () => (
 				<Route exact path="/example" component={Example}/>
 				<Route exact path="/map" component={MapComponent}/>
 				<Route exact path="/photo-upload" component={PhotoUpload}/>
+				<Route exact path="/gallery" component={Gallery}/>
 				<Route exact path="/" component={Home}/>
 				<Route component={FourOhFour}/>
 			</Switch>
