@@ -1,4 +1,5 @@
 import React from "react";
+import {Header} from "../shared/components/header";
 import {Footer} from "../shared/components/Footer";
 import clib from "../images/clib.jpeg";
 import Kimo from "../images/Kimo.jpg";
@@ -21,7 +22,7 @@ export const Gallery =() => {
 		<>
 			<form className="background-pattern-1">
 			<div className="container">
-			{/*	header section with logo and navbar*/}
+				<Header/>
 			</div>
 			<div className="container">
 				<h2>Gallery</h2>
