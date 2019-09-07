@@ -41,34 +41,34 @@ export const MainNav = () => (
 			</DropdownButton>
 		))}
 	</ButtonToolbar>
+
+		// <Navbar collapseOnSelect expand="xs" bg="none" variant="dark">
+		// <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+		// <Navbar.Collapse id="responsive-navbar-nav">
+		// <ul className="navbar-nav">
 		//
-		// {/*<Navbar collapseOnSelect expand="xs" bg="none" variant="dark">*/}
-		// {/*	<Navbar.Toggle aria-controls="responsive-navbar-nav" />*/}
-		// {/*	<Navbar.Collapse id="responsive-navbar-nav">*/}
-		// {/*		<ul className="navbar-nav">*/}
-		//
-		// {/*			<LinkContainer exact to="/">*/}
-		// {/*				<li className="nav-item">*/}
-		// {/*					<a className="nav-link" href="/">Home</a>*/}
-		// {/*				</li>*/}
-		// {/*			</LinkContainer>*/}
-		// {/*			<LinkContainer to="sign-in">*/}
-		// {/*				<li className="nav-item">*/}
-		// {/*					<a className="nav-link" href="">Sign In/Sign Up</a>*/}
-		// {/*				</li>*/}
-		// {/*			</LinkContainer>*/}
-		// {/*			<LinkContainer to="map">*/}
-		// {/*				<li className="nav-item">*/}
-		// {/*					<a className="nav-link" href="">Map</a>*/}
-		// {/*				</li>*/}
-		// {/*			</LinkContainer>*/}
-		// {/*			<LinkContainer to="gallery">*/}
-		// {/*				<li className="nav-item">*/}
-		// {/*					<a className="nav-link" href="">Gallery</a>*/}
-		// {/*				</li>*/}
-		// {/*			</LinkContainer>*/}
-		// {/*		</ul>*/}
-		// {/*	</Navbar.Collapse>*/}
-		// {/*</Navbar>*/}
+		// 			<LinkContainer exact to="/">
+		// 				<li className="nav-item">
+		// 					<a className="nav-link" href="/">Home</a>
+		// 				</li>
+		// 			</LinkContainer>
+		// 			<LinkContainer to="sign-in">
+		// 			<li className="nav-item">
+		// 					<a className="nav-link" href="">Sign In/Sign Up</a>
+		// 				</li>
+		// 		</LinkContainer>
+		// 			<LinkContainer to="map">
+		// 				<li className="nav-item">
+		// 				<a className="nav-link" href="">Map</a>
+		// 			</li>
+		// 			</LinkContainer>
+		// 			<LinkContainer to="gallery">
+		// 				<li className="nav-item">
+		// 					<a className="nav-link" href="">Gallery</a>
+		// 				</li>
+		// 			</LinkContainer>
+		// 		</ul>
+		// 	</Navbar.Collapse>
+		// </Navbar>
 
 );

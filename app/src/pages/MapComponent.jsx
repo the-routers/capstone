@@ -5,6 +5,7 @@ import {Marker} from "react-mapbox-gl";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Header} from "../shared/components/header";
 import {Footer} from "../shared/components/Footer";
+import Container from "react-bootstrap/Container";
 
 
 export const MapComponent = () => {
@@ -24,7 +25,7 @@ export const MapComponent = () => {
 	return (
 		<>
 			<Header />
-
+<Container fluid>
 			<Map
 				style="mapbox://styles/signson66/ck05pmcef0kj11cob7zfe4c7r"
 				containerStyle={
@@ -43,6 +44,7 @@ export const MapComponent = () => {
 					<FontAwesomeIcon icon="map-marker-alt" size="2x"/>
 				</Marker>
 			</Map>
+</Container>
 
 			<div className="container">
 				<Footer />
