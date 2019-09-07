@@ -17,8 +17,8 @@ export const SignIn =() => {
 			</div>
 		</>
 	)
-<<<<<<< HEAD
+
 };
-=======
-}
->>>>>>> header-component
+
+
+

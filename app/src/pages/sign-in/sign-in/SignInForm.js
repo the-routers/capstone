@@ -38,10 +38,6 @@ export const SignInForm = () => {
 
 	return (
 		<>
-<<<<<<< HEAD
-
-=======
->>>>>>> header-component
 			<SignInFormContent/>
 			{/*<Formik*/}
 			{/*	initialValues={signIn}*/}
