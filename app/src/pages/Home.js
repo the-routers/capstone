@@ -11,13 +11,16 @@ import map from '../images/map2.png';
 import elvado from '../images/elvado.png';
 import Button from 'react-bootstrap/Button'
 import {Footer} from "../shared/components/Footer";
+import {Header} from "../shared/components/header";
+
 
 
 export const Home = () => {
 	return (
 		<>
+			<Header/>
 			<Jumbotron fluid id="header-image">
-				<Container>
+				<Container fluid>
 					<Row>
 						<Col md={5} className="mx-auto"><Image src={logo} fluid/></Col>
 					</Row>

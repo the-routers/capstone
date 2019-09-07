@@ -18,6 +18,7 @@ export const SignInFormContent = (props) => {
 	return (
 		<>
 			<header/>
+			<container>
 			<form className="background-pattern-1">
 				<h2 className="h2-center">Sign-in or sign-up to post content for a Route 66 sign</h2>
 				<h4 className="mt-5">Sign-in here</h4>
@@ -70,6 +71,7 @@ export const SignInFormContent = (props) => {
 						</div>
 						{/*<FormDebugger {...props} />*/}
 					</form>
+			</container>
 		</>
 	)
 };
