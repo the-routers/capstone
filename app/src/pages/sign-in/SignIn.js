@@ -1,16 +1,16 @@
 import React from "react";
-import {SignInFormContent} from "./sign-in/SignInFormContent";
-import {SignUpFormContent} from "./sign-up/SignUpFormContent";
+import {SignInForm} from "./sign-in/SignInForm";
 import {Footer} from "../../shared/components/Footer";
+import {SignUpForm} from "./sign-up/SignUpForm";
 
 export const SignIn =() => {
 	return (
 		<>
 			<div className="container">
-			<SignInFormContent/>
+			<SignInForm/>
 			</div>
 			<div className="container">
-			<SignUpFormContent/>
+			<SignUpForm/>
 			</div>
 			<div className="container">
 				<Footer />
