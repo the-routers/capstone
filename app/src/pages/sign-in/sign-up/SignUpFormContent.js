@@ -3,18 +3,18 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import React from "react";
 
 export const SignUpFormContent = (props) => {
-	// const {
-	// 	submitStatus,
-	// 	values,
-	// 	errors,
-	// 	touched,
-	// 	dirty,
-	// 	isSubmitting,
-	// 	handleChange,
-	// 	handleBlur,
-	// 	handleSubmit,
-	// 	handleReset
-	// } = props;
+	const {
+		submitStatus,
+		values,
+		errors,
+		touched,
+		dirty,
+		isSubmitting,
+		handleChange,
+		handleBlur,
+		handleSubmit,
+		handleReset
+	} = props;
 	return (
 		<>
 			<form className="background-pattern-1">
@@ -32,12 +32,19 @@ export const SignUpFormContent = (props) => {
 							className="form-control"
 							id="userEmail"
 							type="email"
+							value={values.userEmail}
 							placeholder="Enter your email"
+							onChange={handleChange}
+							onBlur={handleBlur}
 						/>
 					</div>
+					{
+						errors.userEmail && touched.userEmail && (
 							<div className="alert alert-danger">
-								<p> </p>
+								{errors.userEmail}
 							</div>
+						)
+					}
 				</div>
 
 				{/*controlId must match what is defined by the initialValues object*/}
@@ -54,13 +61,16 @@ export const SignUpFormContent = (props) => {
 							className="form-control"
 							type="password"
 							placeholder="Enter your password"
-
+							value={values.userPassword}
+							onChange={handleChange}
+							onBlur={handleBlur}
 						/>
 					</div>
-						<div className="alert alert-danger">
-							<p>Enter password</p>
-						</div>
+					{errors.userPassword && touched.userPassword && (
+						<div className="alert alert-danger">{errors.userPassword}</div>
+					)}
 				</div>
+
 				<div className="form-group">
 					<label htmlFor="userPasswordConfirm">Confirm your password</label>
 					<div className="input-group">
@@ -75,13 +85,14 @@ export const SignUpFormContent = (props) => {
 							type="password"
 							id="userPasswordConfirm"
 							placeholder="Password confirmed"
+							value={values.userPasswordConfirm}
+							onChange={handleChange}
+							onBlur={handleBlur}
 						/>
 					</div>
-						<div className="alert alert-danger">
-						<p>
-							Confirm your password
-						</p>
-						</div>
+					{errors.userPasswordConfirm && touched.userPasswordConfirm && (
+						<div className="alert alert-danger">{errors.userPasswordConfirm}</div>
+					)}
 				</div>
 
 
@@ -97,13 +108,19 @@ export const SignUpFormContent = (props) => {
 							className="form-control"
 							id="userName"
 							type="text"
+							value={values.userName}
 							placeholder="Enter your username"
+							onChange={handleChange}
+							onBlur={handleBlur}
 						/>
 					</div>
-
+					{
+						errors.userName && touched.userName && (
 							<div className="alert alert-danger">
-								<p>You must enter your username</p>
+								{errors.userName}
 							</div>
+						)
+					}
 				</div>
 
 				<div className="form-group">
