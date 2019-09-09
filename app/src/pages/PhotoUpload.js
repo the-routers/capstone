@@ -4,13 +4,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {MyDropzone} from "../shared/components/main-nav/photoupload/MyDropzone";
 import {backgroundPattern} from "mapbox-gl/src/shaders";
 import {Footer} from "../shared/components/Footer";
-//import {Header} from "../shared/components/header";
+import {Header} from "../shared/components/header";
 
 
 export const PhotoUpload = () => {
-	return (
-		<div className="background-pattern-1">
-		<form>
+
+	return(
+<>
+	<Header />
+	<div className="background-pattern-1">
+			<form>
 		<div className="container text-center">
 					<h4>To Upload Photo for sign drag and drop files below</h4>
 					<div style={{ width: 660, height:20 }}>
@@ -63,7 +66,7 @@ export const PhotoUpload = () => {
 </div>
 		</form>
 		</div>
-
+</>
 	)
 };
 

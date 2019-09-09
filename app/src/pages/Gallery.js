@@ -10,7 +10,7 @@ import Lindy from "../images/Lindy.jpg";
 import doghouse from "../images/doghouse.jpg";
 import intersection from "../images/intersection.jpg";
 import garcia from "../images/garcia.jpg";
-import eldon from "../images/eldon.jpg";
+import Premiere_Motel from "../images/Premiere_Motel.jpg";
 import coffeeshop from "../images/coffee shop.jpeg";
 import elvado from "../images/elvado.png";
 import lodge from "../images/lodge.jpeg"
@@ -20,18 +20,17 @@ import elcamino from "../images/elcamino.jpg";
 export const Gallery =() => {
 	return (
 		<>
+			<Header/>
+
 			<form className="background-pattern-1">
-			<div className="container">
-				<Header/>
-			</div>
 			<div className="container">
 				<h2>Gallery</h2>
 				<div className="container">
 					<div  className="row">
 					<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
 						<div class="boxInner">
-							<img style={{ width: 320, height:320 }} src={clib}/>
-							<div class="titleBox">Caravan NightClub</div>
+							<img style={{ width: 320, height:320 }} src={Premiere_Motel}/>
+							<div class="titleBox">Premiere Motel </div>
 						</div>
 					</div>
 
@@ -61,8 +60,8 @@ export const Gallery =() => {
 
 					<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
 						<div class="boxInner">
-							<img style={{ width: 320, height:320 }} src={lodge} />
-							<div class="titleBox">Luna Loge</div>
+							<img style={{ width: 320, height:320 }} src={Nobhill1} />
+							<div class="titleBox">Nob Hill</div>
 						</div>
 					</div>
 
@@ -119,10 +118,11 @@ export const Gallery =() => {
 					</div>
 				</div>
 			</div>
-			<div className="container">
-				<Footer />
-			</div>
+
 			</form>
+		<div className="container">
+		<Footer />
+		</div>
 		</>
 	)
 }
