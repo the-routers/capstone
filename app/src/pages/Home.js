@@ -35,10 +35,18 @@ export const Home = () => {
 				</Container>
 			</Jumbotron>
 
-			<container>
+			<container className="box">
 				<Row className="d-flex justify-content-center">
-					<Col md={5}><Link to="/map"><Image className="map-link" src={abq} fluid/></Link></Col>
-					<Col md={5}><Link to="/gallery"><Image className="gallery" src={motel} fluid/></Link></Col>
+					<Col md={5}><Link to="/map"><Image className="map-link" src={abq} fluid/>
+						<div className="overlay map-overlay">
+							<div className="text">Map</div>
+						</div>
+					</Link></Col>
+					<Col md={5}><Link to="/gallery"><Image className="gallery" src={motel} fluid/>
+						<div className="overlay gallery-overlay">
+							<div className="text">Gallery</div>
+						</div>
+					</Link></Col>
 				</Row>
 			</container>
 
@@ -47,7 +55,7 @@ export const Home = () => {
 				<p>Signs on 66 is a website that allows users to discover historic neon signs on Route 66 in Albuquerque.
 					Visitors can use our map to locate signs and post their own photos for other visitors to enjoy in
 					our <Link to="/gallery">gallery</Link>. If you would like to add a sign that isn't already on the site,
-					please send us an email at	<a href="mailto:signson66abq@gmail.com">signson66abq@gmail.com</a>.</p>
+					please send us an email at <a href="mailto:signson66abq@gmail.com">signson66abq@gmail.com</a>.</p>
 			</div>
 
 			<div className="container">
