@@ -14,9 +14,6 @@ import {Footer} from "../shared/components/Footer";
 import {httpConfig} from "../shared/utils/http-config";
 
 
-
-
-
 export const Home = () => {
 
 
@@ -40,18 +37,17 @@ export const Home = () => {
 
 			<container>
 				<Row className="d-flex justify-content-around">
-					<Col md={4}><Link to="/map"><Image className="link" src={map} fluid /></Link></Col>
+					<Col md={4}><Link to="/map"><Image className="map-link" src={map} fluid/></Link></Col>
 					<Col md={4}><Link to="/gallery"><Image className="gallery" src={elvado} fluid/></Link></Col>
 				</Row>
 			</container>
 
 			<div className="container p-5">
 				<h3>About Signs on 66</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-					dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-					ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-					fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-					mollit anim id est laborum.</p>
+				<p>Signs on 66 is a website that allows users to discover historic neon signs on Route 66 in Albuquerque.
+					Visitors can use our map to locate signs and post their own photos for other visitors to enjoy in
+					our <Link to="/gallery">gallery</Link>. If you would like to add a sign that isn't already on the site,
+					please send us an email at	<a href="mailto:signson66abq@gmail.com">signson66abq@gmail.com</a>.</p>
 			</div>
 
 			<div className="container">

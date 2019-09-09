@@ -18,10 +18,9 @@
 	background-size: cover;
 	/*height: 100vh;*/
 }
-
 /*::::::::::::::::::::::::::::::::::::::::::::IMAGE LINK SECTION::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 @media (max-width: 765px) {
-	.link {
+	.map-link {
 		margin-left: 0 !important;
 		margin-bottom: 2vw;
 	}
@@ -30,15 +29,16 @@
 	}
 }
 
-.link {
+.map-link {
 	width: 100%;
 	height: auto;
-	/*margin-left: 5vw;*/
+	padding-right: 0px;
+
 }
 .gallery {
 	width: 100%;
 	height: auto;
-	/*margin-right: 5vw;*/
+	padding-left: 0px;
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::SIGN-IN SECTION:::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
