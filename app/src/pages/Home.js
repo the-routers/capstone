@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 
 import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
@@ -7,13 +7,16 @@ import Col from "react-bootstrap/Col";
 import Image from 'react-bootstrap/Image'
 import logo from '../images/66_Logo.png';
 import {Link, Route} from "react-router-dom";
-import map from '../images/map2.png';
-import elvado from '../images/elvado.png';
+import abq from '../images/map1000x600.png';
+import motel from '../images/motel1000x600.png';
 import Button from 'react-bootstrap/Button'
 import {Footer} from "../shared/components/Footer";
+import {httpConfig} from "../shared/utils/http-config";
 
 
 export const Home = () => {
+
+
 	return (
 		<>
 			<Jumbotron fluid id="header-image">
@@ -23,30 +26,36 @@ export const Home = () => {
 					</Row>
 					<Row>
 						<Col className="mx-auto margin-left text-right">
-							<Button variant="warning" className="p-3">Sign In or Sign Up</Button>
+							<Link to="/sign-in"><Button variant="warning" className="p-3">Sign In or Sign Up</Button></Link>
 						</Col>
 						<Col className="mx-auto margin-right">
-							<Button variant="warning" className="px-5 py-3">Find a Sign</Button>
+							<Link to="/map"><Button variant="warning" className="px-5 py-3">Find a Sign</Button></Link>
 						</Col>
 					</Row>
 				</Container>
 			</Jumbotron>
 
-			<container>
-				<Row className="text-center">
-					<Col md={6}><Link to="/map"><Image className="link" src={map} fluid /></Link>
-					</Col>
-					<Col md={6}><Link to="/gallery"><Image className="gallery" src={elvado} fluid/></Link></Col>
+			<container className="box">
+				<Row className="d-flex justify-content-center">
+					<Col md={5}><Link to="/map"><Image className="map-link" src={abq} fluid/>
+						<div className="overlay map-overlay">
+							<div className="text">Map</div>
+						</div>
+					</Link></Col>
+					<Col md={5}><Link to="/gallery"><Image className="gallery" src={motel} fluid/>
+						<div className="overlay gallery-overlay">
+							<div className="text">Gallery</div>
+						</div>
+					</Link></Col>
 				</Row>
 			</container>
 
 			<div className="container p-5">
 				<h3>About Signs on 66</h3>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-					dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-					ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-					fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-					mollit anim id est laborum.</p>
+				<p>Signs on 66 is a website that allows users to discover historic neon signs on Route 66 in Albuquerque.
+					Visitors can use our map to locate signs and post their own photos for other visitors to enjoy in
+					our <Link to="/gallery">gallery</Link>. If you would like to add a sign that isn't already on the site,
+					please send us an email at <a href="mailto:signson66abq@gmail.com">signson66abq@gmail.com</a>.</p>
 			</div>
 
 			<div className="container">

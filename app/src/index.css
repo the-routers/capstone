@@ -1,3 +1,14 @@
+.background-pattern-1 {
+	background-color: #fff;
+	background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6.172L6.172 0h5.656L0 11.828V6.172zm40 5.656L28.172 0h5.656L40 6.172v5.656zM6.172 12l12-12h3.656l12 12h-5.656L20 3.828 11.828 12H6.172zm12 0L20 10.172 21.828 12h-3.656z' fill='%23008080' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+	color: #008080;
+	padding-top: 30px;
+	padding-bottom: 5px;
+	padding-left: 180px;
+	padding-right: 180px;
+	margin-left: -150px;
+	margin-right: -150px;
+						 }
 /*::::::::::::::::::::::::::::::::::::::::::::BANNER IMAGE::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 #header-image {
 	background-image: url("images/cloud_background.jpg");
@@ -5,36 +16,96 @@
 	background-attachment: scroll;
 	background-repeat: no-repeat;
 	background-size: cover;
-	height: 100vh;
+	/*height: 100vh;*/
 }
-
 /*::::::::::::::::::::::::::::::::::::::::::::IMAGE LINK SECTION::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 @media (max-width: 765px) {
-	.link {
-		margin-left: 0 !important;
+	.map-link {
 		margin-bottom: 2vw;
 	}
 	.gallery {
-		margin-right: 0 !important;
 	}
 }
 
-.link {
-	width: 35vw;
+.map-link {
+	width: 100%;
 	height: auto;
-	margin-left: 5vw;
+
 }
 .gallery {
-	width: 35vw;
+	width: 100%;
 	height: auto;
-	margin-right: 5vw;
 }
+
+
+
+
+
+.box {
+	position: relative;
+	width: 50%;
+}
+
+/*.image {*/
+/*	display: block;*/
+/*	width: 100%;*/
+/*	height: auto;*/
+/*}*/
+
+.map-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .5s ease;
+	background-color: #008CBA;
+	margin-right: -5px;
+}
+
+.gallery-overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+	width: 100%;
+	opacity: 0;
+	transition: .5s ease;
+	background-color: #008CBA;
+	
+}
+
+.box:hover .overlay {
+	opacity: 1;
+}
+
+.text {
+	color: white;
+	font-size: 20px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+
+
+
+
 
 /*::::::::::::::::::::::::::::::::::::::::::::SIGN-IN SECTION:::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 .background-pattern-1 {
 	background-color: #fff;
 	background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6.172L6.172 0h5.656L0 11.828V6.172zm40 5.656L28.172 0h5.656L40 6.172v5.656zM6.172 12l12-12h3.656l12 12h-5.656L20 3.828 11.828 12H6.172zm12 0L20 10.172 21.828 12h-3.656z' fill='%23008080' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-	color: #008080;
+	color: #1D1D1D;
 	padding-top: 30px;
 	padding-bottom: 5px;
 	padding-left: 180px;
@@ -48,36 +119,30 @@
 }
 
 .b-submit-signin {
-	background-color: #008080;
+	background-color: rgba(224, 214, 44, 0.97);
 	margin: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
-	color: white;
+	color: #1D1D1D;
 }
 
 .b-submit-reset {
-	background-color: #C71585;
+	background-color: rgba(249, 0, 0, 0.64);
 	margin: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
-	color: white;
+	color: #000 !important;
 }
 /*::::::::::::::::::::::::::::::::::::::::::::SIGN-OUT SECTION:::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 .b-submit-signup {
-	background-color: #008080;
+	background-color: rgba(224, 214, 44, 0.97);
 	margin: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
-	color: white;
+	color: #1D1D1D;
 }
 
-.b-submit-reset {
-	background-color: #C71585;
-	margin: 10px;
-	padding-left: 20px;
-	padding-right: 20px;
-	color: white;
-}
+
 
 .small-header-image {
 	height: 12vh;

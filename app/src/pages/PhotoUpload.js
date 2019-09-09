@@ -1,59 +1,69 @@
 import React from "react"
+import 'bootstrap/dist/css/bootstrap.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {MyDropzone} from "../shared/components/main-nav/photoupload/MyDropzone";
+import {backgroundPattern} from "mapbox-gl/src/shaders";
+import {Footer} from "../shared/components/Footer";
+//import {Header} from "../shared/components/header";
+
 
 export const PhotoUpload = () => {
 	return (
-		<>
-			<div className="container">
-<form>
-	<h4>To Upload Photo for sign drag and drop files below</h4>
-	<div style={{ width: 660, height: 450 }}>
-		<div className="App" id="drop-zone">
-			<h5>Just drag and drop files here</h5>
-
+		<div className="background-pattern-1">
+		<form>
+		<div className="container text-center">
+					<h4>To Upload Photo for sign drag and drop files below</h4>
+					<div style={{ width: 660, height:20 }}>
+					</div>
+					<div className="border border-dark bg-light ">
+							<MyDropzone/>
+					</div>
 		</div>
-	</div>
+			<div style={{ width: 660, height:20 }}>
+			</div>
 
-
-	<div class="progress">
-		<div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" >
-			<span className="sr-only">60% Complete</span>
+<div className="container text-center">
+	<div className="input-group" style={{height:80 }}>
+		<div className="input-group-prepend">
+			<span className="input-group-text">PhotoCaption</span>
 		</div>
+		<textarea className="form-control" aria-label="With textarea"/>
 	</div>
-	<div class="js-upload-finished">
-		<h3>Processed files</h3>
-		<div className="list-group">
-			<a href="#" className="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
-			<a href="#" className="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
-		</div>
-	</div>
-	<div style={{ width: 660, height:50 }}>
-	</div>
-	<div className="input-group" id="mainApp">
-		<div className="custom-file">
+</div>
+			<div style={{ width: 660, height:30 }}>
+			</div>
+<div className="container">
+	<div className="input-group" id="mainApp" >
+				<div className="custom-file">
 			<input
 				type="file"
 				className="custom-file-input"
 				id="inputGroupFile01"
 				aria-describedby="inputGroupFileAddon01"
 			/>
-			<label className="custom-file-label" htmlFor="inputGroupFile01">
+			<label className="custom-file-label text-left" htmlFor="inputGroupFile01">
 				Choose file
 			</label>
 		</div>
 	</div>
-	<div style={{ width: 660, height:50 }}>
+</div>
+	<div style={{ width: 660, height:20 }}>
 	</div>
-	<div className="autocomplete">
+<div className="container">
+	<div className="autocomplete text-left" style={{ width: 700, height:80 }}>
 		<input id="mySigns" type="text" name="mySign" placeholder="Enter sign"/>
 			<input type="submit"/>
-	</div>
-	<div  style={{ width: 660, height:20 }}>
-	</div>
-	<button type="submit" className="btn btn-primary">UploadImage</button>
-
-</form>
+		<div style={{ width: 660, height:20 }}>
 			</div>
-		</>
+		<button type="submit" className="btn btn-light">UploadImage</button>
+
+
+	</div>
+<Footer/>
+</div>
+		</form>
+		</div>
+
 	)
 };
 
