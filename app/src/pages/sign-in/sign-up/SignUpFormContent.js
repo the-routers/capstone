@@ -101,7 +101,7 @@ export const SignUpFormContent = (props) => {
 					<div className="input-group">
 						<div className="input-group-prepend">
 							<div className="input-group-text">
-								<FontAwesomeIcon icon="key"/>
+								<FontAwesomeIcon icon="user"/>
 							</div>
 						</div>
 						<input

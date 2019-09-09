@@ -60,7 +60,7 @@ try {
 		//insert the user into the database
 		$user->insert($pdo);
 		//compose the email message to send with th activation token
-		$messageSubject = "One step closer to Sticky Head -- Account Activation"; //::::::::::what is Sticky Head:::::::::::::::::://////
+		$messageSubject = "Please activate your SignsOn66 -- Account Activation"; //::::::::::what is Sticky Head:::::::::::::::::://////
 		//building the activation link that can travel to another server and still work. This is the link that will be clicked to confirm the account.
 		//make sure URL is /public_html/apis/activation/$activation
 		$basePath = dirname($_SERVER["SCRIPT_NAME"], 3);
@@ -78,7 +78,7 @@ EOF;
 		$swiftMessage = new Swift_Message();
 		// attach the sender to the message
 		// this takes the form of an associative array where the email is the key to a real name
-		$swiftMessage->setFrom(["marsha@sanesuite.com" => "mbattee"]);
+		$swiftMessage->setFrom(["signson66abq@gmail.com" => "Signs on 66"]);
 		/**
 		 * attach recipients to the message
 		 * notice this is an array that can include or omit the recipient's name

@@ -18,10 +18,10 @@ import {
 	faEnvelope,
 	faKey,
 	faMapMarkerAlt,
-	faCloudUploadAlt
+	faUser
 } from "@fortawesome/free-solid-svg-icons";
 
-library.add(faEnvelope, faKey, faMapMarkerAlt);
+library.add(faEnvelope, faKey, faMapMarkerAlt,faUser);
 
 
 
