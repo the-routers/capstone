@@ -32,13 +32,14 @@ export const SignInForm = () => {
 					window.localStorage.removeItem("jwt-token");
 					window.localStorage.setItem("jwt-token", reply.headers["x-jwt-token"]);
 					resetForm();
+					setStatus({message, type});
+
 				}
 			});
 	};
 
 	return (
-
-
+		<>
 			<Formik
 				initialValues={signIn}
 				onSubmit={submitSignIn}
@@ -46,5 +47,6 @@ export const SignInForm = () => {
 			>
 				{SignInFormContent}
 			</Formik>
+			</>
 	)
 };

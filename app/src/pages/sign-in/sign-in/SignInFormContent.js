@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-// import {FormDebugger} from "../../FormDebugger";
+import {FormDebugger} from '../FormDebugger';
 import React from "react";
 export const SignInFormContent = (props) => {
 	const {
@@ -33,7 +33,7 @@ export const SignInFormContent = (props) => {
 								</div>
 								<input
 									className="form-control"
-									id="userEmail"
+									name="userEmail"
 									type="email"
 									value={values.userEmail}
 									onChange={handleChange}
@@ -60,7 +60,7 @@ export const SignInFormContent = (props) => {
 									</div>
 								</div>
 								<input
-									id="userPassword"
+									name="userPassword"
 									className="form-control"
 									type="password"
 									placeholder="Enter your password"
@@ -81,7 +81,7 @@ export const SignInFormContent = (props) => {
 							>Reset
 							</button>
 						</div>
-						{/*<FormDebugger {...props} />*/}
+						<FormDebugger {...props} />
 					</form>
 			{status && (<div className={status.type}>{status.message}</div>)}
 			</>

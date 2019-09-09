@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {httpConfig} from "../../../shared/utils/http-config";
 import * as Yup from "yup";
 import {Formik} from "formik";
-
 import {SignUpFormContent} from "./SignUpFormContent";
 
 export const SignUpForm = () => {
@@ -28,13 +27,14 @@ export const SignUpForm = () => {
 			.min(8, "Password must be at least eight characters")
 	});
 
-	const submitSignUp = (values, {resetForm}) => {
+	const submitSignUp = (values, {resetForm, setStatus}) => {
 		httpConfig.post("/apis/sign-up/", values) //:::::::::::::::::::::::::::::::::::check directory structure::::::::::
 			.then(reply => {
 					let {message, type} = reply;
 					setStatus({message, type});
 					if(reply.status === 200) {
 						resetForm();
+						setStatus({message, type});
 					}
 				}
 			);

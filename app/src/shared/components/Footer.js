@@ -1,13 +1,16 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {Link, Route} from "react-router-dom";
-
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {httpConfig} from "../utils/http-config";
 
 export const Footer = () => {
+	useEffect(() => {
+		httpConfig.get("/apis/earl-grey/")
+	});
 	return (
 		<>
 			<div className="d-flex justify-content-center">
@@ -15,7 +18,7 @@ export const Footer = () => {
 				<Container fluid="true">
 					<Row>
 						<div className="d-flex justify-content-center ml-5 pl-5">
-							<a href="mailto:signson66abq@gmail.com" className="text-center" target="_blank" rel="noopener noreferrer"> Suggestion? Email US!
+							<a href="mailto:signson66abq@gmail.com" className="text-center" target="_blank" rel="noopener noreferrer"> Suggestions? Email us!
 							</a>
 						</div>
 					</Row>

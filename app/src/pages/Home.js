@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 
 import Container from "react-bootstrap/Container";
 import Jumbotron from "react-bootstrap/Jumbotron";
@@ -11,9 +11,15 @@ import map from '../images/map2.png';
 import elvado from '../images/elvado.png';
 import Button from 'react-bootstrap/Button'
 import {Footer} from "../shared/components/Footer";
+import {httpConfig} from "../shared/utils/http-config";
+
+
+
 
 
 export const Home = () => {
+
+
 	return (
 		<>
 			<Jumbotron fluid id="header-image">

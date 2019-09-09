@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-//import {FormDebugger} from "../../FormDebugger";
+import {FormDebugger} from '../FormDebugger';
 import React from "react";
 
 export const SignUpFormContent = (props) => {
@@ -133,6 +133,7 @@ export const SignUpFormContent = (props) => {
 					>Reset
 					</button>
 				</div>
+				<FormDebugger {...props} />
 
 			</form>
 			{console.log(
