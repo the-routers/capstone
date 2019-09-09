@@ -29,20 +29,19 @@ export const Home = () => {
 					</Row>
 					<Row>
 						<Col className="mx-auto margin-left text-right">
-							<Button variant="warning" className="p-3">Sign In or Sign Up</Button>
+							<Link to="/sign-in"><Button variant="warning" className="p-3">Sign In or Sign Up</Button></Link>
 						</Col>
 						<Col className="mx-auto margin-right">
-							<Button variant="warning" className="px-5 py-3">Find a Sign</Button>
+							<Link to="/map"><Button variant="warning" className="px-5 py-3">Find a Sign</Button></Link>
 						</Col>
 					</Row>
 				</Container>
 			</Jumbotron>
 
 			<container>
-				<Row className="text-center">
-					<Col md={6}><Link to="/map"><Image className="link" src={map} fluid /></Link>
-					</Col>
-					<Col md={6}><Link to="/gallery"><Image className="gallery" src={elvado} fluid/></Link></Col>
+				<Row className="d-flex justify-content-around">
+					<Col md={4}><Link to="/map"><Image className="link" src={map} fluid /></Link></Col>
+					<Col md={4}><Link to="/gallery"><Image className="gallery" src={elvado} fluid/></Link></Col>
 				</Row>
 			</container>
 
