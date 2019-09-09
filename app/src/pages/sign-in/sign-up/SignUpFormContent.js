@@ -1,10 +1,10 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {FormDebugger} from '../FormDebugger';
+//import {FormDebugger} from '../FormDebugger';
 import React from "react";
 
 export const SignUpFormContent = (props) => {
 	const {
-		submitStatus,
+		status,
 		values,
 		errors,
 		touched,
@@ -21,7 +21,6 @@ export const SignUpFormContent = (props) => {
 			<form onSubmit={handleSubmit} className="background-pattern-1">
 				<h4 className="mt-5">Sign-up here</h4>
 
-				<h1> Sign Up </h1>
 				{/*controlId must match what is passed to the initialValues prop*/}
 				<div className="form-group">
 					<label htmlFor="userEmail">Email Address</label>
@@ -127,21 +126,20 @@ export const SignUpFormContent = (props) => {
 				<div className="form-group">
 					<button className="btn mb-2 b-submit-signin" type="submit">Submit</button>
 					<button
-						className="btn btn-danger mb-2"
+						className="btn b-submit-reset"
 						onClick={handleReset}
-						disabled={!dirty || isSubmitting}
+						//disabled={!dirty || isSubmitting}
 					>Reset
 					</button>
 				</div>
-				<FormDebugger {...props} />
+		{/*<FormDebugger {...props} />*/}
 
 			</form>
-			{console.log(
-				submitStatus
-			)}
+			{/*{console.log(*/}
+			{/*	submitStatus*/}
+			{/*)}*/}
 
-			{
-				submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
+			{status && (<div className={status.type}>{status.message}</div>)
 			}
 		</>
 

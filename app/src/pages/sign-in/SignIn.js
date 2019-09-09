@@ -8,10 +8,9 @@ export const SignIn =() => {
 		<>
 			<div className="container">
 			<SignInForm/>
-			</div>
-			<div className="container">
 			<SignUpForm/>
 			</div>
+
 			<div className="container">
 				<Footer />
 			</div>

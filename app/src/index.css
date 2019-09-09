@@ -45,7 +45,7 @@
 .background-pattern-1 {
 	background-color: #fff;
 	background-image: url("data:image/svg+xml,%3Csvg width='40' height='12' viewBox='0 0 40 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 6.172L6.172 0h5.656L0 11.828V6.172zm40 5.656L28.172 0h5.656L40 6.172v5.656zM6.172 12l12-12h3.656l12 12h-5.656L20 3.828 11.828 12H6.172zm12 0L20 10.172 21.828 12h-3.656z' fill='%23008080' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-	color: #008080;
+	color: #1D1D1D;
 	padding-top: 30px;
 	padding-bottom: 5px;
 	padding-left: 180px;
@@ -59,36 +59,30 @@
 }
 
 .b-submit-signin {
-	background-color: #008080;
+	background-color: rgba(224, 214, 44, 0.97);
 	margin: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
-	color: white;
+	color: #1D1D1D;
 }
 
 .b-submit-reset {
-	background-color: #C71585;
+	background-color: rgba(249, 0, 0, 0.64);
 	margin: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
-	color: white;
+	color: #000 !important;
 }
 /*::::::::::::::::::::::::::::::::::::::::::::SIGN-OUT SECTION:::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 .b-submit-signup {
-	background-color: #008080;
+	background-color: rgba(224, 214, 44, 0.97);
 	margin: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
-	color: white;
+	color: #1D1D1D;
 }
 
-.b-submit-reset {
-	background-color: #C71585;
-	margin: 10px;
-	padding-left: 20px;
-	padding-right: 20px;
-	color: white;
-}
+
 
 .small-header-image {
 	height: 12vh;

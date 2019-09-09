@@ -75,13 +75,13 @@ export const SignInFormContent = (props) => {
 						</div>
 						<div className="form-group">
 							<button className="btn mb-2 b-submit-signin" type="submit">Submit</button>
-							<button className="btn btn-danger mb-2"
+							<button className="btn b-submit-reset "
 									  onClick={handleReset}
-									  disabled={!dirty || isSubmitting}
+									  //disabled={!dirty || isSubmitting}
 							>Reset
 							</button>
 						</div>
-						<FormDebugger {...props} />
+						{/*<FormDebugger {...props} />*/}
 					</form>
 			{status && (<div className={status.type}>{status.message}</div>)}
 			</>
