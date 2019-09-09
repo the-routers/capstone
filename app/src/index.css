@@ -19,7 +19,6 @@
 	height: 100vh;
 }
 
-
 /*::::::::::::::::::::::::::::::::::::::::::::IMAGE LINK SECTION::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 @media (max-width: 765px) {
 	.link {
@@ -90,3 +89,32 @@
 	padding-right: 20px;
 	color: white;
 }
+
+.small-header-image {
+	height: 12vh;
+	background-color: #282828;
+	padding: 0;
+	padding-top: 2vh;
+	margin-bottom: 0;
+}
+
+.logo {
+	height: 5rem;
+}
+
+.navbar{
+	padding-left: 6vw;
+}
+
+.dropleft {
+	margin-top: 3px;
+}
+
+#dropdown-button-drop-left {
+	background-color: grey;
+}
+
+.nav-item a:hover {
+	background-color: darkgrey;
+}
+

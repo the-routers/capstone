@@ -20,6 +20,8 @@ export const SignUpFormContent = (props) => {
 		<>
 			<form onSubmit={handleSubmit} className="background-pattern-1">
 				<h4 className="mt-5">Sign-up here</h4>
+
+				<h1> Sign Up </h1>
 				{/*controlId must match what is passed to the initialValues prop*/}
 				<div className="form-group">
 					<label htmlFor="userEmail">Email Address</label>
@@ -81,7 +83,6 @@ export const SignUpFormContent = (props) => {
 							</div>
 						</div>
 						<input
-
 							className="form-control"
 							type="password"
 							id="userPasswordConfirm"
@@ -95,7 +96,6 @@ export const SignUpFormContent = (props) => {
 						<div className="alert alert-danger">{errors.userPasswordConfirm}</div>
 					)}
 				</div>
-
 
 				<div className="form-group">
 					<label htmlFor="userName">Username</label>
