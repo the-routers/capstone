@@ -6,7 +6,7 @@ require_once dirname(__DIR__, 3) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 use TheRouters\Capstone\User;
 /**
-<<<<<<< HEAD:php/public_html/apis/sign-in/sign-in.php
+<<<<<<< HEAD:php/public_html/apis/sign-in/index.php
  * apis for handling sign-in
 =======
  * apis for handling log-in
