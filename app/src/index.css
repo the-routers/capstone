@@ -83,7 +83,21 @@
 }
 
 
-
+/*:::::::::::::::::::::::::::photoupload::::::::::::::::::::::::::::::::::::::::*/
+						 .b-uploadImage{
+							 background-color: rgba(224, 214, 44, 0.97);
+							 margin: 10px;
+							 padding-left: 15px;
+							 padding-right: 15px;
+							 color: #1D1D1D;
+						 }
+#mySigns, .input-group-text{
+	background-color: rgba(249, 0, 0, 0.64);
+	margin: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+	color: #1D1D1D;
+}
 .small-header-image {
 	height: 12vh;
 	background-color: #282828;
@@ -91,6 +105,7 @@
 	padding-top: 2vh;
 	margin-bottom: 0;
 }
+
 
 .logo {
 	height: 5rem;

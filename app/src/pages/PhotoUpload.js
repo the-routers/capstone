@@ -16,7 +16,7 @@ export const PhotoUpload = () => {
 			<form>
 		<div className="container text-center">
 					<h4>To Upload Photo for sign drag and drop files below</h4>
-					<div style={{ width: 660, height:20 }}>
+					<div style={{ width: 660, height:20}}>
 					</div>
 					<div className="border border-dark bg-light ">
 							<MyDropzone/>
@@ -54,11 +54,11 @@ export const PhotoUpload = () => {
 	</div>
 <div className="container">
 	<div className="autocomplete text-left" style={{ width: 700, height:80 }}>
-		<input id="mySigns" type="text" name="mySign" placeholder="Enter sign"/>
-			<input type="submit"/>
+		<input  type="text" name="mySign" placeholder="Enter sign"/>
+			<input id="mySigns" type="submit"/>
 		<div style={{ width: 660, height:20 }}>
 			</div>
-		<button type="submit" className="btn btn-light">UploadImage</button>
+		<button type="submit" className="btn b-uploadImage">UploadImage</button>
 
 
 	</div>
