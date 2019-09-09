@@ -36,9 +36,9 @@ export const Home = () => {
 			</Jumbotron>
 
 			<container>
-				<Row className="d-flex justify-content-around">
-					<Col md={4}><Link to="/map"><Image className="map-link" src={abq} fluid/></Link></Col>
-					<Col md={4}><Link to="/gallery"><Image className="gallery" src={motel} fluid/></Link></Col>
+				<Row className="d-flex justify-content-center">
+					<Col md={5}><Link to="/map"><Image className="map-link" src={abq} fluid/></Link></Col>
+					<Col md={5}><Link to="/gallery"><Image className="gallery" src={motel} fluid/></Link></Col>
 				</Row>
 			</container>
 

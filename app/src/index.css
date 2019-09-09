@@ -21,24 +21,20 @@
 /*::::::::::::::::::::::::::::::::::::::::::::IMAGE LINK SECTION::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 @media (max-width: 765px) {
 	.map-link {
-		margin-left: 0 !important;
 		margin-bottom: 2vw;
 	}
 	.gallery {
-		margin-right: 0 !important;
 	}
 }
 
 .map-link {
 	width: 100%;
 	height: auto;
-	padding-right: 0px;
 
 }
 .gallery {
 	width: 100%;
 	height: auto;
-	padding-left: 0px;
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::SIGN-IN SECTION:::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
