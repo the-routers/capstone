@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import ReactMapboxGl from "react-mapbox-gl";
 import {ZoomControl} from "react-mapbox-gl";
 import {Marker} from "react-mapbox-gl";
@@ -6,6 +6,11 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Header} from "../shared/components/header";
 import {Footer} from "../shared/components/Footer";
 import Container from "react-bootstrap/Container";
+import {useSelector, useDispatch} from "react-redux";
+import {UserListItem} from "./UserListItem";
+import {getAllSigns} from "../../shared/actions/get-all-users";
+
+
 
 
 export const MapComponent = () => {
@@ -54,3 +59,4 @@ export const MapComponent = () => {
 		</>
 	)
 };
+
