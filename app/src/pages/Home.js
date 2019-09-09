@@ -7,8 +7,8 @@ import Col from "react-bootstrap/Col";
 import Image from 'react-bootstrap/Image'
 import logo from '../images/66_Logo.png';
 import {Link, Route} from "react-router-dom";
-import map from '../images/map2.png';
-import elvado from '../images/elvado.png';
+import abq from '../images/map1000x600.png';
+import motel from '../images/motel1000x600.png';
 import Button from 'react-bootstrap/Button'
 import {Footer} from "../shared/components/Footer";
 import {httpConfig} from "../shared/utils/http-config";
@@ -37,8 +37,8 @@ export const Home = () => {
 
 			<container>
 				<Row className="d-flex justify-content-around">
-					<Col md={4}><Link to="/map"><Image className="map-link" src={map} fluid/></Link></Col>
-					<Col md={4}><Link to="/gallery"><Image className="gallery" src={elvado} fluid/></Link></Col>
+					<Col md={4}><Link to="/map"><Image className="map-link" src={abq} fluid/></Link></Col>
+					<Col md={4}><Link to="/gallery"><Image className="gallery" src={motel} fluid/></Link></Col>
 				</Row>
 			</container>
 
