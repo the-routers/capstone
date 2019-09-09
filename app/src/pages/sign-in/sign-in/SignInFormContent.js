@@ -34,6 +34,7 @@ export const SignInFormContent = (props) => {
 								</div>
 								<input
 									className="form-control"
+									id="userEmail"
 									type="email"
 									value={values.userEmail}
 									onChange={handleChange}
@@ -75,8 +76,9 @@ export const SignInFormContent = (props) => {
 						</div>
 						<div className="form-group">
 							<button className="btn mb-2 b-submit-signin" type="submit">Submit</button>
-							<button
-								className="btn b-submit-reset mb-2"
+							<button className="btn btn-danger mb-2"
+									  onClick={handleReset}
+									  disabled={!dirty || isSubmitting}
 							>Reset
 							</button>
 						</div>

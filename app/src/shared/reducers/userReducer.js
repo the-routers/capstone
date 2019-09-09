@@ -5,6 +5,7 @@ export default (state = [], action) => {
 		case "GET_USER_BY_USERNAME":
 			return action.payload;
 		case "GET_USER_BY_USEREMAIL":
+			console.log("reach user reducer");
 			return action.payload;
 		default:
 			return state;

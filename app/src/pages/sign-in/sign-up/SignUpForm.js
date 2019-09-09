@@ -43,7 +43,7 @@ export const SignUpForm = () => {
 
 	return (
 
-		<Formik
+	<Formik
 	initialValues={signUp}
 	onSubmit={submitSignUp}
 	validationSchema={validator}

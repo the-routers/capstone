@@ -37,9 +37,8 @@ export const SignInForm = () => {
 	};
 
 	return (
-		<>
 
-			<SignInFormContent/>
+
 			<Formik
 				initialValues={signIn}
 				onSubmit={submitSignIn}
@@ -47,6 +46,5 @@ export const SignInForm = () => {
 			>
 				{SignInFormContent}
 			</Formik>
-		</>
 	)
 };

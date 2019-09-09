@@ -133,11 +133,12 @@ export const SignUpFormContent = (props) => {
 					>Reset
 					</button>
 				</div>
-				s
+
 			</form>
 			{console.log(
 				submitStatus
 			)}
+
 			{
 				submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
 			}
