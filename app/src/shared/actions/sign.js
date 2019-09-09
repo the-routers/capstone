@@ -8,7 +8,7 @@ export const getAllSigns = (test) => async (dispatch) => {
 
 export const getSignBySignId = (test) => async (dispatch) => {
 	const payload =  await httpConfig.get("/apis/sign/");
-	dispatch({type: "FETCH_GET_SIGN_BY_SIGNSID",payload : payload.data });
+	dispatch({type: "FETCH_GET_SIGNS_BY_SIGNID",payload : payload.data });
 };
 
 

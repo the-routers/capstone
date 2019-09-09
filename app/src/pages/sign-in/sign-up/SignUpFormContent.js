@@ -135,9 +135,9 @@ export const SignUpFormContent = (props) => {
 				</div>
 
 			</form>
-			{/*{console.log(*/}
-			{/*	submitStatus*/}
-			{/*)}*/}
+			{console.log(
+				submitStatus
+			)}
 
 			{
 				submitStatus && (<div className={submitStatus.type}>{submitStatus.message}</div>)
