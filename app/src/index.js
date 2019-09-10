@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Jumbotron} from 'react-bootstrap/Jumbotron';
 import {BrowserRouter} from "react-router-dom";
 import {Route, Switch} from "react-router";
+import {reducers} from "./shared/reducers/reducers";
+import {Provider} from "react-redux";
 import {FourOhFour} from "./pages/FourOhFour";
 import {Home} from "./pages/Home";
 import {Example} from "./pages/Example";
@@ -20,13 +22,18 @@ import {
 	faMapMarkerAlt,
 	faUser
 } from "@fortawesome/free-solid-svg-icons";
+import thunk from "redux-thunk";
+import {applyMiddleware, createStore} from "redux";
 
 library.add(faEnvelope, faKey, faMapMarkerAlt,faUser);
 
 
+const store = createStore(reducers, applyMiddleware(thunk));
 
-const Routing = () => (
+
+const Routing = (store) => (
 	<>
+		<Provider store={store}>
 		<BrowserRouter>
 			<Switch>
 				<Route exact path="/sign-in" component={SignIn}/>
@@ -38,7 +45,8 @@ const Routing = () => (
 				<Route component={FourOhFour}/>
 			</Switch>
 		</BrowserRouter>
-
+		</Provider>
 	</>
 );
-ReactDOM.render(<Routing/>, document.querySelector('#root'));
+
+ReactDOM.render(Routing(store), document.querySelector("#root"));

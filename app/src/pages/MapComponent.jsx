@@ -7,20 +7,40 @@ import {Header} from "../shared/components/header";
 import {Footer} from "../shared/components/Footer";
 import Container from "react-bootstrap/Container";
 import {useSelector, useDispatch} from "react-redux";
-import {UserListItem} from "./UserListItem";
-import {getAllSigns} from "../../shared/actions/get-all-users";
+import {getAllSigns} from "../shared/actions/sign";
+import {PointsComponent} from "../shared/components/points-component";
 
 
 
 
 export const MapComponent = () => {
 
+	const signs = useSelector(state => state.signs ? state.signs : []);
+
+	// assigns useDispatch reference to the dispatch variable for later use.
+	const dispatch = useDispatch();
+
+
+	// Define the side effects that will occur in the application.
+	// E.G code that handles dispatches to redux, API requests, or timers.
+	function sideEffects() {
+		// The dispatch function takes actions as arguments to make changes to the store/redux.
+		dispatch(getAllSigns())
+	}
+
+	// Declare any inputs that will be used by functions that are declared in sideEffects.
+	const sideEffectInputs = [];
+
+	/**
+	 * Pass both sideEffects and sideEffectInputs to useEffect.
+	 * useEffect is what handles rerendering of components when sideEffects resolve.
+	 * E.g when a network request to an api has completed and there is new data to display on the dom.
+	 */
+	useEffect(sideEffects, sideEffectInputs);
+
 	const [zoom, setZoom] = useState([11]);
 
 
-	const [points, setPoints] = useState([
-		{lat: 35.082202, lng: -106.630692},
-	]);
 
 
 	const Map = ReactMapboxGl({
@@ -43,12 +63,9 @@ export const MapComponent = () => {
 				center={[-106.630692, 35.082202]}
 				zoom={zoom}
 			>
+				{signs.map(sign => (<PointsComponent sign={sign}/>))};
 				<ZoomControl />
-				<Marker
-					coordinates={points[0]}
-					anchor="bottom">
-					<FontAwesomeIcon icon="map-marker-alt" size="2x"/>
-				</Marker>
+
 			</Map>
 
 			</Container>
