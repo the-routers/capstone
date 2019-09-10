@@ -145,15 +145,16 @@
 
 
 .small-header-image {
-	height: 12vh;
+	height: 11vh;
 	background-color: #282828;
 	padding: 0;
 	padding-top: 2vh;
 	margin-bottom: 0;
 }
 
+
 .logo {
-	height: 5rem;
+	height: 4rem;
 }
 
 .navbar{
@@ -171,4 +172,13 @@
 .nav-item a:hover {
 	background-color: darkgrey;
 }
+
+#popover-basic {
+
+}
+
+.marker-color {
+	color: rgba(47, 47, 47, 0.93);
+}
+
 
