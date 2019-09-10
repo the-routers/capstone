@@ -23,10 +23,9 @@ export const Gallery =() => {
 			<Header/>
 
 			<form className="background-pattern-1">
-			<div className="container">
+					<div className="container">
 				<h2>Gallery</h2>
-				<div className="container">
-					<div  className="row">
+						<div  className="row">
 					<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
 						<div class="boxInner">
 							<img style={{ width: 320, height:320 }} src={Premiere_Motel}/>
@@ -47,7 +46,6 @@ export const Gallery =() => {
 							<div class="titleBox">Nob Hill Court</div>
 						</div>
 					</div>
-
 					</div>
 
 					<div className="row">
@@ -117,12 +115,10 @@ export const Gallery =() => {
 						</div>
 					</div>
 				</div>
-			</div>
-
 			</form>
 		<div className="container">
 		<Footer />
 		</div>
 		</>
 	)
-}
+};
