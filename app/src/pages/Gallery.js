@@ -26,92 +26,91 @@ export const Gallery =() => {
 				<div className="container">
 					<h2>Gallery</h2>
 					<div className="container">
-						<div  className="row">
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={Premiere_Motel}/>
-									<div class="titleBox">Premiere-Motek</div>
-								</div>
-							</div>
-
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={Kimo} />
-									<div class="titleBox">Kimo Theater</div>
-								</div>
-							</div>
-
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={Nob2} />
-									<div class="titleBox">Nob Hill Court</div>
-								</div>
-							</div>
-
-						</div>
-
 						<div className="row">
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={elcamino}/>
-									<div class="titleBox">El Camino Motel</div>
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={Premiere_Motel}  className="img-fluid"/>
+									<div className="titleBox">Premiere-Motek</div>
 								</div>
 							</div>
 
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={lodge} />
-									<div class="titleBox">Luna Loge</div>
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={Kimo} className="img-fluid" />
+									<div className="titleBox">Kimo Theater</div>
 								</div>
 							</div>
 
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={wall} />
-									<div class="titleBox">Wall</div>
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={Nob2} className="img-fluid" />
+									<div className="titleBox">Nob Hill Court</div>
 								</div>
 							</div>
 						</div>
 
 						<div className="row">
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={elvado} />
-									<div class="titleBox">El Vado Motel</div>
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={elcamino}  className="img-fluid"/>
+									<div className="titleBox">El Camino Motel</div>
 								</div>
 							</div>
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={Lindy} />
-									<div class="titleBox">Lindy Dinner</div>
+
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={lodge} className="img-fluid"/>
+									<div className="titleBox">Luna Loge</div>
 								</div>
 							</div>
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={coffeeshop} />
-									<div class="titleBox">Coffee Shop</div>
+
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={wall} className="img-fluid"/>
+									<div className="titleBox">Wall</div>
 								</div>
 							</div>
 						</div>
 
 						<div className="row">
-							<div class="box mt-2 ml-2 pl-1 p-2 mr-2">
-								<div class="boxInner">
-									<img style={{ width: 320, height:320 }} src={intersection} />
-									<div class="titleBox">Intersection</div>
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={elvado} className="img-fluid"/>
+									<div className="titleBox">El Vado Motel</div>
 								</div>
 							</div>
-							<div className="box mt-2 ml-2 pl-1 p-2 mr-2">
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={Lindy} className="img-fluid" />
+									<div className="titleBox">Lindy Dinner</div>
+								</div>
+							</div>
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={coffeeshop} className="img-fluid" />
+									<div className="titleBox">Coffee Shop</div>
+								</div>
+							</div>
+						</div>
+
+						<div className="row">
+							<div className="box col-lg-4">
+								<div className="boxInner">
+									<img style={{ width: 320, height:320 }} src={intersection} className="img-fluid" />
+									<div className="titleBox">Intersection</div>
+								</div>
+							</div>
+							<div className="box col-lg-4">
 								<div className="boxInner">
 									<img style={{width: 320, height: 320}}
-										  src={garcia}/>
-									<div>Garcia's Cafes</div>
+										  src={garcia} className="img-fluid"/>
+									<div className="titleBox">Garcia's Cafe</div>
 								</div>
 							</div>
-							<div className="box mt-2 ml-2 pl-1 p-2 mr-2">
+							<div className="box col-lg-4">
 								<div className="boxInner">
 									<img style={{width: 320, height: 320}}
-										  src={doghouse}/>
+										  className="img-fluid" src={doghouse}/>
 									<div className="titleBox">DogHouse</div>
 								</div>
 							</div>
