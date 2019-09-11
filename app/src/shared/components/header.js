@@ -15,12 +15,12 @@ export const Header = () => {
 		<Jumbotron fluid className="small-header-image">
 
 				<Row className="p-0">
-						<Col sm={1} className="mt-n3">
+						<Col xs={2} sm={1} className="mt-n3">
 						</Col>
-						<Col sm={9} className="p-0">
+						<Col  xs={6} sm={9} className="p-0">
 							<Link to="/"><Image className="logo" src={logo} fluid alt="logo for Signs on 66"/></Link>
 						</Col>
-						<Col sm={1} className="p-0">
+						<Col xs={2} sm={1} className="p-0">
 							<MainNav />
 						</Col>
 				</Row>

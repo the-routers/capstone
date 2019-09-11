@@ -3,7 +3,7 @@ import signReducer from "./signReducer";
 import userReducer from "./userReducer";
 import userPhotoReducer from "./userPhotoReducer";
 
-export const combinedReducers = combineReducers({
+export const reducers = combineReducers({
 	signs: signReducer,
 	users: userReducer,
 	userPhotos: userPhotoReducer,
