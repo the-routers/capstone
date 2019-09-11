@@ -1,18 +1,18 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {MyDropzone} from "../shared/components/main-nav/photoupload/MyDropzone";
-import {backgroundPattern} from "mapbox-gl/src/shaders";
 import {Footer} from "../shared/components/Footer";
 import {Header} from "../shared/components/header";
-import {Autocomplete} from "../shared/components/main-nav/photoupload/Autocomplete";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllSigns} from "../shared/actions/sign";
-import {ImageUploader} from "../shared/components/main-nav/photoupload/ImageUploader";
+import {httpConfig} from "../shared/utils/http-config";
+import {Typeahead} from "react-bootstrap-typeahead";
 
 
 
 export const PhotoUpload = () => {
+	const [imageUrl, setImageUrl] = useState("");
+	const [signName, setSignName] = useState("");
+
 	const signs = useSelector(state => state.signs ? state.signs : []);
 
 	// assigns useDispatch reference to the dispatch variable for later use.
@@ -36,6 +36,36 @@ export const PhotoUpload = () => {
 	 */
 	useEffect(sideEffects, sideEffectInputs);
 
+	const uploadSignImage = () => {
+
+		let foundSign= signs.find(function(sign)
+		{
+			return sign.signName === signName;
+		});
+console.log(foundSign);
+		httpConfig.post("/apis/image/"+foundSign.signId,imageUrl)
+	.then(reply => {
+		let {message, type} = reply;
+		//	setStatus({message, type});
+		console.log(message);
+		if(reply.status === 200) {
+			//		setStatus({message, type});
+			console.log(message);
+		}
+	});
+		httpConfig.post("/apis/userPhoto/",imageUrl)
+	.then(reply => {
+				let {message, type} = reply;
+				//	setStatus({message, type});
+				console.log(message);
+				if(reply.status === 200) {
+					//		setStatus({message, type});
+					console.log(message);
+				}
+			})
+	};
+	const options=signs.map(sign=>sign.signName);
+
 
 	return(
 <>
@@ -47,7 +77,17 @@ export const PhotoUpload = () => {
 					<div style={{ width: 660, height:20}}>
 					</div>
 					<div className="bg-transparent">
-						<ImageUploader />
+						<h4>Upload your sign photos</h4>
+						<div>
+							<input type="file" id="signImage" accept=".jpg, .jpeg, .svg, .png"
+									 onChange={(e) => {
+										 setImageUrl(e.target.files[0]);
+									 }}
+									 onClick={(event) => {
+										 event.target.value = null
+									 }}
+							/>
+						</div>
 					</div>
 		</div>
 			<div style={{ width: 660, height:20 }}>
@@ -67,11 +107,17 @@ export const PhotoUpload = () => {
 	</div>
 
 <div className="container">
-	<Autocomplete signs={signs}/>
+	<Typeahead
+		labelKey="name"
+		placeholder="Enter sign name..."
+		options={options}
+		onChange={(e) => setSignName(e[0])}
+	/>
+
 	<div style={{ width: 660, height:20 }}>
 			</div>
 
-		<button type="submit" className="btn btn-warning">Upload Image</button>
+		<button type="submit" onClick={uploadSignImage} className="btn btn-warning">Upload Image</button>
 
 
 	</div>

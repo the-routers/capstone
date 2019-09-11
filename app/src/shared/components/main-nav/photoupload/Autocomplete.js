@@ -10,7 +10,7 @@ const options=signs.map(sign=>sign.signName);
 						labelKey="name"
 						placeholder="Enter sign name..."
 						options={options}
-
+						onChange={(e) => console.log(e)}
 					/>
 				</>
 			);
