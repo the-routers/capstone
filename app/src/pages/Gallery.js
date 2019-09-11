@@ -121,6 +121,7 @@ export const Gallery =() => {
 			<div className="container">
 				<Footer />
 			</div>
+
 		</>
 	)
 };
