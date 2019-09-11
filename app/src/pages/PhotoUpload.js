@@ -36,18 +36,18 @@ export const PhotoUpload = () => {
 	 */
 	useEffect(sideEffects, sideEffectInputs);
 
-	const uploadSignImage = () => {
-
+	const uploadSignImage = (e) => {
+		e.preventDefault();
 		let foundSign= signs.find(function(sign)
 		{
 			return sign.signName === signName;
 		});
 console.log(foundSign);
-		httpConfig.post("/apis/image/"+foundSign.signId,imageUrl)
+		httpConfig.post("/apis/image/",imageUrl)
 	.then(reply => {
 		let {message, type} = reply;
 		//	setStatus({message, type});
-		console.log(message);
+		console.log(reply);
 		if(reply.status === 200) {
 			//		setStatus({message, type});
 			console.log(message);

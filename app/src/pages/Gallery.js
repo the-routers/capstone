@@ -27,21 +27,21 @@ export const Gallery =() => {
 					<h2>Gallery</h2>
 					<div className="container">
 						<div className="row">
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={Premiere_Motel}  className="img-fluid"/>
 									<div className="titleBox">Premiere-Motek</div>
 								</div>
 							</div>
 
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={Kimo} className="img-fluid" />
 									<div className="titleBox">Kimo Theater</div>
 								</div>
 							</div>
 
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={Nob2} className="img-fluid" />
 									<div className="titleBox">Nob Hill Court</div>
@@ -50,21 +50,21 @@ export const Gallery =() => {
 						</div>
 
 						<div className="row">
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={elcamino}  className="img-fluid"/>
 									<div className="titleBox">El Camino Motel</div>
 								</div>
 							</div>
 
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={lodge} className="img-fluid"/>
 									<div className="titleBox">Luna Loge</div>
 								</div>
 							</div>
 
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={wall} className="img-fluid"/>
 									<div className="titleBox">Wall</div>
@@ -73,19 +73,19 @@ export const Gallery =() => {
 						</div>
 
 						<div className="row">
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={elvado} className="img-fluid"/>
 									<div className="titleBox">El Vado Motel</div>
 								</div>
 							</div>
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={Lindy} className="img-fluid" />
 									<div className="titleBox">Lindy Dinner</div>
 								</div>
 							</div>
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={coffeeshop} className="img-fluid" />
 									<div className="titleBox">Coffee Shop</div>
@@ -94,20 +94,20 @@ export const Gallery =() => {
 						</div>
 
 						<div className="row">
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={intersection} className="img-fluid" />
 									<div className="titleBox">Intersection</div>
 								</div>
 							</div>
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{width: 320, height: 320}}
 										  src={garcia} className="img-fluid"/>
 									<div className="titleBox">Garcia's Cafe</div>
 								</div>
 							</div>
-							<div className="box col-lg-4">
+							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{width: 320, height: 320}}
 										  className="img-fluid" src={doghouse}/>
