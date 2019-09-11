@@ -1,13 +1,16 @@
-import React from 'react';
 import {httpConfig} from "../../../shared/utils/http-config";
 import {Formik} from "formik/dist/index";
 import * as Yup from "yup";
 import {SignInFormContent} from "./SignInFormContent";
-
+import React, {useState} from 'react';
+import {Redirect} from "react-router";
 
 
 export const SignInForm = () => {
-	const validator = Yup.object().shape({              //::::::::::::::::::::::::::::: deprecated symbol :::::::::::::::
+	// // state variable to handle redirect to posts page on sign in
+	// const [toPosts, setToPosts] = useState(null);
+
+	const validator = Yup.object().shape({
 		userEmail: Yup.string()
 			.email("Email must be a valid email")
 			.required('Email is required'),
@@ -32,14 +35,22 @@ export const SignInForm = () => {
 					window.localStorage.removeItem("jwt-token");
 					window.localStorage.setItem("jwt-token", reply.headers["x-jwt-token"]);
 					resetForm();
-					setStatus({message, type});
-
+					// setTimeout(() => {
+					// 	setToPosts(true);
+					// 	window.location = "/gallery";
+					// }, 750);
 				}
+
+				setStatus({message, type});
+
 			});
 	};
 
 	return (
 		<>
+			{/*redirect user to posts page on sign in*/}
+			{/*{toPosts ? <Redirect to="/gallery" /> : null}*/}
+
 			<Formik
 				initialValues={signIn}
 				onSubmit={submitSignIn}
@@ -47,6 +58,6 @@ export const SignInForm = () => {
 			>
 				{SignInFormContent}
 			</Formik>
-			</>
+		</>
 	)
 };

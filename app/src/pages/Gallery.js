@@ -117,10 +117,10 @@ export const Gallery =() => {
 						</div>
 					</div>
 				</div>
-				<div className="container">
-					<Footer />
-				</div>
 			</form>
+			<div className="container">
+				<Footer />
+			</div>
 		</>
 	)
 };
