@@ -3,7 +3,7 @@ import {Typeahead} from "react-bootstrap-typeahead";
 
 export const Autocomplete =({signs}) => {
 const options=signs.map(sign=>sign.signName);
-	console.log(options);
+	//console.log(options);
 			return (
 				<>
 					<Typeahead

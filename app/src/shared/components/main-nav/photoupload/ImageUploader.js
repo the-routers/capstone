@@ -19,6 +19,7 @@ export const ImageUploader = () => {
 
 	const queueSignImage=(imagefile) =>{
 console.log(imagefile);
+httpConfig.post("/apis/image/",imagefile)
 		// add signimage to state
 
 	};

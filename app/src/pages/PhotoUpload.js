@@ -76,9 +76,10 @@ export const PhotoUpload = () => {
 
 	</div>
 		</form>
-		<Footer/>
-
 	</div>
+
+	<Footer/>
+
 </>
 	)
 };
