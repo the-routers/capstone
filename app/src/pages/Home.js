@@ -6,7 +6,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from 'react-bootstrap/Image'
 import blank1 from '../images/blank3.png';
-import streetsign1 from '../images/streetsign1.png';
 import {Link, Route} from "react-router-dom";
 import abq from '../images/map1000x600.png';
 import motel from '../images/motel1000x600.png';

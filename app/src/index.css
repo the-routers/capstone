@@ -64,9 +64,9 @@
 	right: 0;
 	height: 100%;
 	width: 100%;
-	opacity: 0.7;
+	opacity: 0;
 	transition: 0.5s ease;
-	background-color: lightgrey;
+	background-color: #E0BB09;
 	margin-right: -5px;
 	}
 
@@ -78,9 +78,9 @@
 	right: 0;
 	height: 100%;
 	width: 100%;
-	opacity: 0.7;
+	opacity: 0;
 	transition: .5s ease;
-	background-color: lightgrey;
+	background-color: #E0BB09;
 }
 
 .box:hover .overlay {
