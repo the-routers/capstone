@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {MyDropzone} from "../shared/components/main-nav/photoupload/MyDropzone";
@@ -6,10 +6,34 @@ import {backgroundPattern} from "mapbox-gl/src/shaders";
 import {Footer} from "../shared/components/Footer";
 import {Header} from "../shared/components/header";
 import {Autocomplete} from "../shared/components/main-nav/photoupload/Autocomplete";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllSigns} from "../shared/actions/sign";
 
 
 
-export const PhotoUpload = ({signs}) => {
+export const PhotoUpload = () => {
+	const signs = useSelector(state => state.signs ? state.signs : []);
+
+	// assigns useDispatch reference to the dispatch variable for later use.
+	const dispatch = useDispatch();
+
+
+	// Define the side effects that will occur in the application.
+	// E.G code that handles dispatches to redux, API requests, or timers.
+	function sideEffects() {
+		// The dispatch function takes actions as arguments to make changes to the store/redux.
+		dispatch(getAllSigns())
+	}
+
+	// Declare any inputs that will be used by functions that are declared in sideEffects.
+	const sideEffectInputs = [];
+
+	/**
+	 * Pass both sideEffects and sideEffectInputs to useEffect.
+	 * useEffect is what handles rerendering of components when sideEffects resolve.
+	 * E.g when a network request to an api has completed and there is new data to display on the dom.
+	 */
+	useEffect(sideEffects, sideEffectInputs);
 
 
 	return(

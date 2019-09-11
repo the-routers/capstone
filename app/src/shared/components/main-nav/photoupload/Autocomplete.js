@@ -9,7 +9,7 @@ const options=signs.map(sign=>sign.signName);
 					<Typeahead
 						labelKey="name"
 						placeholder="Enter sign name..."
-						options={["signA","signB"]}
+						options={options}
 
 					/>
 				</>
