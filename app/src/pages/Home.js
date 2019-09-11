@@ -15,7 +15,9 @@ import {httpConfig} from "../shared/utils/http-config";
 
 
 export const Home = () => {
-
+	// useEffect(() => {
+	// 	httpConfig.get("/apis/earl-grey/")
+	// });
 
 	return (
 		<>

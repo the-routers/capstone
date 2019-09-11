@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from "react"
 import ReactDOM from 'react-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import {Jumbotron} from 'react-bootstrap/Jumbotron';
@@ -24,6 +24,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import thunk from "redux-thunk";
 import {applyMiddleware, createStore} from "redux";
+import {httpConfig} from "./shared/utils/http-config";
 
 library.add(faEnvelope, faKey, faMapMarkerAlt,faUser);
 
@@ -31,7 +32,12 @@ library.add(faEnvelope, faKey, faMapMarkerAlt,faUser);
 const store = createStore(reducers, applyMiddleware(thunk));
 
 
-const Routing = (store) => (
+const Routing = (store) => {
+	// useEffect(() => {
+	// 	httpConfig.get("/apis/earl-grey/")
+	// });
+
+	return (
 	<>
 		<Provider store={store}>
 		<BrowserRouter>
@@ -47,6 +53,6 @@ const Routing = (store) => (
 		</BrowserRouter>
 		</Provider>
 	</>
-);
+)};
 
 ReactDOM.render(Routing(store), document.querySelector("#root"));
