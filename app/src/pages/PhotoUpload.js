@@ -1,13 +1,16 @@
-import React from "react"
+import React from "react";
 import 'bootstrap/dist/css/bootstrap.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {MyDropzone} from "../shared/components/main-nav/photoupload/MyDropzone";
 import {backgroundPattern} from "mapbox-gl/src/shaders";
 import {Footer} from "../shared/components/Footer";
 import {Header} from "../shared/components/header";
+import {Autocomplete} from "../shared/components/main-nav/photoupload/Autocomplete";
 
 
-export const PhotoUpload = () => {
+
+export const PhotoUpload = ({signs}) => {
+
 
 	return(
 <>
@@ -35,37 +38,22 @@ export const PhotoUpload = () => {
 </div>
 			<div style={{ width: 660, height:30 }}>
 			</div>
-<div className="container">
-	<div className="input-group" id="mainApp" >
-				<div className="custom-file">
-			<input
-				type="file"
-				className="custom-file-input"
-				id="inputGroupFile01"
-				aria-describedby="inputGroupFileAddon01"
-			/>
-			<label className="custom-file-label text-left" htmlFor="inputGroupFile01">
-				Choose file
-			</label>
-		</div>
-	</div>
-</div>
 	<div style={{ width: 660, height:20 }}>
 	</div>
+
 <div className="container">
-	<div className="autocomplete text-left" style={{ width: 700, height:80 }}>
-		<input  type="text" name="mySign" placeholder="Enter sign"/>
-			<input id="mySigns" type="submit"/>
-		<div style={{ width: 660, height:20 }}>
+	<Autocomplete signs={signs}/>
+	<div style={{ width: 660, height:20 }}>
 			</div>
+
 		<button type="submit" className="btn b-uploadImage">UploadImage</button>
 
 
 	</div>
-<Footer/>
-</div>
 		</form>
-		</div>
+		<Footer/>
+
+	</div>
 </>
 	)
 };

@@ -14,6 +14,7 @@
     "mdbreact": "^4.19.2",
     "react": "^16.9.0",
     "react-bootstrap": "^1.0.0-beta.10",
+    "react-bootstrap-typeahead": "^3.4.6",
     "react-dom": "^16.9.0",
     "react-images-upload": "^1.2.7",
     "react-map-gl": "^5.0.10",
