@@ -8,6 +8,7 @@ import {Header} from "../shared/components/header";
 import {Autocomplete} from "../shared/components/main-nav/photoupload/Autocomplete";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllSigns} from "../shared/actions/sign";
+import {ImageUploader} from "../shared/components/main-nav/photoupload/ImageUploader";
 
 
 
@@ -42,11 +43,11 @@ export const PhotoUpload = () => {
 	<div className="background-pattern-1">
 			<form>
 		<div className="container text-center">
-					<h4>To Upload Photo for sign drag and drop files below</h4>
+					<h2>Welcome to the photo upload page</h2>
 					<div style={{ width: 660, height:20}}>
 					</div>
-					<div className="border border-dark bg-light ">
-							<MyDropzone/>
+					<div className="bg-transparent">
+						<ImageUploader />
 					</div>
 		</div>
 			<div style={{ width: 660, height:20 }}>
@@ -70,7 +71,7 @@ export const PhotoUpload = () => {
 	<div style={{ width: 660, height:20 }}>
 			</div>
 
-		<button type="submit" className="btn b-uploadImage">UploadImage</button>
+		<button type="submit" className="btn btn-warning">Upload Image</button>
 
 
 	</div>

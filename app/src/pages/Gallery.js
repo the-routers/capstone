@@ -123,4 +123,4 @@ export const Gallery =() => {
 			</form>
 		</>
 	)
-}
+};
