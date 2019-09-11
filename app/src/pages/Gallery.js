@@ -22,7 +22,7 @@ export const Gallery =() => {
 		<>
 			<Header/>
 
-			<form className="background-pattern-1">
+			<form className="upload">
 				<div className="container">
 					<h2>Gallery</h2>
 					<div className="container">

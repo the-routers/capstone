@@ -70,8 +70,7 @@ console.log(foundSign);
 	return(
 <>
 	<Header />
-	<div className="background-pattern-1">
-			<form>
+	<form className="upload">
 		<div className="container text-center">
 					<h2>Welcome to the photo upload page</h2>
 					<div style={{ width: 660, height:20}}>
@@ -122,7 +121,6 @@ console.log(foundSign);
 
 	</div>
 		</form>
-	</div>
 
 	<Footer/>
 

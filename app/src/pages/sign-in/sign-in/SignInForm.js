@@ -8,7 +8,7 @@ import {Redirect} from "react-router";
 
 export const SignInForm = () => {
 	// // state variable to handle redirect to posts page on sign in
-	// const [toPosts, setToPosts] = useState(null);
+	//const [toPosts, setToPosts] = useState(null);
 
 	const validator = Yup.object().shape({
 		userEmail: Yup.string()
