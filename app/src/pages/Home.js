@@ -5,7 +5,8 @@ import Jumbotron from "react-bootstrap/Jumbotron";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Image from 'react-bootstrap/Image'
-import logo from '../images/66_Logo.png';
+import blank1 from '../images/blank3.png';
+import streetsign1 from '../images/streetsign1.png';
 import {Link, Route} from "react-router-dom";
 import abq from '../images/map1000x600.png';
 import motel from '../images/motel1000x600.png';
@@ -22,7 +23,7 @@ export const Home = () => {
 			<Jumbotron fluid id="header-image">
 				<Container>
 					<Row>
-						<Col md={5} className="mx-auto"><Image src={logo} fluid/></Col>
+						<Col md={5} className="mx-auto"><Image src={blank1}/></Col>
 					</Row>
 					<Row>
 						<Col className="mx-auto margin-left text-right">
@@ -42,6 +43,7 @@ export const Home = () => {
 							<div className="text">Map</div>
 						</div>
 					</Link></Col>
+					<Col md={1}></Col>
 					<Col md={5}><Link to="/gallery"><Image className="gallery" src={motel} fluid/>
 						<div className="overlay gallery-overlay">
 							<div className="text">Gallery</div>

@@ -10,14 +10,28 @@
 	margin-right: -150px;
 						 }
 /*::::::::::::::::::::::::::::::::::::::::::::BANNER IMAGE::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-#header-image {
-	background-image: url("images/cloud_background.jpg");
-	background-color: black;
-	background-attachment: scroll;
-	background-repeat: no-repeat;
-	background-size: cover;
-	/*height: 100vh;*/
+@media (min-width: 588px) {
+	#header-image {
+		background-image: url("images/streetsign1.png");
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
+	}
 }
+
+@media (max-width: 587px) {
+	#header-image {
+		background-image: url("images/1.png");
+		background-color: black;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		height: 100vh;
+		margin: 0 auto;
+	}
+}
+
 /*::::::::::::::::::::::::::::::::::::::::::::IMAGE LINK SECTION::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 @media (max-width: 765px) {
 	.map-link {
@@ -37,20 +51,10 @@
 	height: auto;
 }
 
-
-
-
-
 .box {
 	position: relative;
 	width: 50%;
 }
-
-/*.image {*/
-/*	display: block;*/
-/*	width: 100%;*/
-/*	height: auto;*/
-/*}*/
 
 .map-overlay {
 	position: absolute;
@@ -60,11 +64,11 @@
 	right: 0;
 	height: 100%;
 	width: 100%;
-	opacity: 0;
-	transition: .5s ease;
-	background-color: #008CBA;
+	opacity: 0.7;
+	transition: 0.5s ease;
+	background-color: lightgrey;
 	margin-right: -5px;
-}
+	}
 
 .gallery-overlay {
 	position: absolute;
@@ -74,20 +78,25 @@
 	right: 0;
 	height: 100%;
 	width: 100%;
-	opacity: 0;
+	opacity: 0.7;
 	transition: .5s ease;
-	background-color: #008CBA;
-	
+	background-color: lightgrey;
 }
 
 .box:hover .overlay {
 	opacity: 1;
 }
 
+.text:hover {
+	opacity: 1;
+}
+
 .text {
-	color: white;
-	font-size: 20px;
+	color: black;
+	font-size: 50px;
+	font-family: "Arial Black";
 	position: absolute;
+	opacity: 0;
 	top: 50%;
 	left: 50%;
 	-webkit-transform: translate(-50%, -50%);
@@ -95,12 +104,6 @@
 	transform: translate(-50%, -50%);
 	text-align: center;
 }
-
-
-
-
-
-
 /*::::::::::::::::::::::::::::::::::::::::::::SIGN-IN SECTION:::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 .background-pattern-1 {
 	background-color: #fff;
