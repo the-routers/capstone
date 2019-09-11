@@ -20,6 +20,7 @@ if(session_start() !== PHP_SESSION_ACTIVE) {
 $reply = new stdClass();
 $reply->status = 200;
 $reply->data = null;
+$reply->message = "image upload";
 try {
 	$secrets = new ("/etc/apache2/capstone-mysql/Secrets.php");
 	$pdo = $secrets->getPdoObject();
