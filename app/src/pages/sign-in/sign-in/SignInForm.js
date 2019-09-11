@@ -8,7 +8,7 @@ import {Redirect} from "react-router";
 
 export const SignInForm = () => {
 	// // state variable to handle redirect to posts page on sign in
-	//const [toPosts, setToPosts] = useState(null);
+const [toPosts, setToPosts] = useState(null);
 
 	const validator = Yup.object().shape({
 		userEmail: Yup.string()
@@ -35,10 +35,10 @@ export const SignInForm = () => {
 					window.localStorage.removeItem("jwt-token");
 					window.localStorage.setItem("jwt-token", reply.headers["x-jwt-token"]);
 					resetForm();
-					// setTimeout(() => {
+					 setTimeout(() => {
 					// 	setToPosts(true);
-					// 	window.location = "/gallery";
-					// }, 750);
+						window.location = "/map";
+					 }, 750);
 				}
 
 				setStatus({message, type});
@@ -49,7 +49,7 @@ export const SignInForm = () => {
 	return (
 		<>
 			{/*redirect user to posts page on sign in*/}
-			{/*{toPosts ? <Redirect to="/gallery" /> : null}*/}
+			{toPosts ? <Redirect to="/map" /> : null}
 
 			<Formik
 				initialValues={signIn}

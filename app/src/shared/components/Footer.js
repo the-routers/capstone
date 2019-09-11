@@ -8,9 +8,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {httpConfig} from "../utils/http-config";
 
 export const Footer = () => {
-	useEffect(() => {
-		httpConfig.get("/apis/earl-grey/")
-	});
 	return (
 		<>
 			<div className="d-flex justify-content-center">
