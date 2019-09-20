@@ -18,12 +18,12 @@ services:
       depends_on:
          - php
       ports:
-         - 8080:80
+         - 80:80
    sql:
       build: ./sql
       volumes:
-         - ddc-twitter-sql:/var/lib/mysql
+         - signson66-sql:/var/lib/mysql
       env_file:
          - ./docker-compose.env
 volumes:
-   ddc-twitter-sql:
+   signson66-sql:

@@ -7,6 +7,9 @@
     "phpseclib/phpseclib": "2.0.11",
     "swiftmailer/swiftmailer": "@stable",
     "lcobucci/jwt": "3.2",
+    "mailgun/mailgun-php": "@stable",
+    "kriswallsmith/buzz": "@stable",
+    "nyholm/psr7": "@stable",
     "ramsey/uuid": "@stable"
   },
   "scripts":{

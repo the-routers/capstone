@@ -7,8 +7,7 @@ require_once dirname(__DIR__, 3) . "/lib/uuid.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use TheRouters\Capstone\User;
-
-////Edu\Cnm\DataDesign\Profile; :::::::::::::::::::::::::::::::::::: Is mine correct?? This was the example ::::::::::::
+use Mailgun\Mailgun;
 
 /**
  * apis for signing up to 'Signs on 66' website
@@ -27,6 +26,7 @@ try {
 	//grab the mySQL connection
 	$secrets = new \Secrets("/etc/apache2/capstone-mysql/signson66.ini");
 	$pdo = $secrets->getPdoObject();
+	$mailgun = $secrets->getSecret("mailgun");
 	//determine which HTTP method was used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 	if($method === "POST") {
@@ -107,20 +107,16 @@ EOF;
 		 * SwiftMailer supports many different transport methods; SMTP was chosen because it's the most compatible and has the best error handling
 		 * @see http://swiftmailer.org/docs/sending.html Sending Messages - Documentation - SwitftMailer
 		 **/
-		//setup smtp
-		$smtp = new Swift_SmtpTransport(
-			"localhost", 25);
-		$mailer = new Swift_Mailer($smtp);
-		//send the message
-		$numSent = $mailer->send($swiftMessage, $failedRecipients);
+
+		//Instantiate the mailgun api with your API credentials
+		$mailgun = Mailgun::create($mailgun->apiKey);
+
+		//configure the mailgun object and send the email
+		$mailgun->messages()->sendMime($mailgun->domain, $requestObject->userEmail, $swiftMessage->toString(), []);
 		/**
 		 * the send method returns the number of recipients that accepted the Email
 		 * so, if the number attempted is not the number accepted, this is an Exception
 		 **/
-		if($numSent !== count($recipients)) {
-			// the $failedRecipients parameter passed in the send() method now contains contains an array of the Emails that failed
-			throw(new RuntimeException("unable to send email", 400));
-		}
 		// update reply
 		$reply->message = "Thank you for creating a profile with Signs on 66";
 	} else {
