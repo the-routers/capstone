@@ -112,7 +112,7 @@ try {
 				 validateJwtHeader();
 				 // enforce the user is signed in
 				 if(empty($_SESSION["user"]) === true) {
-					 throw(new \InvalidArgumentException("you must be sign in to post photo", 403));
+					 throw(new \InvalidArgumentException("you must be signed in to post photo", 403));
 				 }
 				 $userPhoto = new UserPhoto(generateUuidV4(), $requestObject->userPhotoSignId, $_SESSION["user"]->getUserId(), $requestObject->userPhotoCaption, $requestObject->userPhotoIsFeature, $requestObject->userPhotoUrl);
 				 $userPhoto->insert($pdo);

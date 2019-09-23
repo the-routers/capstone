@@ -8,7 +8,6 @@ import {httpConfig} from "../shared/utils/http-config";
 import {Typeahead} from "react-bootstrap-typeahead";
 
 
-
 export const PhotoUpload = () => {
 	const [imageUrl, setImageUrl] = useState("");
 	const [signName, setSignName] = useState("");
@@ -38,42 +37,41 @@ export const PhotoUpload = () => {
 
 	const uploadSignImage = (e) => {
 		e.preventDefault();
-		let foundSign= signs.find(function(sign)
-		{
+		let foundSign = signs.find(function(sign) {
 			return sign.signName === signName;
 		});
-console.log(foundSign);
-		httpConfig.post("/apis/image/",imageUrl)
-	.then(reply => {
-		let {message, type} = reply;
-		//	setStatus({message, type});
-		console.log(reply);
-		if(reply.status === 200) {
-			//		setStatus({message, type});
-			console.log(message);
-		}
-	});
-		httpConfig.post("/apis/userPhoto/",imageUrl)
-	.then(reply => {
+		console.log(foundSign);
+		httpConfig.post("/apis/image/", imageUrl)
+			.then(reply => {
 				let {message, type} = reply;
 				//	setStatus({message, type});
-				console.log(message);
+				console.log(reply);
 				if(reply.status === 200) {
 					//		setStatus({message, type});
 					console.log(message);
 				}
-			})
+			});
+		// 	httpConfig.post("/apis/userPhoto/",imageUrl)
+		// .then(reply => {
+		// 			let {message, type} = reply;
+		// 			//	setStatus({message, type});
+		// 			console.log(message);
+		// 			if(reply.status === 200) {
+		// 				//		setStatus({message, type});
+		// 				console.log(message);
+		// 			}
+		// 		})
 	};
-	const options=signs.map(sign=>sign.signName);
+	const options = signs.map(sign => sign.signName);
 
 
-	return(
-<>
-	<Header />
-	<form className="upload">
-		<div className="container text-center">
+	return (
+		<>
+			<Header/>
+			<form className="upload">
+				<div className="container text-center">
 					<h2>Welcome to the photo upload page</h2>
-					<div style={{ width: 660, height:20}}>
+					<div style={{width: 660, height: 20}}>
 					</div>
 					<div className="bg-transparent">
 						<h4>Upload your sign photos</h4>
@@ -88,43 +86,43 @@ console.log(foundSign);
 							/>
 						</div>
 					</div>
-		</div>
-			<div style={{ width: 660, height:20 }}>
-			</div>
+				</div>
+				<div style={{width: 660, height: 20}}>
+				</div>
 
-<div className="container text-center">
-	<div className="input-group" style={{height:80 }}>
-		<div className="input-group-prepend">
-			<span className="input-group-text">PhotoCaption</span>
-		</div>
-		<textarea className="form-control" aria-label="With textarea"/>
-	</div>
-</div>
-			<div style={{ width: 660, height:30 }}>
-			</div>
-	<div style={{ width: 660, height:20 }}>
-	</div>
+				<div className="container text-center">
+					<div className="input-group" style={{height: 80}}>
+						<div className="input-group-prepend">
+							<span className="input-group-text">PhotoCaption</span>
+						</div>
+						<textarea className="form-control" aria-label="With textarea"/>
+					</div>
+				</div>
+				<div style={{width: 660, height: 30}}>
+				</div>
+				<div style={{width: 660, height: 20}}>
+				</div>
 
-<div className="container">
-	<Typeahead
-		labelKey="name"
-		placeholder="Enter sign name..."
-		options={options}
-		onChange={(e) => setSignName(e[0])}
-	/>
+				<div className="container">
+					<Typeahead
+						labelKey="name"
+						placeholder="Enter sign name..."
+						options={options}
+						onChange={(e) => setSignName(e[0])}
+					/>
 
-	<div style={{ width: 660, height:20 }}>
-			</div>
+					<div style={{width: 660, height: 20}}>
+					</div>
 
-		<button type="submit" onClick={uploadSignImage} className="btn btn-warning">Upload Image</button>
+					<button type="submit" onClick={uploadSignImage} className="btn btn-warning">Upload Image</button>
 
 
-	</div>
-		</form>
+				</div>
+			</form>
 
-	<Footer/>
+			<Footer/>
 
-</>
+		</>
 	)
 };
 

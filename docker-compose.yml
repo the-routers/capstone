@@ -25,5 +25,7 @@ services:
          - signson66-sql:/var/lib/mysql
       env_file:
          - ./docker-compose.env
+      ports:
+         - 3306:3306
 volumes:
    signson66-sql:

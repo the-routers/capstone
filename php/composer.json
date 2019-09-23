@@ -10,7 +10,8 @@
     "mailgun/mailgun-php": "@stable",
     "kriswallsmith/buzz": "@stable",
     "nyholm/psr7": "@stable",
-    "ramsey/uuid": "@stable"
+    "ramsey/uuid": "@stable",
+    "cloudinary/cloudinary_php": "@stable"
   },
   "scripts":{
     "phpunit": "./vendor/bin/phpunit -c ./Classes/Test --coverage-html coverage"
