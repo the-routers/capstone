@@ -108,17 +108,33 @@ EOF;
 		 * @see http://swiftmailer.org/docs/sending.html Sending Messages - Documentation - SwitftMailer
 		 **/
 
-		//Instantiate the mailgun api with your API credentials
-		$mailgun = Mailgun::create($mailgun->apiKey);
+		//setup smtp
+		$smtp = new Swift_SmtpTransport(
+			"localhost", 25);
+		$mailer = new Swift_Mailer($smtp);
+		//send the message
+		$numSent = $mailer->send($swiftMessage, $failedRecipients);
+		/**
+		 * the send method returns the number of recipients that accepted the Email
+		 * so, if the number attempted is not the number accepted, this is an Exception
+		 **/
+		if($numSent !== count($recipients)) {
+			// the $failedRecipients parameter passed in the send() method now contains contains an array of the Emails that failed
+			throw(new RuntimeException("unable to send email", 400));
+		}
 
-		//configure the mailgun object and send the email
-		$mailgun->messages()->sendMime($mailgun->domain, $requestObject->userEmail, $swiftMessage->toString(), []);
+//		//Instantiate the mailgun api with your API credentials
+//		$mailgun = Mailgun::create($mailgun->apiKey);
+//
+//		//configure the mailgun object and send the email
+//		$mailgun->messages()->sendMime($mailgun->domain, $requestObject->userEmail, $swiftMessage->toString(), []);
+
 		/**
 		 * the send method returns the number of recipients that accepted the Email
 		 * so, if the number attempted is not the number accepted, this is an Exception
 		 **/
 		// update reply
-		$reply->message = "Thank you for creating a profile with Signs on 66";
+		$reply->message = "Thank you for creating a profile with Signs on 66. Please sign in to your account above.";
 	} else {
 		throw (new InvalidArgumentException("invalid http request"));
 	}

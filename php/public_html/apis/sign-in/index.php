@@ -50,13 +50,15 @@ try {
 
 		$user = User::getUserByUserEmail($pdo, $userEmail);
 		if(empty($user) === true) {
+			$reply->message = "TEST MESSAGE1.";
 			throw(new InvalidArgumentException("Invalid Email", 401));
 		}
 		$user->setUserActivationToken(null);
 		$user->update($pdo);
 		//verify hash is correct
 		if(password_verify($requestObject->userPassword, $user->getuserHash()) === false) {
-			throw(new \InvalidArgumentException("Password or email is incorrect.", 401));
+			//$reply->message = "TEST MESSAGE2.";
+			throw(new \InvalidArgumentException("Password is incorrect.", 401));
 		}
 		//grab user from database and put into a session
 		$user = User::getUserByUserId($pdo, $user->getUserId());
