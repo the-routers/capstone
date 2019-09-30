@@ -30,7 +30,7 @@ export const Gallery =() => {
 							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={Premiere_Motel}  className="img-fluid"/>
-									<div className="titleBox">Premiere-Motek</div>
+									<div className="titleBox">Premiere Motel</div>
 								</div>
 							</div>
 
@@ -60,14 +60,14 @@ export const Gallery =() => {
 							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={lodge} className="img-fluid"/>
-									<div className="titleBox">Luna Loge</div>
+									<div className="titleBox">Luna Lodge</div>
 								</div>
 							</div>
 
 							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={wall} className="img-fluid"/>
-									<div className="titleBox">Wall</div>
+									<div className="titleBox">Mural</div>
 								</div>
 							</div>
 						</div>
@@ -82,7 +82,7 @@ export const Gallery =() => {
 							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={Lindy} className="img-fluid" />
-									<div className="titleBox">Lindy Dinner</div>
+									<div className="titleBox">Lindy's Dinner</div>
 								</div>
 							</div>
 							<div className="box col-lg-4 col-sm-6 col-xs-8">
@@ -97,7 +97,7 @@ export const Gallery =() => {
 							<div className="box col-lg-4 col-sm-6 col-xs-8">
 								<div className="boxInner">
 									<img style={{ width: 320, height:320 }} src={intersection} className="img-fluid" />
-									<div className="titleBox">Intersection</div>
+									<div className="titleBox">Street Sign</div>
 								</div>
 							</div>
 							<div className="box col-lg-4 col-sm-6 col-xs-8">
@@ -111,7 +111,7 @@ export const Gallery =() => {
 								<div className="boxInner">
 									<img style={{width: 320, height: 320}}
 										  className="img-fluid" src={doghouse}/>
-									<div className="titleBox">DogHouse</div>
+									<div className="titleBox">Dog House</div>
 								</div>
 							</div>
 						</div>

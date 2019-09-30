@@ -25,6 +25,7 @@ try {
 	// Grab the MySQL connection
 	$secrets = new \Secrets("/etc/apache2/capstone-mysql/signson66.ini");
 	$pdo = $secrets->getPdoObject();
+	$cloudinary = $secrets->getSecret("cloudinary");
 	//determine which HTTP method is being used
 	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
 	//check filter_input value is correct or not
@@ -34,6 +35,7 @@ try {
 	$userPhotoCaption = filter_input(INPUT_GET, "userPhotoCaption", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userPhotoIsFeature = filter_input(INPUT_GET, "userPhotoIsFeature", FILTER_VALIDATE_INT);
 	$userPhotoUrl = filter_input(INPUT_GET, "userPhotoUrl", FILTER_VALIDATE_URL);
+	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "api_key" => $cloudinary->apiKey, "api_secret" =>$cloudinary->apiSecret]);
 
 	// process GET requests
 	if($method === "GET") {
@@ -85,36 +87,27 @@ try {
 //		}
 //
 	} else if($method === "POST" || $method === "PUT") {
-			//decode the response from the front end
-			$requestContent = file_get_contents("php://input");
-			$requestObject = json_decode($requestContent);
-			if(empty($requestObject->userPhotoSignId) === true) {
-		throw (new \InvalidArgumentException("No Sign linked to the photo", 405));
-	}
-////			if(empty($requestObject->userPhotoUserId) === true) {
-////				throw (new \InvalidArgumentException("No user linked to the photo", 405));
-////			}
-	if(empty($requestObject->userPhotoCaption) === true) {
-			$requestObject->userPhotoCaption = null;
-	}
-	if(empty($requestObject->userPhotoIsFeature) === true) {
-		$requestObject->userPhotoIsFeature = 0||1;
-//	throw (new \InvalidArgumentException("Mark photo as feature or not", 405));
-	}
-	if(empty($requestObject->userPhotoUrl) === true) {
-		throw (new \InvalidArgumentException("Photo url is required", 405));
-	}
-
 			 if($method === "POST") {
 				 //enforce that the end user has a XSRF token.
 				 verifyXsrf();
-				 //enforce the end user has a JWT token
-				 validateJwtHeader();
+//				 //enforce the end user has a JWT token
+//				 validateJwtHeader();
 				 // enforce the user is signed in
 				 if(empty($_SESSION["user"]) === true) {
 					 throw(new \InvalidArgumentException("you must be signed in to post photo", 403));
 				 }
-				 $userPhoto = new UserPhoto(generateUuidV4(), $requestObject->userPhotoSignId, $_SESSION["user"]->getUserId(), $requestObject->userPhotoCaption, $requestObject->userPhotoIsFeature, $requestObject->userPhotoUrl);
+
+				 $userPhotoSignId = filter_input(INPUT_POST, "userPhotoSignId");
+				 $userPhotoCaption = filter_input(INPUT_POST, "userPhotoCaption");
+				 if(empty($userPhotoSignId) === true) {
+					 throw (new \InvalidArgumentException("Selected sign is required", 405));
+				 }
+				 // assigning variable to the user profile, add image extension
+				 $tempUserFileName = $_FILES["image"]["tmp_name"];
+				 // upload image to cloudinary and get public id
+				 $cloudinaryResult = \Cloudinary\Uploader::upload($tempUserFileName, array("width" => 200, "crop" => "scale"));
+
+				 $userPhoto = new UserPhoto(generateUuidV4(), $userPhotoSignId, $_SESSION["user"]->getUserId(), $userPhotoCaption, 0, $cloudinaryResult["secure_url"]);
 				 $userPhoto->insert($pdo);
 				 $reply->message = "Photo is uploaded";
 			 }

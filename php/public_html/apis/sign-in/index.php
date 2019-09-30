@@ -6,11 +6,7 @@ require_once dirname(__DIR__, 3) . "/lib/jwt.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 use TheRouters\Capstone\User;
 /**
-<<<<<<< HEAD:php/public_html/apis/sign-in/index.php
- * apis for handling sign-in
-=======
  * apis for handling log-in
->>>>>>> small changes to files during api testing process:php/public_html/apis/log-in/log-in.php
  *
  * @author Gkephart
  **/
@@ -37,7 +33,7 @@ try {
 		$requestObject = json_decode($requestContent);
 		//check to make sure the password and email field is not empty.s
 		if(empty($requestObject->userEmail) === true) {
-			throw(new \InvalidArgumentException("email address not provided.", 401));
+			throw(new \InvalidArgumentException("Email address not provided.", 401));
 		} else {
 			$userEmail = filter_var($requestObject->userEmail, FILTER_SANITIZE_EMAIL);
 		}
@@ -51,13 +47,13 @@ try {
 		$user = User::getUserByUserEmail($pdo, $userEmail);
 		if(empty($user) === true) {
 			$reply->message = "TEST MESSAGE1.";
-			throw(new InvalidArgumentException("Invalid Email", 401));
+			throw(new InvalidArgumentException("Invalid Email.", 401));
 		}
-		$user->setUserActivationToken(null);
+//		$user->setUserActivationToken(null);						:::::::::::::::Comment boxes now working:::::::::::::::::::
 		$user->update($pdo);
 		//verify hash is correct
 		if(password_verify($requestObject->userPassword, $user->getuserHash()) === false) {
-			//$reply->message = "TEST MESSAGE2.";
+			$reply->message = "TEST MESSAGE2.";
 			throw(new \InvalidArgumentException("Password is incorrect.", 401));
 		}
 		//grab user from database and put into a session

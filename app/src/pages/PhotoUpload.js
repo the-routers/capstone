@@ -10,7 +10,9 @@ import {Typeahead} from "react-bootstrap-typeahead";
 
 export const PhotoUpload = () => {
 	const [imageUrl, setImageUrl] = useState("");
+	const [photoCaption, setPhotoCaption] = useState("");
 	const [signName, setSignName] = useState("");
+
 
 	const signs = useSelector(state => state.signs ? state.signs : []);
 
@@ -35,16 +37,22 @@ export const PhotoUpload = () => {
 	 */
 	useEffect(sideEffects, sideEffectInputs);
 
+	function handleChange(event) {
+		setPhotoCaption(event.target.value)
+	}
+
 	const uploadSignImage = (e) => {
 		e.preventDefault();
 		let foundSign = signs.find(function(sign) {
 			return sign.signName === signName;
 		});
-		console.log(imageUrl);
+		// console.log(imageUrl);
 		let formData = new FormData();
 		formData.append("image", imageUrl);
-		console.log(foundSign);
-		httpConfig.post("/apis/image/", formData)
+		formData.append("userPhotoSignId", foundSign.signId);
+		formData.append("userPhotoCaption", photoCaption);
+		// console.log(foundSign);
+		httpConfig.post("/apis/userPhoto/", formData)
 			.then(reply => {
 				let {message, type} = reply;
 				//	setStatus({message, type});
@@ -98,7 +106,7 @@ export const PhotoUpload = () => {
 						<div className="input-group-prepend">
 							<span className="input-group-text">PhotoCaption</span>
 						</div>
-						<textarea className="form-control" aria-label="With textarea"/>
+						<textarea className="form-control" value={photoCaption} aria-label="With textarea" onChange={handleChange}/>
 					</div>
 				</div>
 				<div style={{width: 660, height: 30}}>
@@ -108,6 +116,7 @@ export const PhotoUpload = () => {
 
 				<div className="container">
 					<Typeahead
+						id="selectSign"
 						labelKey="name"
 						placeholder="Enter sign name..."
 						options={options}

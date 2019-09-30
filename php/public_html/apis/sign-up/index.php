@@ -7,7 +7,7 @@ require_once dirname(__DIR__, 3) . "/lib/uuid.php";
 require_once("/etc/apache2/capstone-mysql/Secrets.php");
 
 use TheRouters\Capstone\User;
-use Mailgun\Mailgun;
+//use Mailgun\Mailgun;
 
 /**
  * apis for signing up to 'Signs on 66' website
@@ -26,7 +26,7 @@ try {
 	//grab the mySQL connection
 	$secrets = new \Secrets("/etc/apache2/capstone-mysql/signson66.ini");
 	$pdo = $secrets->getPdoObject();
-	$mailgun = $secrets->getSecret("mailgun");
+	//$mailgun = $secrets->getSecret("mailgun");
 	//determine which HTTP method was used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 	if($method === "POST") {
