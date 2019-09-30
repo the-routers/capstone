@@ -40,8 +40,11 @@ export const PhotoUpload = () => {
 		let foundSign = signs.find(function(sign) {
 			return sign.signName === signName;
 		});
+		console.log(imageUrl);
+		let formData = new FormData();
+		formData.append("image", imageUrl);
 		console.log(foundSign);
-		httpConfig.post("/apis/image/", imageUrl)
+		httpConfig.post("/apis/image/", formData)
 			.then(reply => {
 				let {message, type} = reply;
 				//	setStatus({message, type});
