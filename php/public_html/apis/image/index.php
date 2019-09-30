@@ -24,9 +24,7 @@ $reply->status = 200;
 $reply->data = null;
 $reply->message = "image upload";
 try {
-	var_dump("got to line 24");
 	$secrets = new \Secrets("/etc/apache2/capstone-mysql/signson66.ini");
-	var_dump($secrets);
 	$pdo = $secrets->getPdoObject();
 	$cloudinary = $secrets->getSecret("cloudinary");
 	//determine which HTTP method is being used
