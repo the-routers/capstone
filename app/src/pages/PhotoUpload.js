@@ -30,6 +30,8 @@ export const PhotoUpload = () => {
 	// Declare any inputs that will be used by functions that are declared in sideEffects.
 	const sideEffectInputs = [];
 
+
+
 	/**
 	 * Pass both sideEffects and sideEffectInputs to useEffect.
 	 * useEffect is what handles rerendering of components when sideEffects resolve.

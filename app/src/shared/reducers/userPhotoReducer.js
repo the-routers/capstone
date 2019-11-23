@@ -1,6 +1,6 @@
 export default (state = [], action) => {
 	switch(action.type) {
-		case "GET_ALL_USERPHOTOS":
+		case "FETCH_GET_ALL_USERPHOTOS":
 			return action.payload;
 		case "GET_USERPHOTOS_BY_USERPHOTOID":
 			return action.payload;

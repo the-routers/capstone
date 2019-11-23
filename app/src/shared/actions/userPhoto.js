@@ -10,7 +10,7 @@ export const postUserPhotoByUserPhotoSignId = (test) => async (dispatch) => {
 };
 
 
-export const getAllUserPhotos = (test) => async (dispatch) => {
+export const getAllUserPhotos = () => async (dispatch) => {
 	const payload =  await httpConfig.get("/apis/userPhoto/");
 	dispatch({type: "FETCH_GET_ALL_USERPHOTOS",payload : payload.data });
 };
